@@ -14,5 +14,5 @@ Mints Automobile Sensing Kit
   - BME280   : I2c  
   - TMP117   : I2c
 
-
- 
+- Since multiple uarts are needed, soft uart can be used: https://github.com/adrianomarto/soft_uart
+- Add an extra I2c Pipeline On the to /boot/config.txt add the following lines dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24 And connect the secondary I2C devices to gpio pins 23(16) and 24(18).
