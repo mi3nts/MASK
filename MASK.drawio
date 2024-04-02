@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2024-04-02T20:34:57.694Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="KTQJOeB6ppPSErtJdEdZ" version="24.0.7" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-02T20:47:53.301Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="jcbTCIYqFdbSKolEmSVw" version="24.0.7" type="github">
   <diagram name="Page-1" id="3OzVXapQxGBqhg9Vh2Or">
-    <mxGraphModel dx="1963" dy="1013" grid="1" gridSize="1" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1748" dy="1289" grid="1" gridSize="1" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="NXsdGgOJUFReOd44QVA4-33" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://i.stack.imgur.com/yHddo.png;points=[[0,0.46,0,-120,0],[0.48,0.08,0,0,0],[0.48,0.12,0,0,0],[0.48,0.16,0,0,0],[0.48,0.25,0,0,0],[0.92,0.07,0,0,0],[0.92,0.12,0,0,0],[0.92,0.16,0,0,0],[0.92,0.21,0,0,0],[0.92,0.26,0,0,0],[0.92,0.31,0,0,0]];" vertex="1" parent="1">
+        <mxCell id="NXsdGgOJUFReOd44QVA4-33" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://i.stack.imgur.com/yHddo.png;points=[[0.48,0.08,0,0,0],[0.48,0.12,0,0,0],[0.48,0.16,0,0,0],[0.48,0.43,0,0,0],[0.48,0.61,0,0,0],[0.55,0.25,0,0,0],[0.55,0.29,0,0,0],[0.55,0.34,0,0,0],[0.55,0.39,0,0,0],[0.83,0.34,0,0,0],[0.83,0.39,0,0,0],[0.83,0.43,0,0,0],[0.83,0.48,0,0,0],[0.92,0.07,0,0,0],[0.92,0.12,0,0,0],[0.92,0.16,0,0,0],[0.92,0.21,0,0,0],[0.92,0.25,0,0,0],[0.92,0.29,0,0,0]];" vertex="1" parent="1">
           <mxGeometry x="-127" y="110" width="635.22" height="445" as="geometry" />
         </mxCell>
         <mxCell id="NXsdGgOJUFReOd44QVA4-37" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://m.media-amazon.com/images/I/61i6o6qQgSL._AC_SL1500_.jpg;clipPath=inset(33.57% 4% 29.29% 17.67%);points=[[0.72,0.84,0,0,0],[0.79,0.84,0,0,0],[0.79,0.92,0,0,0],[0.82,0.92,0,0,0],[0.83,0.84,0,0,0],[0.87,0.92,0,0,0]];" vertex="1" parent="1">
@@ -74,6 +74,9 @@
               <mxPoint x="451" y="-15" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="NXsdGgOJUFReOd44QVA4-73" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/325/MFG_COZIR-AH-1.jpg;clipPath=inset(18.67% 12.67% 13.33% 10.33% round 16%);points=[[0,0.36,0,0,0],[0,0.5,0,0,0],[0,0.63,0,0,0],[0,0.77,0,0,0]];" vertex="1" parent="1">
+          <mxGeometry x="700" y="185" width="177" height="156.31168831168833" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
