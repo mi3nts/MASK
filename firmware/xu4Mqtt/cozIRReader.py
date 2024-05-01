@@ -30,19 +30,19 @@ def main(portNum):
     print(" ")
     line = []
     ser.write(str.encode('K 2\r\n'))
-    time.sleep(2)
+    time.sleep(1)
 
     ser.write(str.encode('.\r\n'))
-    time.sleep(2)
+    time.sleep(1)
 
     ser.write(str.encode('z\r\n'))
-    time.sleep(2)
+    time.sleep(1)
 
     ser.write(str.encode('Z\r\n'))
-    time.sleep(2)
+    time.sleep(1)
 
     ser.write(str.encode('K 1\r\n'))
-    time.sleep(2)
+    time.sleep(1)
 
     while True:
         try:
