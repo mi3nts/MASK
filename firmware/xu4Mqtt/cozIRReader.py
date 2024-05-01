@@ -39,6 +39,9 @@ def main(portNum):
     ser.write(str.encode('z\r\n'))
     time.sleep(2)
 
+    ser.write(str.encode('Z\r\n'))
+    time.sleep(2)
+
     
 
     while True:
