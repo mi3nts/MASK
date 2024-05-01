@@ -32,7 +32,6 @@ def main(portNum):
     ser.write(str.encode('K 2\r\n'))
     time.sleep(2)
 
-
     ser.write(str.encode('.\r\n'))
     time.sleep(2)
 
@@ -42,7 +41,8 @@ def main(portNum):
     ser.write(str.encode('Z\r\n'))
     time.sleep(2)
 
-    
+    ser.write(str.encode('K 2\r\n'))
+    time.sleep(2)
 
     while True:
         try:
@@ -56,8 +56,8 @@ def main(portNum):
                     print(dataStringPost)
                     line = []
 
-                    ser.write(str.encode('z'))
-                    time.sleep(2)
+                    # ser.write(str.encode('z'))
+                    # time.sleep(2)
                     # print("Setting Frequency to 10 Seconds")
                     # ser.write(str.encode('a'))
                     # time.sleep(2)
