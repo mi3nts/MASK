@@ -36,6 +36,8 @@ def main(portNum):
     ser.write(str.encode('.\r\n'))
     time.sleep(2)
 
+    ser.write(str.encode('z\r\n'))
+    time.sleep(2)
 
     
 
@@ -83,10 +85,10 @@ def main(portNum):
                     # menuSetUp = True
                     line = []
 
-                if chr(c) == '\n' and (menuSetUp):
-                    dataString = ''.join(line)
-                    dataString     = (''.join(line)).replace("\n","").replace("\r","")
-                    print(dataString)
+                # if chr(c) == '\n' and (menuSetUp):
+                #     dataString = ''.join(line)
+                #     dataString     = (''.join(line)).replace("\n","").replace("\r","")
+                #     print(dataString)
                     # dateTime = datetime.datetime.now()
 
 					# The Output shouldnt have any letters
