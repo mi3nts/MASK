@@ -36,6 +36,9 @@ def main(portNum):
     ser.write(str.encode('.\r\n'))
     time.sleep(2)
 
+
+    
+
     while True:
         try:
             for c in ser.read():
@@ -47,9 +50,9 @@ def main(portNum):
                     print("================")
                     print(dataStringPost)
                     line = []
-                    # print("Entering Menu")
-                    # ser.write(str.encode('m'))
-                    # time.sleep(2)
+
+                    ser.write(str.encode('z'))
+                    time.sleep(2)
                     # print("Setting Frequency to 10 Seconds")
                     # ser.write(str.encode('a'))
                     # time.sleep(2)
