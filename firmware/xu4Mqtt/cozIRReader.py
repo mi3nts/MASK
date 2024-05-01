@@ -29,7 +29,12 @@ def main(portNum):
     print("Connected to: " + ser.portstr)
     print(" ")
     line = []
-    ser.write(str.encode('K 2\r\n'))
+    ser.write(str.encode('K 1\r\n'))
+    time.sleep(2)
+
+
+    ser.write(str.encode('K 1\r\n'))
+    time.sleep(2)
 
     while True:
         try:
