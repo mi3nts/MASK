@@ -33,7 +33,7 @@ def main(portNum):
     time.sleep(2)
 
 
-    ser.write(str.encode('K 1\r\n'))
+    ser.write(str.encode('.\r\n'))
     time.sleep(2)
 
     while True:
