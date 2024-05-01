@@ -29,7 +29,7 @@ def main(portNum):
     print("Connected to: " + ser.portstr)
     print(" ")
     line = []
-    ser.write(str.encode('Y\r\n'))
+    # ser.write(str.encode('Y\r\n'))
 
     while True:
         try:
@@ -38,8 +38,10 @@ def main(portNum):
                 
                 if chr(c) == '\n' and not(menuSetUp):
                     dataString = ''.join(line)
-                    dataString     = (''.join(line)).replace("\n","").replace("\r","")
-                    
+                    dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
+                    print("================")
+                    print(dataStringPost)
+                    line = []
                     # print("Entering Menu")
                     # ser.write(str.encode('m'))
                     # time.sleep(2)
