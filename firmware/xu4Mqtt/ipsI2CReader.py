@@ -144,9 +144,9 @@ class IpsSensor:
         return version_data,checkSumPassed
     
 
-bus          = smbus2.SMBus(5)
 
-ips7100      = IpsSensor(bus)
+ips7100      = IpsSensor(5)
+
 loopInterval = 5 
 
 
