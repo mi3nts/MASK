@@ -159,11 +159,12 @@ if __name__ == "__main__":
     print(ips7100.get_version())
     print(ips7100.get_vref())
     print(ips7100.update())
-
+    print("=============")
+    print("=============")
     PCData , PMData, PCCS,PMCS =  ips7100.update()        
     print(PCData)
     print(PMData)
-    
+
     
 
 
