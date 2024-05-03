@@ -109,7 +109,7 @@ class IpsSensor:
             float_bytes = pm_raw_values[start_idx:start_idx + 4]
             self.pm_values[i] = self.bytes_to_float(float_bytes)
 
-        return pc_raw_values, pm_raw_values, checkSumPassedPC, checkSumPassedPM
+        return self.pc_values, self.pm_values, checkSumPassedPC, checkSumPassedPM
 
 
 
