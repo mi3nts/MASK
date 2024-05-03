@@ -163,7 +163,9 @@ if __name__ == "__main__":
     print("=============")
     PCData , PMData, PCCS,PMCS =  ips7100.update()        
     print(PCData)
+    print(len(PCData))
     print(PMData)
+    print(len(PMData))
 
     
 
