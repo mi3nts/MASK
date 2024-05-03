@@ -41,9 +41,9 @@ class IpsSensor:
         # Request `reply_size` bytes from the I2C device
         received_bytes = self.bus.read_i2c_block_data(0x4B, command, reply_size)
 
-        print("[", end=" ")
-        print(" ".join(f"{byte:02X}" for byte in received_bytes), end=" ")
-        print("]")
+        # print("[", end=" ")
+        # print(" ".join(f"{byte:02X}" for byte in received_bytes), end=" ")
+        # print("]")
 
         # Calculate the checksum of the received data
         message_checksum = self.get_checksum(received_bytes, reply_size - 2)
@@ -101,7 +101,7 @@ class IpsSensor:
         # Introduce a small delay if necessary (not typically needed in Python with SMBus)
         # import time
         # time.sleep(0.1)
-        pm_raw_values, checkSumPassedPM= self.read_i2c(0x12, 32, True)
+        pm_raw_values, checkSumPassedPM= self.read_i2c(0x12, 32)
 
         # Assemble PM values (float) from 4 bytes using struct.unpack
         for i in range(7):
