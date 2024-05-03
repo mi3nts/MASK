@@ -154,18 +154,25 @@ if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
     print("=============")
-    print("Debugging IPS Data ")
+    print("Serial Number")
     print(ips7100.get_serial_number())
+
+    print("Version")
     print(ips7100.get_version())
+    
+    print("VREF")
     print(ips7100.get_vref())
-    print(ips7100.update())
-    print("=============")
-    print("=============")
-    PCData , PMData, PCCS,PMCS =  ips7100.update()        
-    print(PCData)
-    print(len(PCData))
-    print(PMData)
-    print(len(PMData))
+
+    while True:
+        PCData , PMData, PCCS,PMCS =  ips7100.update()        
+        print(datetime.datetime.now())
+        print("PC Data")
+        print(PCData)
+        print(" PM Data" )
+        print(PMData)
+        time.sleep(5)
+
+
 
     
 
