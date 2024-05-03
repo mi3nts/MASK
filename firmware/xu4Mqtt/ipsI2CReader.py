@@ -158,6 +158,8 @@ if __name__ == "__main__":
     print(ips7100.get_serial_number())
     print(ips7100.get_version())
     print(ips7100.get_vref())
+    print(ips7100.update())
+
 
 
 
