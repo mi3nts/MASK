@@ -170,7 +170,7 @@ if __name__ == "__main__":
         print(PCData)
         print(" PM Data" )
         print(PMData)
-        time.sleep(5)
+        time.sleep(1)
 
 
 
