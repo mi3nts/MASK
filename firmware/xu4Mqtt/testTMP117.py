@@ -157,7 +157,7 @@ def soft_reset():
     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
     
     # Clear the MODE bits and set them to the specified averaging mode
-    config = (config & ~SOFT_RESET_MASK) | soft_reset
+    config = (config & ~SOFT_RESET_MASK) | SOFT_RESET_VALUE 
     
     # Write the updated configuration back to the register
     bus.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
@@ -198,7 +198,7 @@ def main():
         while True:
             # Read temperature
             if( get_data_ready()):
-                print(datetime.datetime,now())
+                print(datetime.datetime.now())
                 temperature = read_temperature()
                 print(f"Temperature: {temperature:.2f} °C")
             else:
