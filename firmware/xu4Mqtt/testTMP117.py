@@ -188,12 +188,12 @@ def main():
         #print(f"TMP117 Device ID: 0x{device_id_data:08X}")
         print(device_id_data)
         time.sleep(1)
-        set_continuous_conversion_mode(CONV_CYCLE_1000_MS)
+        set_continuous_conversion_mode()
+        time.sleep(1)
+        set_conversion_cycle_time(CONV_CYCLE_1000_MS)
         time.sleep(1)
         set_averaged_times(AVERAGE_WITH_8_POINTS)
         time.sleep(1)
-        set_averaged_times(AVERAGE_WITH_8_POINTS)
-
 
         while True:
             # Read temperature
