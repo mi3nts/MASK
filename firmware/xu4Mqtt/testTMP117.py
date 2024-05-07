@@ -38,9 +38,9 @@ CONV_CYCLE_16000_MS     = 0b111 << 7
 AVERAGE_WITH_MASK      = 0b11 << 5  #   bits (bits 5 and 6)
 
 AVERAGE_WITH_0_POINTS  = 0b00 << 5
-AVERAGE_WITH_8_POINTS  = 0b10 << 5
+AVERAGE_WITH_8_POINTS  = 0b01 << 5
 AVERAGE_WITH_32_POINTS = 0b10 << 5
-AVERAGE_WITH_64_POINTS = 0b10 << 5
+AVERAGE_WITH_64_POINTS = 0b11 << 5
 
 SOFT_RESET_MASK        = 0b1 << 1  #   bits (bits 5 and 6)
 SOFT_RESET_VALUE       = 0b0 << 1
@@ -169,7 +169,7 @@ def get_data_ready():
     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
 
     # Check the data ready bit
-    print(config & DR_BIT_MASK)
+    # print(config & DR_BIT_MASK)
     return config & DR_BIT_MASK
 
 
