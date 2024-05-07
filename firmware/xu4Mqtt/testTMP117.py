@@ -17,6 +17,11 @@ TMP117_SERIAL_NUM_2 = 0x06 # Serial number part 2
 TMP117_SERIAL_NUM_3 = 0x08 # Serial number part 2
 
 
+# Register addresses
+TMP117_CONFIG_REGISTER = 0x01  # Configuration register
+MODE_BITS_MASK = 0b11 << 10  # MODE bits (bits 11 and 10)
+CONTINUOUS_MODE = 0b00 << 10
+
 # Create an I2C bus object
 bus = smbus2.SMBus(4)  # 1 is the I2C bus number on Raspberry Pi; change as needed for your platform
 
@@ -80,7 +85,21 @@ def convert_to_integer(bytes_to_convert: bytearray) -> int:
             integer = integer << 8
             integer = integer | chunk
     return integer
-  
+
+
+def set_continuous_conversion_mode():
+    # Read the current value of the configuration register
+    config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
+    
+    # Clear the MODE bits and set them to continuous conversion mode
+    config = (config & ~MODE_BITS_MASK) | CONTINUOUS_MODE
+    
+    # Write the updated configuration back to the register
+    bus.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
+    
+    print("TMP117 set to continuous conversion mode.")
+
+
 def main():
     try:
         # Read the serial number of the TMP117 sensor
@@ -92,7 +111,11 @@ def main():
         #print(f"TMP117 Device ID: 0x{device_id_data:08X}")
         print(device_id_data)
         
-        
+        set_continuous_conversion_mode()
+
+        time.sleep(1)
+
+
         while True:
             # Read temperature
             temperature = read_temperature()
