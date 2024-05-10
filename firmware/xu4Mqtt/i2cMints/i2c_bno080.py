@@ -117,7 +117,7 @@ class BNO080:
 
         # Transmit the packet on channel 2, with 2 bytes
         self.send_packet(CHANNEL_CONTROL, 2)
-
+        time.sleep(.1)
         # Wait for a response
         if self.receive_packet():
             if self.shtp_data[0] == 0xF9:  # SHTP_REPORT_PRODUCT_ID_RESPONSE
@@ -154,7 +154,7 @@ class BNO080:
         # Write the packet using SMBus
         try:
             self.bus.write_i2c_block_data(self.device_address, 0, packet)
-            print(" Package Sent")
+            print(" Packet Sent")
             return True
         except IOError as e:
             print(f"send_packet(I2C): I/O error: {e}")
