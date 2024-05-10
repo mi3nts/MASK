@@ -156,8 +156,7 @@ class BNO080:
             self.bus.write_i2c_block_data(self.device_address, 0, packet)
             return True
         except IOError as e:
-            if self.debug:
-                print(f"send_packet(I2C): I/O error: {e}")
+            print(f"send_packet(I2C): I/O error: {e}")
             return False
         
     def receive_packet(self):
@@ -165,8 +164,7 @@ class BNO080:
         try:
             header = self.bus.read_i2c_block_data(self.device_address, 0, 4)
         except IOError as e:
-            if self.debug:
-                print(f"receive_packet: I/O error: {e}")
+            print(f"receive_packet: I/O error: {e}")
             return False
         
         packet_lsb, packet_msb, channel_number, sequence_number = header
@@ -192,8 +190,7 @@ class BNO080:
             data = self.bus.read_i2c_block_data(self.device_address, 0, data_length)
             self.shtp_data[:data_length] = data
         except IOError as e:
-            if self.debug:
-                print(f"receive_packet: I/O error: {e}")
+            print(f"receive_packet: I/O error: {e}")
             return False
         
         # Process packet based on channel number and other conditions
