@@ -1,121 +1,113 @@
-# SPDX-FileCopyrightText: Copyright (c) 2020 Bryan Siepert for Adafruit Industries
-#
-# SPDX-License-Identifier: MIT
-"""
+import time 
 
-    Subclass of `adafruit_bno08x.BNO08X` to use I2C
+BNO080_I2C_ADDR =  0x4A
 
-"""
-from struct import pack_into
-from adafruit_bus_device import i2c_device
-from . import BNO08X, DATA_BUFFER_SIZE, const, Packet, PacketError
+SHTP_REPORT_PRODUCT_ID_REQUEST = 0xF9
+CHANNEL_CONTROL = 2
+DEFAULT_INT_PIN = 255
 
-_BNO08X_DEFAULT_ADDRESS = const(0x4A)
+class BNO080:
+    # Assume other class members are defined
+    def __init__(self, i2c_device):
+        self.device_address =  BNO080_I2C_ADDR
+        self.bus = i2c_device
+        # self.int_pin = int_pin if int_pin is not None else self.DEFAULT_INT_PIN
+        # self.debug = debug
+        self.shtp_data = bytearray(14)  # Array to hold received data
+        self.sequence_number = [0] * 6  # Initialize sequence numbers for 6 channels
+
+    def begin(self):
+        # Perform a soft reset on the IMU
+        # self.soft_reset()
+        time.sleep(0.1)  # Add some delay after reset
+
+        # Request product ID and reset info
+        self.shtp_data[0] = self.SHTP_REPORT_PRODUCT_ID_REQUEST
+        self.shtp_data[1] = 0
+
+        # Transmit the packet on channel 2, with 2 bytes
+        self.send_packet(self.CHANNEL_CONTROL, 2)
+
+        # Wait for a response
+        if self.receive_packet():
+            if self.shtp_data[0] == 0xF9:  # SHTP_REPORT_PRODUCT_ID_RESPONSE
+                print(f"SW Version Major: 0x{self.shtp_data[2]:02X}")
+                print(f"SW Version Minor: 0x{self.shtp_data[3]:02X}")
+                sw_part_number = (self.shtp_data[7] << 24) | (self.shtp_data[6] << 16) | \
+                                    (self.shtp_data[5] << 8) | self.shtp_data[4]
+                print(f"SW Part Number: 0x{sw_part_number:08X}")
+                sw_build_number = (self.shtp_data[11] << 24) | (self.shtp_data[10] << 16) | \
+                                    (self.shtp_data[9] << 8) | self.shtp_data[8]
+                print(f"SW Build Number: 0x{sw_build_number:08X}")
+                sw_version_patch = (self.shtp_data[13] << 8) | self.shtp_data[12]
+                print(f"SW Version Patch: 0x{sw_version_patch:04X}")
+                return True
+        return False  # Something went wrong
 
 
-class BNO08X_I2C(BNO08X):
-    """Library for the BNO08x IMUs from Hillcrest Laboratories
+    def send_packet(self, channel_number, data_length):
+        # Calculate the total packet length including header (4 bytes)
+        packet_length = data_length + 4
+        
+        # Create the packet to send
+        packet = []
+        packet.append(packet_length & 0xFF)  # Packet length LSB
+        packet.append(packet_length >> 8)    # Packet length MSB
+        packet.append(channel_number)        # Channel number
+        packet.append(self.sequence_number[channel_number])  # Sequence number
+        # Increment the sequence number for the channel
+        self.sequence_number[channel_number] += 1
+        
+        # Add user's data packet to the list
+        packet.extend(self.shtp_data[:data_length])
+        
+        # Write the packet using SMBus
+        try:
+            self.bus.write_i2c_block_data(self.device_address, 0, packet)
+            return True
+        except IOError as e:
+            if self.debug:
+                print(f"send_packet(I2C): I/O error: {e}")
+            return False
+        
+    def receive_packet(self):
+        # Read the first four bytes to get the packet header
+        try:
+            header = self.bus.read_i2c_block_data(self.device_address, 0, 4)
+        except IOError as e:
+            if self.debug:
+                print(f"receive_packet: I/O error: {e}")
+            return False
+        
+        packet_lsb, packet_msb, channel_number, sequence_number = header
+        
+        # Store the header information
+        self.shtp_header[0] = packet_lsb
+        self.shtp_header[1] = packet_msb
+        self.shtp_header[2] = channel_number
+        self.shtp_header[3] = sequence_number
 
-    :param ~busio.I2C i2c_bus: The I2C bus the BNO08x is connected to.
+        # Calculate the number of data bytes in this packet
+        data_length = ((packet_msb << 8) | packet_lsb) & 0x7FFF  # Clear MSB
+        
+        if data_length == 0:
+            # Packet is empty
+            return False  # All done
 
-    """
+        # Adjust data length to exclude header
+        data_length -= 4
+        
+        # Read the incoming data into the shtp_data array
+        try:
+            data = self.bus.read_i2c_block_data(self.device_address, 0, data_length)
+            self.shtp_data[:data_length] = data
+        except IOError as e:
+            if self.debug:
+                print(f"receive_packet: I/O error: {e}")
+            return False
+        
+        # Process packet based on channel number and other conditions
+        if channel_number == self.CHANNEL_EXECUTABLE and self.shtp_data[0] == self.EXECUTABLE_RESET_COMPLETE:
+            self.has_reset = True
 
-    def __init__(
-        self, i2c_bus, reset=None, address=_BNO08X_DEFAULT_ADDRESS, debug=False
-    ):
-        self.bus_device_obj = i2c_device.I2CDevice(i2c_bus, address)
-        super().__init__(reset, debug)
-
-    def _send_packet(self, channel, data):
-        data_length = len(data)
-        write_length = data_length + 4
-
-        pack_into("<H", self._data_buffer, 0, write_length)
-        self._data_buffer[2] = channel
-        self._data_buffer[3] = self._sequence_number[channel]
-        for idx, send_byte in enumerate(data):
-            self._data_buffer[4 + idx] = send_byte
-        packet = Packet(self._data_buffer)
-        self._dbg("Sending packet:")
-        self._dbg(packet)
-        with self.bus_device_obj as i2c:
-            i2c.write(self._data_buffer, end=write_length)
-
-        self._sequence_number[channel] = (self._sequence_number[channel] + 1) % 256
-        return self._sequence_number[channel]
-
-    # returns true if available data was read
-    # the sensor will always tell us how much there is, so no need to track it ourselves
-
-    def _read_header(self):
-        """Reads the first 4 bytes available as a header"""
-        with self.bus_device_obj as i2c:
-            i2c.readinto(self._data_buffer, end=4)  # this is expecting a header
-        packet_header = Packet.header_from_buffer(self._data_buffer)
-        self._dbg(packet_header)
-        return packet_header
-
-    def _read_packet(self):
-        with self.bus_device_obj as i2c:
-            i2c.readinto(self._data_buffer, end=4)  # this is expecting a header?
-        self._dbg("")
-        # print("SHTP READ packet header: ", [hex(x) for x in self._data_buffer[0:4]])
-
-        header = Packet.header_from_buffer(self._data_buffer)
-        packet_byte_count = header.packet_byte_count
-        channel_number = header.channel_number
-        sequence_number = header.sequence_number
-
-        self._sequence_number[channel_number] = sequence_number
-        if packet_byte_count == 0:
-            self._dbg("SKIPPING NO PACKETS AVAILABLE IN i2c._read_packet")
-            raise PacketError("No packet available")
-        packet_byte_count -= 4
-        self._dbg(
-            "channel",
-            channel_number,
-            "has",
-            packet_byte_count,
-            "bytes available to read",
-        )
-
-        self._read(packet_byte_count)
-
-        new_packet = Packet(self._data_buffer)
-        if self._debug:
-            print(new_packet)
-
-        self._update_sequence_number(new_packet)
-
-        return new_packet
-
-    # returns true if all requested data was read
-    def _read(self, requested_read_length):
-        self._dbg("trying to read", requested_read_length, "bytes")
-        # +4 for the header
-        total_read_length = requested_read_length + 4
-        if total_read_length > DATA_BUFFER_SIZE:
-            self._data_buffer = bytearray(total_read_length)
-            self._dbg(
-                "!!!!!!!!!!!! ALLOCATION: increased _data_buffer to bytearray(%d) !!!!!!!!!!!!! "
-                % total_read_length
-            )
-        with self.bus_device_obj as i2c:
-            i2c.readinto(self._data_buffer, end=total_read_length)
-
-    @property
-    def _data_ready(self):
-        header = self._read_header()
-
-        if header.channel_number > 5:
-            self._dbg("channel number out of range:", header.channel_number)
-        if header.packet_byte_count == 0x7FFF:
-            print("Byte count is 0x7FFF/0xFFFF; Error?")
-            if header.sequence_number == 0xFF:
-                print("Sequence number is 0xFF; Error?")
-            ready = False
-        else:
-            ready = header.data_length > 0
-
-        # self._dbg("\tdata ready", ready)
-        return ready
+        return True  # Packet received successfully
