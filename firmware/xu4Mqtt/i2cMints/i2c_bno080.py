@@ -152,12 +152,13 @@ class BNO080:
         packet.extend(self.shtp_data[:data_length])
         
         # Write the packet using SMBus
-        # try:
-        self.bus.write_i2c_block_data(self.device_address, 0, packet)
-        #     return True
-        # except IOError as e:
-        #     print(f"send_packet(I2C): I/O error: {e}")
-        #     return False
+        try:
+            self.bus.write_i2c_block_data(self.device_address, 0, packet)
+            print(" Package Sent")
+            return True
+        except IOError as e:
+            print(f"send_packet(I2C): I/O error: {e}")
+            return False
         
     def receive_packet(self):
         # Read the first four bytes to get the packet header
