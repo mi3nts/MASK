@@ -10,3 +10,5 @@ debug  = False
 bus     = smbus2.SMBus(5)
 
 BNO080  = BNO080(bus)
+
+BNO080.initiate()

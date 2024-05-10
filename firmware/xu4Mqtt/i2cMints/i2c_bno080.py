@@ -16,7 +16,7 @@ class BNO080:
         self.shtp_data = bytearray(14)  # Array to hold received data
         self.sequence_number = [0] * 6  # Initialize sequence numbers for 6 channels
 
-    def begin(self):
+    def initiate(self):
         # Perform a soft reset on the IMU
         # self.soft_reset()
         time.sleep(0.1)  # Add some delay after reset
