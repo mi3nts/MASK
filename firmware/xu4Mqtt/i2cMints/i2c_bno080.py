@@ -1,6 +1,6 @@
 import time 
 
-BNO080_I2C_ADDR =  0x4A
+
 
 SHTP_REPORT_PRODUCT_ID_REQUEST = 0xF9
 CHANNEL_CONTROL = 2
@@ -94,12 +94,12 @@ TARE_AR_VR_STABILIZED_GAME_ROTATION_VECTOR = 5
 # Packet sizes
 MAX_PACKET_SIZE = 128  # Maximum packet size in bytes (packets can be up to 32k, but this value is a reasonable limit)
 MAX_METADATA_SIZE = 9  # Maximum metadata size in words (this is in words, often 9 is sufficient)
-
+BNO080_I2C_ADDR =  0x4A
 
 class BNO080:
     # Assume other class members are defined
     def __init__(self, i2c_device):
-        self.device_address =  BNO080_I2C_ADDR
+        self.device_address =  0x4A
         self.bus = i2c_device
         # self.int_pin = int_pin if int_pin is not None else self.DEFAULT_INT_PIN
         # self.debug = debug
