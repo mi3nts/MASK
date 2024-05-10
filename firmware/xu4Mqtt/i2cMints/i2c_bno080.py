@@ -152,20 +152,20 @@ class BNO080:
         packet.extend(self.shtp_data[:data_length])
         
         # Write the packet using SMBus
-        try:
-            self.bus.write_i2c_block_data(self.device_address, 0, packet)
-            return True
-        except IOError as e:
-            print(f"send_packet(I2C): I/O error: {e}")
-            return False
+        # try:
+        self.bus.write_i2c_block_data(self.device_address, 0, packet)
+        #     return True
+        # except IOError as e:
+        #     print(f"send_packet(I2C): I/O error: {e}")
+        #     return False
         
     def receive_packet(self):
         # Read the first four bytes to get the packet header
-        try:
-            header = self.bus.read_i2c_block_data(self.device_address, 0, 4)
-        except IOError as e:
-            print(f"receive_packet: I/O error: {e}")
-            return False
+        # try:
+        header = self.bus.read_i2c_block_data(self.device_address, 0, 4)
+        # except IOError as e:
+        #     print(f"receive_packet: I/O error: {e}")
+        #     return False
         
         packet_lsb, packet_msb, channel_number, sequence_number = header
         
@@ -186,12 +186,12 @@ class BNO080:
         data_length -= 4
         
         # Read the incoming data into the shtp_data array
-        try:
-            data = self.bus.read_i2c_block_data(self.device_address, 0, data_length)
-            self.shtp_data[:data_length] = data
-        except IOError as e:
-            print(f"receive_packet: I/O error: {e}")
-            return False
+        # try:
+        data = self.bus.read_i2c_block_data(self.device_address, 0, data_length)
+        self.shtp_data[:data_length] = data
+        # except IOError as e:
+        #     print(f"receive_packet: I/O error: {e}")
+        #     return False
         
         # Process packet based on channel number and other conditions
         if channel_number == self.CHANNEL_EXECUTABLE and self.shtp_data[0] == self.EXECUTABLE_RESET_COMPLETE:
