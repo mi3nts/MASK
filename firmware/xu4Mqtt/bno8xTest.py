@@ -64,10 +64,10 @@ def receive_packet(bus: SMBus, device_address: int):
     
     if data_length > 0:
         # Read the remaining data bytes
-        data_read_msg = i2c_msg.read(device_address, data_length)
-        bus.i2c_rdwr(data_read_msg)
-        data = list(data_read_msg)
-        print(data)
+        data_read_msg = bus.read_i2c_block_data(device_address, 0, data_length)
+        # bus.i2c_rdwr(data_read_msg)
+        # data = list(data_read_msg)
+        print(data_read_msg)
         # Process incoming data (if needed)
         # Example: print(data)
         
