@@ -135,8 +135,7 @@ address = 0x4A  # Example device address (BNO080)
 block_size = 32  # Example block size for reading data
 
 # Read data from the device
-data = [bus.read_word_data(address, register) for register in range(0, block_size, 2)]
-
+data = bus.read_byte(address)
 print("Data received:", data)
 
 
