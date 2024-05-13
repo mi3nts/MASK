@@ -134,9 +134,21 @@ def read_shtp_advertising(bus, address):
 address = 0x4A  # Example device address (BNO080)
 block_size = 32  # Example block size for reading data
 
+while True:
+    try:
+        # Attempt to initiate communication with the device
+        bus.write_byte(BNO_ADDRESS, 0)  # Sending a dummy byte to check device presence
+        break  # Exit the loop if communication is successful
+    except OSError as e:
+        pass  # Device not found, retrying...
+
+
+# Device found, print a message
+print("BNO found")
+
 # Read data from the device
-data = bus.read_byte(address)
-print("Data received:", data)
+# data = bus.read_byte(address)
+# print("Data received:", data)
 
 
 # # Main loop
