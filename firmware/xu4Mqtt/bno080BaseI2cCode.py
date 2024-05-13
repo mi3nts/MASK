@@ -119,7 +119,7 @@ def read_shtp_advertising(bus, address):
 
 # get_product_id()
 
-read_shtp_advertising(bus, BNO_ADDRESS)
+# read_shtp_advertising(bus, BNO_ADDRESS)
 
 # def get_quaternion():
 #     cargo = bytearray(23)  # cargo buffer
@@ -131,7 +131,12 @@ read_shtp_advertising(bus, BNO_ADDRESS)
 
 
 
+address = 0x4A  # Example device address (BNO080)
+block_size = 32  # Example block size for reading data
 
+# Read data from the device
+data = bus.read_i2c_block_data(address, 0, block_size)
+print("Data received:", data)
 
 
 # # Main loop
