@@ -25,7 +25,9 @@ def detect_devices(bus):
 
 try:
     # Create an SMBus object for the specified bus number
-    bus = smbus2.SMBus(bus_number)
+
+    # Create an SMBus object with the specified speed
+    bus = smbus2.SMBus(bus_number, 400000)
     
     # Detect devices on the I2C bus
     detected_devices = detect_devices(bus)
