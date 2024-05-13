@@ -159,7 +159,28 @@ class BNO080:
         except IOError as e:
             print(f"send_packet(I2C): I/O error: {e}")
             return False
+
+    def soft_reset(bus: SMBus, device_address: int):
+        # Send reset command
+        shtp_data = [RESET_COMMAND]  # Reset command
+        # Create an I2C message to write data to the sensor
+        write_msg = i2c_msg.write(device_address, [CHANNEL_EXECUTABLE] + shtp_data)
+        bus.i2c_rdwr(write_msg)
         
+        # Delay for 50 milliseconds
+        time.sleep(DELAY_INTERVAL)
+        
+        # Flush the incoming data
+        while receive_packet(bus, device_address):
+            pass
+        
+        # Delay again for another 50 milliseconds
+        time.sleep(DELAY_INTERVAL)
+        
+        # Flush any remaining incoming data
+        while receive_packet(bus, device_address):
+            pass
+
     def receive_packet(self):
         # Read the first four bytes to get the packet header
         # try:

@@ -61,7 +61,7 @@ def receive_packet(bus: SMBus, device_address: int):
     # Calculate data length from header
     packet_length = header[0] | (header[1] << 8)
     data_length = packet_length - 4  # Subtract header length
-    
+    print(data_length)
     if data_length > 0:
         # Read the remaining data bytes
         data_read_msg = bus.read_i2c_block_data(device_address, 0, data_length)
