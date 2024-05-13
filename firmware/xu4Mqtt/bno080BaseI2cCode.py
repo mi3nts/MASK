@@ -168,6 +168,8 @@ for _ in range(num_bytes):
     byte = bus.read_byte(BNO_ADDRESS)
     response.append(byte)
 
+print(response)
+
 
 # Read data from the device
 
