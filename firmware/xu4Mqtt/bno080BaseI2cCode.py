@@ -164,7 +164,7 @@ cargo = [0] * 32
 #     print()
 
 # print("End of SHTP advertising")
-for j in range(4, 33):
+for j in range(0, 10):
     print(bus.read_byte_data(j, 0))
 
 
