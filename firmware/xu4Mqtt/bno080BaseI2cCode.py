@@ -156,7 +156,8 @@ print("BNO found")
 
 # Send an SHTP command to request data
 command =  [0x06, 0x00, 0x02, 0x00, 0xF9, 0x00]  # Example command bytes
-bus.write_i2c_block_data(BNO_ADDRESS, 0, command)
+reversed_list = command[::-1]
+bus.write_i2c_block_data(BNO_ADDRESS, 0, reversed_list)
 print("Bytes Written")
 # Wait for a short time for the sensor to process the command
 time.sleep(0.1)
