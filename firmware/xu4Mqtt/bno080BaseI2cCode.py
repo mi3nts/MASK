@@ -36,7 +36,9 @@ def detect_devices(bus):
     devices = []
     for address in range(128):  # I2C addresses range from 0x00 to 0x7F
         try:
-            bus.read_byte(address)
+
+            print("AD" + str(address))
+            print(bus.read_byte(address))
             devices.append(address)
         except OSError:
             pass
