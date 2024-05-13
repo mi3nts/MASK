@@ -52,7 +52,8 @@ def get_product_id():
     # Send command to request product ID
     # while(True):
         # try:
-    bus.write_i2c_block_data(BNO_ADDRESS, 0, get_pid)
+    for byte in get_pid:
+        bus.write_byte(BNO_ADDRESS, byte)
             # break
         # except Exception as e:
         #     # Print the error message if an exception occurs
@@ -64,6 +65,7 @@ def get_product_id():
     while True:
         try:
             response = [bus.read_byte(BNO_ADDRESS) for _ in range(25)]
+        
             if response[4] == 0xF8:  # Check for command response
                 break
         except Exception as e:
@@ -80,9 +82,44 @@ def get_product_id():
     print("SW Major:", hex(sw_major))
     print("SW Minor:", hex(sw_minor))
 
-get_product_id()
 
+def read_shtp_advertising(bus, address):
 
+    """
+    Reads SHTP advertising data from the BNO080 sensor.
+
+    Parameters:
+    - bus: An instance of the SMBus class representing the I2C bus.
+    - address: The I2C address of the BNO080 sensor.
+
+    Returns:
+    - advertising_data: A list containing the SHTP advertising data.
+    """
+    advertising_data = []
+
+    # Send start condition
+    bus.write_byte(address, 1)
+
+    # Repeat until length is still greater than 0
+    while True:
+        # Request advertising data from BNO080
+        advertising_data += bus.read_i2c_block_data(address, 0, 32)
+
+        # Check if length is still greater than 0
+        if advertising_data[0] == 0:
+            break
+
+    # Print the advertising data
+    print("SHTP advertising:", end=" ")
+    for byte in advertising_data[4:]:  # Skip the first 4 bytes
+        print(hex(byte), end=", ")
+    print()
+
+    return advertising_data
+
+# get_product_id()
+
+read_shtp_advertising(bus, BNO_ADDRESS)
 
 # def get_quaternion():
 #     cargo = bytearray(23)  # cargo buffer
