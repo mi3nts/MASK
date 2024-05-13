@@ -7,34 +7,43 @@
 
 # Try SPI too: 
     # https://github.com/adafruit/Adafruit_CircuitPython_BNO08x/blob/main/examples/bno08x_simpletest_spi.py
-
-
 import smbus2
 
 # Define the I2C bus number
-bus_number = 4 # Adjust according to your setup
+bus_number = 1  # Adjust according to your setup
 
-# Create an SMBus object for the specified bus number
-bus = smbus2.SMBus(bus_number)
+# Function to check for devices on the I2C bus
+def detect_devices(bus):
+    devices = []
+    for address in range(128):  # I2C addresses range from 0x00 to 0x7F
+        try:
+            bus.read_byte(address)
+            devices.append(address)
+        except OSError:
+            pass
+    return devices
 
 try:
-    # Scan for devices on the I2C bus
-    devices = smbus2.scan(bus)
+    # Create an SMBus object for the specified bus number
+    bus = smbus2.SMBus(bus_number)
     
-    if len(devices) > 0:
+    # Detect devices on the I2C bus
+    detected_devices = detect_devices(bus)
+    
+    if detected_devices:
         print("Devices found on the I2C bus:")
-        for device in devices:
+        for device in detected_devices:
             print("Device at address 0x{:02X}".format(device))
     else:
         print("No devices found on the I2C bus.")
-        
-        
+
 except Exception as e:
     print("Error:", e)
 
 finally:
     # Close the bus to release resources
     bus.close()
+
 
 
 
