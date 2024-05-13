@@ -69,7 +69,14 @@ def get_product_id():
     get_pid = [6, 0, 2, 0, 0xF9, 0]
     
     # Send command to request product ID
-    bus.write_i2c_block_data(BNO_ADDRESS, 0, get_pid)
+    while(True):
+        try:
+            bus.write_i2c_block_data(BNO_ADDRESS, 0, get_pid)
+            break
+        except Exception as e:
+            # Print the error message if an exception occurs
+            print("Error:", e)
+            
     time.sleep(0.2)  # Wait for response
     
     # Read response
