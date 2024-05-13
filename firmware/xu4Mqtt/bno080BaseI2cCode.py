@@ -146,6 +146,25 @@ while True:
 # Device found, print a message
 print("BNO found")
 
+
+# Define a list to store the cargo data
+cargo = [0] * 32
+
+# Send request to read advertising data
+print("SHTP advertising: ")
+cargo[0] = 1  # Start condition
+while cargo[0] != 0:  # Repeat if length is still > 0
+    # Request data from the BNO device
+    bus.write_byte(BNO_ADDRESS, 0)  # Dummy write to trigger the BNO to send data
+    cargo = bus.read_i2c_block_data(BNO_ADDRESS, 0, 32)
+
+    # Skip the first 4 bytes and print the cargo data
+    for j in range(4, 33):
+        print(hex(cargo[j]), end=",")
+    print()
+
+print("End of SHTP advertising")
+
 # Read data from the device
 # data = bus.read_byte(address)
 # print("Data received:", data)
