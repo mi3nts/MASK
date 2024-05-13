@@ -10,7 +10,7 @@
 import smbus2
 
 # Define the I2C bus number
-bus_number = 1  # Adjust according to your setup
+bus_number = 2  # Adjust according to your setup
 
 # Function to check for devices on the I2C bus
 def detect_devices(bus):
