@@ -64,7 +64,6 @@ def get_product_id():
     while True:
         try:
             response = [bus.read_byte(BNO_ADDRESS) for _ in range(25)]
-            print(response)
             if response[4] == 0xF8:  # Check for command response
                 break
         except Exception as e:
