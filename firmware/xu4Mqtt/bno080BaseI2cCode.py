@@ -164,8 +164,7 @@ cargo = [0] * 32
 #     print()
 
 # print("End of SHTP advertising")
-for j in range(0, 10):
-    print(bus.read_byte_data(j,0))
+print(bus.read_byte_data(BNO_ADDRESS,0))
 
 
 # Read data from the device
