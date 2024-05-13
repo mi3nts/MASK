@@ -28,6 +28,7 @@ try:
     else:
         print("No devices found on the I2C bus.")
         
+        
 except Exception as e:
     print("Error:", e)
 
