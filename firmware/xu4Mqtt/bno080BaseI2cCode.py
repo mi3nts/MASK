@@ -81,9 +81,14 @@ def get_product_id():
     
     # Read response
     while True:
-        response = bus.read_i2c_block_data(BNO_ADDRESS, 0, 25)
-        if response[4] == 0xF8:  # Check for command response
-            break
+        try:
+            response = bus.read_i2c_block_data(BNO_ADDRESS, 0, 25)
+            print(response)
+            if response[4] == 0xF8:  # Check for command response
+                break
+        except Exception as e:
+            # Print the error message if an exception occurs
+            print("Error:", e)
         time.sleep(0.1)  # Wait for response
         
     # Parse response and print product ID
