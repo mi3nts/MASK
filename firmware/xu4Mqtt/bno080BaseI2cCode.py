@@ -47,7 +47,7 @@ def detect_devices(bus):
 
 def get_product_id():
     # Define command to request product ID
-    get_pid = [6, 0, 2, 0, 0xF9, 0]
+    get_pid = [0x06, 0x00, 0x02, 0x00, 0xF9, 0x00]
     
     # Send command to request product ID
     # while(True):
@@ -147,24 +147,22 @@ while True:
 print("BNO found")
 
 
-# Define a list to store the cargo data
-cargo = [0] * 32
+# # Define a list to store the cargo data
+# cargo = [0] * 32
 
-# Send request to read advertising data
-# print("SHTP advertising: ")
-# cargo[0] = 1  # Start condition
-# while cargo[0] != 0:  # Repeat if length is still > 0
-#     # Request data from the BNO device
-#     bus.write_byte(BNO_ADDRESS, 0)  # Dummy write to trigger the BNO to send data
-#     cargo = bus.read_i2c_block_data(BNO_ADDRESS, 0, 32)
+# #  print("End of SHTP advertising")
+# print(bus.read_byte(BNO_ADDRESS))
+# print(bus.read_byte_data(BNO_ADDRESS,0))
 
-#     # Skip the first 4 bytes and print the cargo data
-#     for j in range(4, 33):
-#         print(hex(cargo[j]), end=",")
-#     print()
+# Send an SHTP command to request data
+command =  [0x06, 0x00, 0x02, 0x00, 0xF9, 0x00]  # Example command bytes
+bus.write_i2c_block_data(BNO_ADDRESS, 0, command)
 
-# print("End of SHTP advertising")
-print(bus.read_byte_data(BNO_ADDRESS,0))
+# Wait for a short time for the sensor to process the command
+time.sleep(0.1)
+
+# Receive response from the sensor
+response = bus.read_i2c_block_data(BNO_ADDRESS, 0, 23)
 
 
 # Read data from the device
