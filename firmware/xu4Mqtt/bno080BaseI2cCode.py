@@ -60,48 +60,26 @@ def get_product_id():
     print("Written to Device")
     time.sleep(0.2)  # Wait for response
 
-    try:
-        # Create an SMBus object for the specified bus number
-        
-        # Detect devices on the I2C bus
-        detected_devices = detect_devices(bus)
-        
-        if detected_devices:
-            print("Devices found on the I2C bus:")
-            for device in detected_devices:
-                print("Device at address 0x{:02X}".format(device))
-        else:
-            print("No devices found on the I2C bus.")
-
-    except Exception as e:
-        print("Error:", e)
-
-    finally:
-        # Close the bus to release resources
-        bus.close()
-
-
-
     # Read response
-    # while True:
-    #     try:
-    #         response = bus.read_i2c_block_data(BNO_ADDRESS, 0, 25)
-    #         print(response)
-    #         if response[4] == 0xF8:  # Check for command response
-    #             break
-    #     except Exception as e:
-    #         # Print the error message if an exception occurs
-    #         print("Error:", e)
-    #     time.sleep(0.1)  # Wait for response
+    while True:
+        try:
+            response = [bus.read_byte(BNO_ADDRESS) for _ in range(25)]
+            print(response)
+            if response[4] == 0xF8:  # Check for command response
+                break
+        except Exception as e:
+            # Print the error message if an exception occurs
+            print("Error:", e)
+        time.sleep(0.1)  # Wait for response
         
-    # # Parse response and print product ID
-    # reset_cause = response[5]
-    # sw_major = response[6]
-    # sw_minor = response[7]
-    # print("Product ID response:")
-    # print("Reset cause:", hex(reset_cause))
-    # print("SW Major:", hex(sw_major))
-    # print("SW Minor:", hex(sw_minor))
+    # Parse response and print product ID
+    reset_cause = response[5]
+    sw_major = response[6]
+    sw_minor = response[7]
+    print("Product ID response:")
+    print("Reset cause:", hex(reset_cause))
+    print("SW Major:", hex(sw_major))
+    print("SW Minor:", hex(sw_minor))
 
 get_product_id()
 
