@@ -25,12 +25,12 @@ Mints Automobile Sensing Kit
     
     - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` Connecting  the secondary I2C devices to gpio pins 25(22) and 26(37).
 
-- Check Devices
-  ```sudo i2cdetect -y 1```
-  ```sudo i2cdetect -y 2```
-  ```sudo i2cdetect -y 3```
-  ```sudo i2cdetect -y 4```
-  ```sudo i2cdetect -y 5```
+- Check Devices<br>
+  ```sudo i2cdetect -y 1```<br>
+  ```sudo i2cdetect -y 2```<br>
+  ```sudo i2cdetect -y 3```<br>
+  ```sudo i2cdetect -y 4```<br>
+  ```sudo i2cdetect -y 5```<br>
 
 # minWeZeroRPiOS
 Contains Firmware for Mints Wearable Systems on the Raspberry Pi OS
