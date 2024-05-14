@@ -6,16 +6,20 @@ Mints Automobile Sensing Kit
 - Pi Sugar 3 Power Manage
 - Toggle Switch
 - Sensors
-  - IPS7100  : I2c or Uart
-  - BME280   : I2c (0x77) 
-  - COZIR AH : Uart Only 
-  - BNO085   : I2c and Uart 
-  - PA1010D  : I2c and Uart 
-  - BME280   : I2c  
-  - TMP117   : I2c
-
+  - COZIR AH          : Uart Only           : UART (default)
+  - PiSugar and Clock : I2c                 : I2c Bus 1 (default)
+  - IPS7100           : I2c or Uart         : I2c Bus 2
+  - BNO085            : I2c, SPI and Uart   : I2c Bus 3
+  - BME280            : I2c                 : I2c Bus 4
+  - TMP117            : I2c                 : I2c Bus 4
+  - PA1010D           : I2c, SPI and Uart   : I2c Bus 5
+  - 
 - Since multiple uarts are needed, soft uart can be used: https://github.com/adrianomarto/soft_uart
-- Add an extra I2c Pipeline On the to /boot/config.txt add the following lines dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24 And connect the secondary I2C devices to gpio pins 23(16) and 24(18).
+- Add an extra I2c Pipeline On the to /boot/config.txt add the following lines
+  `dtoverlay=i2c-gpio,bus=2,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22` And connect the secondary I2C devices to gpio pins 27(13) and 22(15).
+  `dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24` And connect the secondary I2C devices to gpio pins 23(16) and 24(18).
+  `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=29,i2c_gpio_scl=31` And connect the secondary I2C devices to gpio pins 29(05) and 31(06).
+  `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` And connect the secondary I2C devices to gpio pins 25(22) and 26(37).
 
 - Check Devices
   ```sudo i2cdetect -y 1```
