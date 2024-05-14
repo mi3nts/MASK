@@ -27,6 +27,10 @@ Mints Automobile Sensing Kit
 
 - Check Devices
   ```sudo i2cdetect -y 1```
+  ```sudo i2cdetect -y 2```
+  ```sudo i2cdetect -y 3```
+  ```sudo i2cdetect -y 4```
+  ```sudo i2cdetect -y 5```
 
 # minWeZeroRPiOS
 Contains Firmware for Mints Wearable Systems on the Raspberry Pi OS
