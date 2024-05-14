@@ -27,8 +27,7 @@ Mints Automobile Sensing Kit
   ```sudo i2cdetect -y 4```<br>
   ```sudo i2cdetect -y 5```<br>
 
-# minWeZeroRPiOS
-Contains Firmware for Mints Wearable Systems on the Raspberry Pi OS
+Inspired by this [link](https://www.instructables.com/Raspberry-PI-Multiple-I2c-Devices/) 
 
 
 ## SD Card Installation 
@@ -115,5 +114,16 @@ On the to /boot/config.txt add the following lines `dtoverlay=i2c-gpio,bus=4,i2c
   pip3 install adafruit-circuitpython-gps
   pip3 install adafruit-extended-bus
 ```
+
+## Data Sheet links 
+* [BME280: 1](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf)
+* [BME280: 2](https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/downloads)
+
+**Note:GPIO pins are not header numbers**
+
+The pin diagrams for the rasbery pi zero are given below:
+<img src="https://raw.githubusercontent.com/mi3nts/minWeZeroNodes/main/res/Raspberry-PI-Zero-Pinout-schema.jpg.webp"
+     alt="Rasberry Pi Zero Pin Outs"
+     style="float: left; margin-right: 10px;" />
 
 
