@@ -16,14 +16,14 @@ Mints Automobile Sensing Kit
   - 
 - Since multiple uarts are needed, soft uart can be used: https://github.com/adrianomarto/soft_uart
 - Add an extra I2c Pipeline On the to /boot/config.txt add the following lines
-  `dtoverlay=i2c-gpio,bus=2,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22`
-  And connect the secondary I2C devices to gpio pins 27(13) and 22(15).
-  `dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24`
-  And connect the secondary I2C devices to gpio pins 23(16) and 24(18).
-  `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=29,i2c_gpio_scl=31`
-  And connect the secondary I2C devices to gpio pins 29(05) and 31(06).
-  `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26`
-  And connect the secondary I2C devices to gpio pins 25(22) and 26(37).
+  
+    - `dtoverlay=i2c-gpio,bus=2,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22` Connecting the secondary I2C devices to gpio pins 27(13) and 22(15).
+    
+    - `dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24` Connecting the tertiary I2C devices to gpio pins 23(16) and 24(18).
+    
+    - `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=29,i2c_gpio_scl=31` Connecting the secondary I2C devices to gpio pins 29(05) and 31(06).
+    
+    - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` Connecting  the secondary I2C devices to gpio pins 25(22) and 26(37).
 
 - Check Devices
   ```sudo i2cdetect -y 1```
