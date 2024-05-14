@@ -24,21 +24,19 @@ import sys
 import time
 import os
 import smbus2
-from i2cMints.i2c_scd30 import SCD30
+#from i2cMints.i2c_scd30 import SCD30
 from i2cMints.i2c_bme280 import BME280
 from mintsXU4 import mintsSensorReader as mSR
 
 debug  = False 
 
-bus     = smbus2.SMBus(4)
+bus     = smbus2.SMBus(5)
 
-scd30   = SCD30(bus,debug)
 bme280  = BME280(bus,debug)
 loopInterval = 5 
 
 
 def main(loopInterval):
-    scd30_valid    = scd30.initiate(30)
     bme280_valid   = bme280.initiate(30)
     startTime    = time.time()
     while True:
@@ -48,11 +46,6 @@ def main(loopInterval):
                 mSR.BME280WriteI2c(bme280.read())
             print("=======================")
             time.sleep(2)       
-            print("======== SCD30 ========")
-            if scd30_valid:
-                mSR.SCD30WriteI2c(scd30.read())
-            print("=======================")
-            time.sleep(2)
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             
         except Exception as e:
@@ -63,5 +56,5 @@ if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
     print("=============")
-    print("Monitoring Battery level for Mints Wearable Node")
+    print("Monitoring Climate data for MASK")
     main(loopInterval)
