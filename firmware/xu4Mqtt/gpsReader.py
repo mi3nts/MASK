@@ -13,17 +13,17 @@ from mintsXU4 import mintsDefinitions as mD
 def main():
 
 
-    delta  = .75
+    delta  = 1
     lastGPRMC = time.time()
     lastGPGGA = time.time()
 
     try:  
     # Detecting if the GPS is Connected
-        i2c = I2C(4)
+        i2c = I2C(6)
         gps = adafruit_gps.GPS_GtopI2C(i2c, debug=False) # Use I2C interface
         print("GPS found")
     except Exception as e:
-        time.sleep(.5)
+        time.sleep(1)
         print("No GPS found")
         print ("Error and type: %s - %s." % (e,type(e)))
         quit()
@@ -31,15 +31,15 @@ def main():
     # Turn on everything (not all of it is parsed!)
     print("Sending GPS Command")
     gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
-
+    time.sleep(1)
     print("Changing Update Frequency")
     gps.send_command(b"PMTK220,1000")
 
 
     while True:
+        time.sleep(1)
         try:  
             if not gps.update() or not gps.has_fix:
-                time.sleep(0.1)
                 print("No Coordinates found")
                 print(gps.nmea_sentence) 
                 continue

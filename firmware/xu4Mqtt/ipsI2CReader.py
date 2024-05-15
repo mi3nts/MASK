@@ -145,7 +145,7 @@ class IpsSensor:
     
 
 
-ips7100      = IpsSensor(5)
+ips7100      = IpsSensor(3)
 
 loopInterval = 5 
 
@@ -164,16 +164,20 @@ if __name__ == "__main__":
     print(ips7100.get_vref())
 
     while True:
-        PCData , PMData, PCCS,PMCS =  ips7100.update()        
-        print(datetime.datetime.now())
-        print("PC Data")
-        print(PCData)
-        print(" PM Data" )
-        print(PMData)
-        time.sleep(1)
+        try:
+            
+            PCData , PMData, PCCS,PMCS =  ips7100.update()        
+            print(datetime.datetime.now())
+            print("PC Data")
+            print(PCData)
+            print(" PM Data" )
+            print(PMData)
+            time.sleep(1)
+        except Exception as e:
+            # Code to handle any other exception
+            print(f"An error occurred: {e}")
+          
 
 
 
     
-
-
