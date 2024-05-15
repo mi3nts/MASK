@@ -28,7 +28,7 @@ bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 1 
 checkCurrent = 0 
-checkTrails  = 0 
+checkTrials  = 0 
 checkLimit   = 2
 
 
@@ -40,10 +40,11 @@ def main(loopInterval):
             print("======= BNO080 ========")
             if bno080_valid:
                 bno080Data = bno080.read()
-                if bno080Data == checkCurrent:
-                    checkTrails = checkTrails + 1 
                 
-                if checkTrails >= checkLimit :
+                if bno080Data == checkCurrent:
+                    checkTrials = checkTrials + 1 
+                
+                if checkTrials >= checkLimit :
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
