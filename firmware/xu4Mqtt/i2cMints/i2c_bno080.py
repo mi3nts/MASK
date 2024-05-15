@@ -77,7 +77,7 @@ class BNO080:
         except Exception as e:
             print(e)
             time.sleep(1)
+            print("BN Measurments not read")    
             return [];
-            print("BNO080 Measurments not read")    
 
 

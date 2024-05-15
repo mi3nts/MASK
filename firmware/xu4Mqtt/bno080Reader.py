@@ -27,7 +27,7 @@ bus          = I2C(4)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 1 
-
+checkCurrent = 0 
 
 def main(loopInterval):
     bno080_valid   =  bno080.initiate(initTrials)
@@ -36,11 +36,18 @@ def main(loopInterval):
         try:
             print("======= BNO080 ========")
             if bno080_valid:
-               bno080Data = bno080.read()
-               print(bno080Data)
-            #  if bno080Data[-]
-            #  mSR.BME280WriteI2c(bme280.read())
-
+                bno080Data = bno080.read()
+                if bno080Data == checkCurrent:
+                    print("Resetting BNO080")
+                    bno080_valid   =  bno080.initiate(initTrials)
+                    time.sleep(10)
+                    break;
+                
+                bno080_valid   =  bno080.initiate(initTrials)
+                checkCurrent   = bno080Data[-1]
+                print(bno080Data)
+                #  mSR.BNO080WriteI2c(bno080Data)
+            
             print("=======================")  
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
 
