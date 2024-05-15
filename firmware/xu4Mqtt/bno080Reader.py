@@ -29,7 +29,7 @@ initTrials   = 5
 loopInterval = 1 
 checkCurrent = 0 
 checkTrials  = 0 
-checkLimit   = 2
+checkLimit   = 5
 
 
 def main(loopInterval, checkTrials, checkCurrent ):
@@ -46,7 +46,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 else: 
                     checkTrials = 0 
                 print(checkTrials)
-                if checkTrials >= checkLimit :
+                if checkTrials > checkLimit :
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
