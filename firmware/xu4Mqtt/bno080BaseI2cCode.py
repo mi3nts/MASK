@@ -9,12 +9,8 @@
     # https://github.com/adafruit/Adafruit_CircuitPython_BNO08x/blob/main/examples/bno08x_simpletest_spi.py
 # import smbus2
 
-# # Define the I2C bus number
+# Define the I2C bus number
 # bus_number = 4  # Adjust according to your setup
-
-
-
-
 import smbus2
 import time
 
@@ -24,7 +20,6 @@ BNO_ADDRESS = 0x4A
 # Configuration parameters
 plot_interval = 1  # plot interval in seconds
 reporting_frequency = 400  # reporting frequency in Hz
-
 
 # Function to read quaternion data
 
@@ -40,6 +35,7 @@ def detect_devices(bus):
             print("AD" + str(address))
             print(bus.read_byte(address))
             devices.append(address)
+            
         except OSError:
             pass
     return devices
@@ -131,8 +127,8 @@ def read_shtp_advertising(bus, address):
 
 
 
-address = 0x4A  # Example device address (BNO080)
-block_size = 32  # Example block size for reading data
+address    = 0x4A  # Example device address (BNO080)
+block_size = 32    # Example block size for reading data
 
 while True:
     try:
@@ -156,15 +152,22 @@ print("BNO found")
 
 # Send an SHTP command to request data
 command =  [0x06, 0x00, 0x02, 0x00, 0xF9, 0x00]  # Example command bytes
+
 reversed_list = command[::-1]
+
 bus.write_i2c_block_data(BNO_ADDRESS, 0, reversed_list)
+
 print("Bytes Written")
+
 # Wait for a short time for the sensor to process the command
+
 time.sleep(0.1)
 
 # Receive response from the sensor
-num_bytes = 10  # Example: read 10 bytes
+num_bytes = 10 
+
 response = []
+
 for _ in range(num_bytes):
     byte = bus.read_byte(BNO_ADDRESS)
     response.append(byte)
