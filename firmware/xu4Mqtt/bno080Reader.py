@@ -32,7 +32,7 @@ checkTrials  = 0
 checkLimit   = 2
 
 
-def main(loopInterval):
+def main(loopInterval, checkTrials, checkCurrent ):
     bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()
     while True:
@@ -71,5 +71,5 @@ if __name__ == "__main__":
     print("    MINTS    ")
     print("=============")
     print("Monitoring Climate data for MASK")
-    main(loopInterval)
+    main(loopInterval, checkTrials, checkCurrent )
 
