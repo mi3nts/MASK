@@ -41,22 +41,23 @@ def main(loopInterval, checkTrials, checkCurrent ):
             if bno080_valid:
                 bno080Data = bno080.read()
                 
-                if bno080Data == checkCurrent:
+                if bno080Data[-1] == checkCurrent:
                     checkTrials = checkTrials + 1 
-                
+                else: 
+                    checkTrials = 0 
+
                 if checkTrials >= checkLimit :
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
                     break;
-                else: 
-                    checkTrails = 0 
 
-                bno080_valid   = bno080.initiate(initTrials)
-                checkCurrent   = bno080Data[-1]
+
                 print(bno080Data)
                 #  mSR.BNO080WriteI2c(bno080Data)
-            
+                checkCurrent   = bno080Data[-1]
+
+
             print("=======================")  
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
 
