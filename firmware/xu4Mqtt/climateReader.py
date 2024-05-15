@@ -36,6 +36,7 @@ loopInterval = 5
 
 
 def main(loopInterval):
+    global checkTrials, checkCurrent 
     bme280_valid   = bme280.initiate(30)
     startTime    = time.time()
     while True:
