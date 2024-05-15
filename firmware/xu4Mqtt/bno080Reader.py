@@ -43,7 +43,7 @@ def main(loopInterval):
                 if bno080Data == checkCurrent:
                     checkTrails = checkTrails + 1 
                 
-                if checkTrails >= 1:
+                if checkTrails >= checkLimit :
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
