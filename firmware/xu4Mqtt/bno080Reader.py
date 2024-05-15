@@ -22,15 +22,15 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 # i2c     = I2C(4)
 # bno     = BNO08X_I2C(i2c)
 
-debug   = False 
-bus     = I2C(4)
-bno080  = BNO080(bus,debug)
-
+debug        = False 
+bus          = I2C(4)
+bno080       = BNO080(bus,debug)
+initTrials   = 5
 loopInterval = 1 
 
 
 def main(loopInterval):
-    bno080_valid   =  bno080.initiate(5)
+    bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()
     while True:
         try:
@@ -42,17 +42,12 @@ def main(loopInterval):
             #  mSR.BME280WriteI2c(bme280.read())
 
             print("=======================")  
-            
-            
-            
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-            
-
-
 
         except Exception as e:
-            bno080_valid   =  bno080.initiate(5)
             print(e)
+            print("Resetting BNO080")
+            bno080_valid   =  bno080.initiate(initTrials)
             time.sleep(10)
         
 if __name__ == "__main__":
