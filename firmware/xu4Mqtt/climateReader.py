@@ -28,10 +28,10 @@ import smbus2
 from i2cMints.i2c_bme280 import BME280
 from mintsXU4 import mintsSensorReader as mSR
 
-debug  = False 
-bus     = smbus2.SMBus(5)
-bme280  = BME280(bus,debug)
-
+debug        = False 
+bus          = smbus2.SMBus(5)
+bme280       = BME280(bus,debug)
+checkTrials  = 0
 loopInterval = 5 
 
 

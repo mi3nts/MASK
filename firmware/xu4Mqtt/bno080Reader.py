@@ -28,6 +28,9 @@ bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 1 
 checkCurrent = 0 
+checkTrails  = 0 
+checkLimit   = 2
+
 
 def main(loopInterval):
     bno080_valid   =  bno080.initiate(initTrials)
@@ -38,12 +41,17 @@ def main(loopInterval):
             if bno080_valid:
                 bno080Data = bno080.read()
                 if bno080Data == checkCurrent:
+                    checkTrails = checkTrails + 1 
+                
+                if checkTrails >= 1:
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
                     break;
-                
-                bno080_valid   =  bno080.initiate(initTrials)
+                else: 
+                    checkTrails = 0 
+
+                bno080_valid   = bno080.initiate(initTrials)
                 checkCurrent   = bno080Data[-1]
                 print(bno080Data)
                 #  mSR.BNO080WriteI2c(bno080Data)
