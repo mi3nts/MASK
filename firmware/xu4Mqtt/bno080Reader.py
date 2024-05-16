@@ -48,10 +48,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
                     checkCurrent = bno080Data[12]
                 
                 print(checkTrials)
-                print(bno080Data)
+                # print(bno080Data)
 
                 if checkTrials == 0:
                     print("Writing Data")
+                    print(bno080Data)
                     mSR.BNO080WriteI2c(bno080Data)
                     startTime = mSR.delayMints(time.time() - startTime,loopInterval)
                     continue;
