@@ -89,7 +89,6 @@ while True:
     )
     print("")
 
-
     print("Linear Acceleration:")
     (
         linear_accel_x,
@@ -113,12 +112,15 @@ while True:
         "I: %0.6f  J: %0.6f K: %0.6f  Real: %0.6f"
         % (geo_quat_i, geo_quat_j, geo_quat_k, geo_quat_real)
     )
-    # print("")
+    print("")
+    
     heading = find_heading(quat_real, quat_i, quat_j, quat_k)
     print("Heading using rotation vector:", heading)
+    print("")
 
     heading_geo = find_heading(geo_quat_real, geo_quat_i, geo_quat_j, geo_quat_k)
     print("Heading using geomagnetic rotation vector:", heading_geo)
+    print("")
 
     print("Game Rotation Vector Quaternion:")
     (
@@ -150,7 +152,7 @@ while True:
     print("")
     time.sleep(0.4)
     HO = bno.shake
-    print("Heading Output: " + str(HO) )
+    print("Shake Output: " + str(HO) )
     if HO:
         print("SHAKE DETECTED!")
         print("")
