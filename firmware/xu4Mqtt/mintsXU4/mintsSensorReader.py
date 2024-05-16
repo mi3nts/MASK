@@ -440,7 +440,7 @@ def BME680Write(sensorData,dateTime):
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 def BNO080WriteI2c(sensorData):
-    
+    print(dataLength)
     sensorName = "BNO080"
     dataLength = 30  # Adjusted to match the actual number of elements expected in sensorData
     if len(sensorData) == dataLength:
@@ -480,7 +480,7 @@ def BNO080WriteI2c(sensorData):
         print(sensorDictionary)
         sensorFinisher(sensorData[0], sensorName, sensorDictionary)
    
-   
+
 
 def BME280WriteI2c(sensorData):
     
