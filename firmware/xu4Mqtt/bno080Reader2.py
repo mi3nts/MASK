@@ -8,7 +8,7 @@ from math import atan2, sqrt, pi
 import board  # pylint:disable=wrong-import-order
 import busio  # pylint:disable=wrong-import-order
 
-uart = busio.UART(board.TX, board.RX, baudrate=3000000, receiver_buffer_size=2048)
+# uart = busio.UART(board.TX, board.RX, baudrate=3000000, receiver_buffer_size=2048)
 
 # uncomment and comment out the above for use with Raspberry Pi
 # import serial
