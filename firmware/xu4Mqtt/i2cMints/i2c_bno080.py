@@ -160,7 +160,7 @@ class BNO080:
                             walking, \
                             running, \
                             on_stairs \
-                        ]                                        = self.bno.activity_classification_summary(activity_classification)
+                        ]                                        = self.activity_classification_summary(self.bno.activity_classification)
 
 
             return [dateTime,\
