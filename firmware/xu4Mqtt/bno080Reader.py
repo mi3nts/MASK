@@ -36,7 +36,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
     bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()
     while True:
-        try:
+        # try:
             print("======= BNO080 ========")
             if bno080_valid:
                 bno080Data = bno080.read()
@@ -66,11 +66,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
             print("=======================")  
 
 
-        except Exception as e:
-            print(e)
-            print("Resetting BNO080")
-            bno080_valid   =  bno080.initiate(initTrials)
-            time.sleep(10)
+        # except Exception as e:
+        #     print(e)
+        #     print("Resetting BNO080")
+        #     bno080_valid   =  bno080.initiate(initTrials)
+        #     time.sleep(10)
         
 if __name__ == "__main__":
     print("=============")
