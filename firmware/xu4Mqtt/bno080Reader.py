@@ -41,21 +41,27 @@ def main(loopInterval, checkTrials, checkCurrent ):
             if bno080_valid:
                 bno080Data = bno080.read()
                 
-                if bno080Data[-1] == checkCurrent:
+                if checkCurrent == bno080Data[-1]:
                     checkTrials = checkTrials + 1 
                 else: 
-                    checkTrials = 0 
+                    checkTrials  = 0 
+                    checkCurrent = bno080Data[-1]
+                
                 print(checkTrials)
+                
+                if checkTrials == 0:
+                    print(bno080Data)
+                    continue;
+
                 if checkTrials > checkLimit :
                     print("Resetting BNO080")
                     bno080_valid   =  bno080.initiate(initTrials)
                     time.sleep(10)
-                    break;
+                    continue;
 
+                    #  mSR.BNO080WriteI2c(bno080Data)
+    
 
-                print(bno080Data)
-                #  mSR.BNO080WriteI2c(bno080Data)
-                checkCurrent   = bno080Data[-1]
 
 
             print("=======================")  
