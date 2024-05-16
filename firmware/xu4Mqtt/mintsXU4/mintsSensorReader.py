@@ -477,8 +477,9 @@ def BNO080WriteI2c(sensorData):
             ("running",              sensorData[29]),
             ("onStairs",             sensorData[30])
         ])
+        print(sensorDictionary)
         sensorFinisher(sensorData[0], sensorName, sensorDictionary)
-
+   
 
 def BME280WriteI2c(sensorData):
     
