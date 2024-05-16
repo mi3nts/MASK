@@ -41,11 +41,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
             if bno080_valid:
                 bno080Data = bno080.read()
                 
-                if checkCurrent == bno080Data[-1]:
+                if checkCurrent == bno080Data[12]:
                     checkTrials = checkTrials + 1 
                 else: 
                     checkTrials  = 0 
-                    checkCurrent = bno080Data[-1]
+                    checkCurrent = bno080Data[12]
                 
                 print(checkTrials)
                 print(bno080Data)

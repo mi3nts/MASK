@@ -443,18 +443,18 @@ def BNO080WriteI2c(sensorData):
     
     sensorName = "BNO080"
     dataLength = 13
-    if(len(sensorData) == dataLength):
-        sensorDictionary =  OrderedDict([
-                ("dateTime"       ,str(sensorData[0])), 
-        		("linearAccelerationX"  ,sensorData[1]),
-            	("linearAccelerationY"  ,sensorData[2]),
-                ("linearAccelerationZ"  ,sensorData[3]),
-        		("linearAccelerationX"  ,sensorData[1]),
-            	("angularRotationX"  ,sensorData[2]),
-                ("accelerationZ"  ,sensorData[3]),                
-            	("altitude"       ,sensorData[4])
-                ])
-        sensorFinisher(sensorData[0],sensorName,sensorDictionary)    
+    # if(len(sensorData) == dataLength):
+    #     sensorDictionary =  OrderedDict([
+    #             ("dateTime"       ,str(sensorData[0])), 
+    #     		("linearAccelerationX"  ,sensorData[1]),
+    #         	("linearAccelerationY"  ,sensorData[2]),
+    #             ("linearAccelerationZ"  ,sensorData[3]),
+    #     		("linearAccelerationX"  ,sensorData[1]),
+    #         	("angularRotationX"  ,sensorData[2]),
+    #             ("accelerationZ"  ,sensorData[3]),                
+    #         	("altitude"       ,sensorData[4])
+    #             ])
+    #     sensorFinisher(sensorData[0],sensorName,sensorDictionary)    
 
 
 def BME280WriteI2c(sensorData):
