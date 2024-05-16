@@ -440,9 +440,9 @@ def BME680Write(sensorData,dateTime):
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 def BNO080WriteI2c(sensorData):
-    print(dataLength)
+    print(len(sensorData))
     sensorName = "BNO080"
-    dataLength = 30  # Adjusted to match the actual number of elements expected in sensorData
+    dataLength = 31  # Adjusted to match the actual number of elements expected in sensorData
     if len(sensorData) == dataLength:
         sensorDictionary = OrderedDict([
             ("dateTime",             str(sensorData[0])), 
