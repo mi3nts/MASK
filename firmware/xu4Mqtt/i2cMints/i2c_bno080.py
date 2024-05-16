@@ -145,6 +145,7 @@ class BNO080:
             heading_geo                                         = self.find_heading(geo_quat_real, geo_quat_i, geo_quat_j, geo_quat_k)
             game_quat_i,game_quat_j, game_quat_k,game_quat_real = self.bno.game_quaternion 
             steps                                               = self.bno.steps
+            time.sleep(1)
             shake                                               = self.shake_summary(self.bno.shake)
 
             [ mostLikelyIndex,\
