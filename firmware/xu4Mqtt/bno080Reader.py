@@ -48,9 +48,12 @@ def main(loopInterval, checkTrials, checkCurrent ):
                     checkCurrent = bno080Data[-1]
                 
                 print(checkTrials)
-                
+                print(bno080Data)
+
                 if checkTrials == 0:
-                    print(bno080Data)
+                    print("Writing Data")
+                    # mSR.BNO080WriteI2c(bno080Data)
+    
                     continue;
 
                 if checkTrials > checkLimit :
@@ -59,8 +62,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                     time.sleep(10)
                     continue;
 
-                    #  mSR.BNO080WriteI2c(bno080Data)
-    
+                    #  
 
 
 
