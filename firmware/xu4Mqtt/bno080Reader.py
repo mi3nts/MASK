@@ -40,7 +40,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
             print("======= BNO080 ========")
             if bno080_valid:
                 bno080Data = bno080.read()
-                
+                print(bno080Data)
                 if checkCurrent == bno080Data[12]:
                     checkTrials = checkTrials + 1 
                 else: 
