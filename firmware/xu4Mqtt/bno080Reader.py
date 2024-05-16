@@ -26,7 +26,7 @@ debug        = False
 bus          = I2C(4)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
-loopInterval = 2
+loopInterval = 1
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5
@@ -53,7 +53,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 if checkTrials == 0:
                     print("Writing Data")
                     # mSR.BNO080WriteI2c(bno080Data)
-    
+                    startTime = mSR.delayMints(time.time() - startTime,loopInterval)
                     continue;
 
                 if checkTrials > checkLimit :
@@ -62,12 +62,8 @@ def main(loopInterval, checkTrials, checkCurrent ):
                     time.sleep(10)
                     continue;
 
-                    #  
-
-
-
             print("=======================")  
-            startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+
 
         except Exception as e:
             print(e)
