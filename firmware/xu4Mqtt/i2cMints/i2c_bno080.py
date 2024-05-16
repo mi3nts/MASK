@@ -88,7 +88,6 @@ class BNO080:
             return True       
         
     def find_heading(self,dqw, dqx, dqy, dqz):
-        print("FH")
         norm = sqrt(dqw * dqw + dqx * dqx + dqy * dqy + dqz * dqz)
         dqw = dqw / norm
         dqx = dqx / norm
@@ -109,7 +108,6 @@ class BNO080:
     
 
     def activity_classification_summary(self,activity_classification):
-        print("ACS")
         most_likely     = activity_classification["most_likely"]
         mostLikelyIndex = mapping.get(activity_classification['most_likely'], -1) 
         mostLikelyConf  = activity_classification[most_likely]
