@@ -87,7 +87,7 @@ class BNO080:
             time.sleep(1)
             return True       
         
-    def find_heading(dqw, dqx, dqy, dqz):
+    def find_heading(self,dqw, dqx, dqy, dqz):
         norm = sqrt(dqw * dqw + dqx * dqx + dqy * dqy + dqz * dqz)
         dqw = dqw / norm
         dqx = dqx / norm
@@ -107,7 +107,7 @@ class BNO080:
         return yaw  # heading in 360 clockwise
     
 
-    def activity_classification_summary(activity_classification):
+    def activity_classification_summary(self,activity_classification):
         most_likely     = activity_classification["most_likely"]
         mostLikelyIndex = mapping.get(activity_classification['most_likely'], -1) 
         mostLikelyConf  = activity_classification[most_likely]
@@ -125,7 +125,7 @@ class BNO080:
                         ]
         return outPut;
 
-    def shake_summary(shake_output):
+    def shake_summary(self,shake_output):
         if shake_output == False:
             return 0
         
