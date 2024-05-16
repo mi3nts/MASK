@@ -62,6 +62,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                     time.sleep(10)
                     continue;
 
+            startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             print("=======================")  
 
 
