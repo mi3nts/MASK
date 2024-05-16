@@ -143,11 +143,17 @@ while True:
 
     activity_classification = bno.activity_classification
     most_likely = activity_classification["most_likely"]
+    
     print(
         "Activity classification:",
         most_likely,
         "confidence: %d/100" % activity_classification[most_likely],
     )
+
+    print("")
+    print(activity_classification)
+
+
 
     print("")
     time.sleep(0.4)
