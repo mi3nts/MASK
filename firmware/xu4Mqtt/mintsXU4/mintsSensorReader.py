@@ -442,19 +442,42 @@ def BME680Write(sensorData,dateTime):
 def BNO080WriteI2c(sensorData):
     
     sensorName = "BNO080"
-    dataLength = 13
-    # if(len(sensorData) == dataLength):
-    #     sensorDictionary =  OrderedDict([
-    #             ("dateTime"       ,str(sensorData[0])), 
-    #     		("linearAccelerationX"  ,sensorData[1]),
-    #         	("linearAccelerationY"  ,sensorData[2]),
-    #             ("linearAccelerationZ"  ,sensorData[3]),
-    #     		("linearAccelerationX"  ,sensorData[1]),
-    #         	("angularRotationX"  ,sensorData[2]),
-    #             ("accelerationZ"  ,sensorData[3]),                
-    #         	("altitude"       ,sensorData[4])
-    #             ])
-    #     sensorFinisher(sensorData[0],sensorName,sensorDictionary)    
+    dataLength = 30  # Adjusted to match the actual number of elements expected in sensorData
+    if len(sensorData) == dataLength:
+        sensorDictionary = OrderedDict([
+            ("dateTime",             str(sensorData[0])), 
+            ("accelerationX",        sensorData[1]),
+            ("accelerationY",        sensorData[2]),
+            ("accelerationZ",        sensorData[3]),
+            ("linearAccelerationX",  sensorData[4]),
+            ("linearAccelerationY",  sensorData[5]),  
+            ("linearAccelerationZ",  sensorData[6]),  
+            ("angularVelocityX",     sensorData[7]),
+            ("angularVelocityY",     sensorData[8]),
+            ("angularVelocityZ",     sensorData[9]),
+            ("magneticFluxDensityX", sensorData[10]),
+            ("magneticFluxDensityY", sensorData[11]),
+            ("magneticFluxDensityZ", sensorData[12]),
+            ("quaternionI",          sensorData[13]),
+            ("quaternionJ",          sensorData[14]),
+            ("quaternionK",          sensorData[15]),
+            ("quaternionReal",       sensorData[16]),
+            ("heading",              sensorData[17]),
+            ("steps",                sensorData[18]),
+            ("shake",                sensorData[19]),
+            ("mostLikelyIndex",      sensorData[20]),
+            ("mostLikelyConfidence", sensorData[21]),
+            ("unknown",              sensorData[22]),
+            ("inVehicle",            sensorData[23]),
+            ("onBicycle",            sensorData[24]),
+            ("onFoot",               sensorData[25]),
+            ("still",                sensorData[26]),
+            ("tilting",              sensorData[27]),
+            ("walking",              sensorData[28]),
+            ("running",              sensorData[29]),
+            ("onStairs",             sensorData[30])
+        ])
+        sensorFinisher(sensorData[0], sensorName, sensorDictionary)
 
 
 def BME280WriteI2c(sensorData):

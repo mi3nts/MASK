@@ -15,8 +15,6 @@ from adafruit_bno08x import (
     BNO_REPORT_MAGNETOMETER,
     BNO_REPORT_ROTATION_VECTOR,
     BNO_REPORT_LINEAR_ACCELERATION,
-    BNO_REPORT_GEOMAGNETIC_ROTATION_VECTOR,
-    BNO_REPORT_GAME_ROTATION_VECTOR,
     BNO_REPORT_STEP_COUNTER,
     BNO_REPORT_STABILITY_CLASSIFIER,
     BNO_REPORT_ACTIVITY_CLASSIFIER,
@@ -59,12 +57,10 @@ class BNO080:
             try:
                 self.bno = BNO08X_I2C(self.i2c)
                 self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+                self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
                 self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
                 self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
                 self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
-                self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
-                self.bno.enable_feature(BNO_REPORT_GEOMAGNETIC_ROTATION_VECTOR)
-                self.bno.enable_feature(BNO_REPORT_GAME_ROTATION_VECTOR)
                 self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
                 self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
                 self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
@@ -108,11 +104,11 @@ class BNO080:
     
 
     def activity_classification_summary(self,activity_classification):
-        most_likely     = activity_classification["most_likely"]
-        mostLikelyIndex = mapping.get(activity_classification['most_likely'], -1) 
-        mostLikelyConf  = activity_classification[most_likely]
-        outPut          = [ mostLikelyIndex,\
-                            mostLikelyConf,\
+        most_likely       = activity_classification["most_likely"]
+        most_likely_index = mapping.get(activity_classification['most_likely'], -1) 
+        most_likely_conf  = activity_classification[most_likely]
+        outPut            = [ most_likely_index,\
+                            most_likely_conf,\
                             activity_classification["Unknown"], \
                             activity_classification["In-Vehicle"], \
                             activity_classification["On-Bicycle"], \
@@ -136,46 +132,39 @@ class BNO080:
         try:
             dateTime                                            = datetime.datetime.now() 
             accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
+            linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
             gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
             mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
             quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
-            linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
-            geo_quat_i,geo_quat_j,geo_quat_k,geo_quat_real      = self.bno.geomagnetic_quaternion
             heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
-            heading_geo                                         = self.find_heading(geo_quat_real, geo_quat_i, geo_quat_j, geo_quat_k)
-            game_quat_i,game_quat_j, game_quat_k,game_quat_real = self.bno.game_quaternion 
             steps                                               = self.bno.steps
             time.sleep(1)
             shake                                               = self.shake_summary(self.bno.shake)
-
-            [ mostLikelyIndex,\
-                            mostLikelyConf,\
-                            unknown, \
-                            in_vehicle, \
-                            on_bicycle, \
-                            on_foot, \
-                            still, \
-                            tilting, \
-                            walking, \
-                            running, \
-                            on_stairs \
-                        ]                                        = self.activity_classification_summary(self.bno.activity_classification)
+            [   most_likely_index,\
+                most_likely_conf,\
+                unknown, \
+                in_vehicle, \
+                on_bicycle, \
+                on_foot, \
+                still, \
+                tilting, \
+                walking, \
+                running, \
+                on_stairs \
+                ]                                                = self.activity_classification_summary(self.bno.activity_classification)
 
 
             return [dateTime,\
                     accel_x, accel_y, accel_z,\
+                    linear_accel_x,linear_accel_y, linear_accel_z,\
                     gyro_x, gyro_y, gyro_z,\
                     mag_x, mag_y, mag_z,\
                     quat_i, quat_j, quat_k, quat_real,\
-                    linear_accel_x,linear_accel_y, linear_accel_z,\
-                    geo_quat_i,geo_quat_j,geo_quat_k,geo_quat_real,\
-                    heading,
-                    heading_geo,
-                    game_quat_i,game_quat_j, game_quat_k,game_quat_real,
+                    heading,\
                     steps ,\
                     shake,\
-                    mostLikelyIndex,\
-                    mostLikelyConf,\
+                    most_likely_index,\
+                    most_likely_conf,\
                     unknown, \
                     in_vehicle, \
                     on_bicycle, \
