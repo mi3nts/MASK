@@ -439,6 +439,21 @@ def BME680Write(sensorData,dateTime):
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
+def BNO080WriteI2c(sensorData):
+    
+    sensorName = "BNO080"
+    dataLength = 13
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("temperature"  ,sensorData[1]),
+            	("pressure"     ,sensorData[2]),
+                ("humidity"     ,sensorData[3]),
+            	("altitude"     ,sensorData[4])
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)    
+
+
 def BME280WriteI2c(sensorData):
     
     sensorName = "BME280"

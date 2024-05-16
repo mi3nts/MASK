@@ -52,7 +52,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
 
                 if checkTrials == 0:
                     print("Writing Data")
-                    # mSR.BNO080WriteI2c(bno080Data)
+                    mSR.BNO080WriteI2c(bno080Data)
                     startTime = mSR.delayMints(time.time() - startTime,loopInterval)
                     continue;
 
