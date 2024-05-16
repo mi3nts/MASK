@@ -157,7 +157,7 @@ class BNO080:
                             tilting, \
                             walking, \
                             running, \
-                            on_stairs, \
+                            on_stairs \
                         ]                                        = self.bno.activity_classification
 
 
