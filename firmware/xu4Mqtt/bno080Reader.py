@@ -32,6 +32,7 @@ checkTrials  = 0
 checkLimit   = 5
 
 
+
 def main(loopInterval, checkTrials, checkCurrent ):
     bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()

@@ -480,6 +480,7 @@ def BNO080WriteI2c(sensorData):
         print(sensorDictionary)
         sensorFinisher(sensorData[0], sensorName, sensorDictionary)
    
+   
 
 def BME280WriteI2c(sensorData):
     
