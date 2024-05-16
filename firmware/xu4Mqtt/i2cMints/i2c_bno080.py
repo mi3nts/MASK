@@ -125,6 +125,13 @@ class BNO080:
                         ]
         return outPut;
 
+    def shake_summary(shake_output):
+        if shake_output == False:
+            return 0
+        
+        return 1; 
+
+
     def read(self):
         try:
             dateTime                                            = datetime.datetime.now() 
@@ -138,6 +145,8 @@ class BNO080:
             heading_geo                                         = self.find_heading(geo_quat_real, geo_quat_i, geo_quat_j, geo_quat_k)
             game_quat_i,game_quat_j, game_quat_k,game_quat_real = self.bno.game_quaternion 
             steps                                               = self.bno.steps
+            shake                                               = self.shake_summary(self.bno.shake)
+
             [ mostLikelyIndex,\
                             mostLikelyConf,\
                             unknown, \
@@ -163,6 +172,7 @@ class BNO080:
                     heading_geo,
                     game_quat_i,game_quat_j, game_quat_k,game_quat_real,
                     steps ,\
+                    shake,\
                     mostLikelyIndex,\
                     mostLikelyConf,\
                     unknown, \
