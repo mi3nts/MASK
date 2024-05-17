@@ -116,8 +116,8 @@ class TMP117:
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
         print("Serial Number")
-        print(f"TMP117 Serial Number: 0x{self.serial_number:08X}")
-        # print(self.serial_num)
+        self.serial_number_string = f"{self.serial_number:08X}"
+        print(self.serial_number_string)
         # self.combined_id = bytearray(
         #         [
         #             serial_num1_data[0],
@@ -129,7 +129,7 @@ class TMP117:
         #         ]
         #     )
         # print(self.combined_id)
-        return "TEST"
+        return serial_number_string
     
     def soft_reset(self):
         # Write the soft reset value to the configuration register
