@@ -92,6 +92,16 @@ class TMP117:
             time.sleep(1)
             return True       
       
+    def convert_to_integer(bytes_to_convert: bytearray) -> int:
+        """Use bitwise operators to convert the bytes into integers."""
+        integer = None
+        for chunk in bytes_to_convert:
+            if not integer:
+                integer = chunk
+            else:
+                integer = integer << 8
+                integer = integer | chunk
+        return integer
 
     def read_serial_number(self):
         
@@ -106,17 +116,18 @@ class TMP117:
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
         print(self.serial_num)
-        self.combined_id = bytearray(
-                [
-                    serial_num1_data[0],
-                    serial_num1_data[1],
-                    serial_num2_data[0],
-                    serial_num2_data[1],
-                    serial_num3_data[0],
-                    serial_num3_data[1],
-                ]
-            )
-        print(self.combined_id)
+        # print(self.serial_num)
+        # self.combined_id = bytearray(
+        #         [
+        #             serial_num1_data[0],
+        #             serial_num1_data[1],
+        #             serial_num2_data[0],
+        #             serial_num2_data[1],
+        #             serial_num3_data[0],
+        #             serial_num3_data[1],
+        #         ]
+        #     )
+        # print(self.combined_id)
         return "TEST"
     
     def soft_reset(self):
