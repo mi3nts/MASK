@@ -62,10 +62,12 @@ class TMP117:
                 self.soft_reset()
                 time.sleep(1)
                 self.serial_number = self.read_serial_number()
-                time.sleep(1)
                 print("TMP117 Serial Number:")
                 print(self.serial_number)
-                # print(serial_number)
+
+                time.sleep(1)
+                self.device_id     = self.read_device_id()
+                time.sleep(1)
                 # time.sleep(1)
                 # self.device_id_data = self.read_device_id()
                 # print(f"TMP117 Device ID: 0x{device_id_data:08X}")
@@ -111,67 +113,37 @@ class TMP117:
         serial_num3_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_SERIAL_NUM_3, 2)
 
         # Combine the data to form the 32-bit serial number
-        self.serial_number = (
+        serial_number_pre = (
             (serial_num1_data[0] << 8 | serial_num1_data[1]) << 32 | 
             (serial_num2_data[0] << 8 | serial_num2_data[1]) << 16 | 
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
-        print("Serial Number:")
-        self.serial_number_string = f"{self.serial_number:08X}"
-        print(self.serial_number_string)
-
-        return self.serial_number_string
+        return  f"{serial_number_pre:08X}"
     
     def soft_reset(self):
         # Write the soft reset value to the configuration register
         config =  self.i2c.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
-        
         # Clear the MODE bits and set them to the specified averaging mode
         config = (config & ~SOFT_RESET_MASK) | SOFT_RESET_VALUE 
-        
         # Write the updated configuration back to the register
         self.i2c.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
-        
         print("Software Reset")
-
-
 
     def read_device_id(self):
         device_id_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_DEVICE_ID, 2)
-        
-        # Combine the data to form the 16-bit device ID
-        self.device_id = (device_id_data[0] << 8) | device_id_data[1]
-        
-        return self.device_id;
-
-# # # Create an I2C bus object
-# # bus = smbus2.SMBus(4)  # 1 is the I2C bus number on Raspberry Pi; change as needed for your platform
-
-# def read_temperature():
-#     # Read 2 bytes from the temperature result register
-#     data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_TEMP_RESULT, 2)
-
-#     # Convert the data to temperature in Celsius
-#     temp_raw = (data[0] << 8) | data[1]
-#     temp_celsius = temp_raw * 0.0078125
-
-#     return temp_celsius
+        device_id_pre  = (device_id_data[0] << 8) | device_id_data[1]
+        return  f"{device_id_pre:08X}";
 
 
-  
+    def read_temperature():
+        # Read 2 bytes from the temperature result register
+        data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_TEMP_RESULT, 2)
 
-    
-  
-# def convert_to_integer(bytes_to_convert: bytearray) -> int:
-#     """Use bitwise operators to convert the bytes into integers."""
-#     integer = None
-#     for chunk in bytes_to_convert:
-#         if not integer:
-#             integer = chunk
-#         else:
-#             integer = integer << 8
-#             integer = integer | chunk
-#     return integer
+        # Convert the data to temperature in Celsius
+        temp_raw = (data[0] << 8) | data[1]
+        temp_celsius = temp_raw * 0.0078125
+
+        return temp_celsius
 
 
 # def set_continuous_conversion_mode():
