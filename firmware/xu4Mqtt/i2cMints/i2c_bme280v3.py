@@ -64,8 +64,8 @@ class BME280V3:
                     measurement.temperature,\
                         100*measurement.pressure,\
                             measurement.humidity,\
-                                self.calculate_dew_point(self,measurement.temperature, measurement.humidity),\
-                                    self.calculate_altitude(self,measurement.pressure)];
+                                self.calculate_dew_point(measurement.temperature, measurement.humidity),\
+                                    self.calculate_altitude(measurement.pressure)];
         else:
             time.sleep(1)
             print("BME280 Measurments not read")    

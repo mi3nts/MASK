@@ -73,14 +73,16 @@ class TMP117:
                 print("TMP117 Device ID:")
                 print(self.device_id)
                 time.sleep(1)
-
-                # time.sleep(1)
-                # self.set_continuous_conversion_mode()
-                # time.sleep(1)
-                # self.set_conversion_cycle_time(CONV_CYCLE_1000_MS)
-                # time.sleep(1)
-                # self.set_averaged_times(AVERAGE_WITH_8_POINTS)
-                # time.sleep(1)
+    
+                self.set_continuous_conversion_mode()
+                time.sleep(1)
+    
+                self.set_conversion_cycle_time(CONV_CYCLE_1000_MS)
+                time.sleep(1)
+    
+                self.set_averaged_times(AVERAGE_WITH_8_POINTS)
+                time.sleep(1)
+                
                 ready = True
                 
             except OSError:
