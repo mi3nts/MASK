@@ -44,10 +44,8 @@ AVERAGE_WITH_64_POINTS = 0b11 << 5
 SOFT_RESET_MASK        = 0b1 << 1  #   bits (bits 5 and 6)
 SOFT_RESET_VALUE       = 0b0 << 1
 
-
 # Bit masks
 DR_BIT_MASK = 0b1 << 13  # Data ready bit (bit 3)
-
 
 class TMP117:
 

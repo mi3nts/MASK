@@ -51,7 +51,7 @@ DR_BIT_MASK = 0b1 << 13  # Data ready bit (bit 3)
 
 
 # Create an I2C bus object
-bus = smbus2.SMBus(4)  # 1 is the I2C bus number on Raspberry Pi; change as needed for your platform
+bus = smbus2.SMBus(5)  # 1 is the I2C bus number on Raspberry Pi; change as needed for your platform
 
 def read_temperature():
     # Read 2 bytes from the temperature result register
