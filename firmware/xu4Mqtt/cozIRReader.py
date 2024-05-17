@@ -121,11 +121,11 @@ def decode_cozir_data(data):
 
         print(data[1:6])
         print(data[7:12])
-        print(data[12:17])        
-        print(data[17:22])       
+        print(data[13:18])        
+        print(data[19:])       
         humidity      = int(data[1:5]) / 10.0             # Assuming the humidity is given in tenths of percentage
-        temperature   = (int(data[7:11]) - 1000) / 10.0   # Assuming the temperature is given in tenths of degrees Celsius
-        co2Filtured   = int(data[13:17])                  # CO2 concentration in ppm
+        temperature   = (int(data[7:12]) - 1000) / 10.0   # Assuming the temperature is given in tenths of degrees Celsius
+        co2Filtured   = int(data[13:18])                  # CO2 concentration in ppm
         co2Recent     = int(data[19:])                    # Another CO2 concentration in ppm or another parameter
         
         return [co2Recent,co2Filtured,temperature,humidity]
