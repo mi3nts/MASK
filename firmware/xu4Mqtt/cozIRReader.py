@@ -5,6 +5,8 @@ import datetime
 from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 import time
+import re
+
 import sys
 
 dataFolderReference    = mD.dataFolderReference
@@ -88,15 +90,27 @@ def main(portNum):
                      print(datetime.datetime.now())                     
                      dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
                      print(dataStringPost)
-                     time.sleep(5)
+                     time.sleep(1)
+                     if check_format(dataStringPost):
+                        print("Pattern Matched")
+                        ser.write(str.encode('Q\r\n'))
+
                      
-                     ser.write(str.encode('Q\r\n'))
                      line = []
         except:
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
 
-
+def check_format(s):
+    """
+    Check if the string has the format 'H ddddd T ddddd Z ddddd z ddddd'.
+    
+    :param s: The string to check.
+    :return: True if the string matches the format, False otherwise.
+    """
+    pattern = r'^H \d{5} T \d{5} Z \d{5} z \d{5}$'
+    match = re.match(pattern, s)
+    return bool(match)
 
 
 if __name__ == "__main__":
