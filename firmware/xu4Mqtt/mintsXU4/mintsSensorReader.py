@@ -477,7 +477,32 @@ def BNO080WriteI2c(sensorData):
             ("onStairs",             sensorData[30])
         ])
         sensorFinisher(sensorData[0], sensorName, sensorDictionary)
-   
+
+def TMP117WriteI2c(sensorData):
+    sensorName = "TMP117"
+    dataLength = 2
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("temperature"  ,sensorData[1]),
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)   
+
+
+def BME280V3WriteI2c(sensorData):
+    sensorName = "BME280V3"
+    dataLength = 6
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("temperature"  ,sensorData[1]),
+            	("pressure"     ,sensorData[2]),
+                ("humidity"     ,sensorData[3]),
+            	("dewPoint"     ,sensorData[4])
+            	("altitude"     ,sensorData[5])
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
+
 
 
 def BME280WriteI2c(sensorData):

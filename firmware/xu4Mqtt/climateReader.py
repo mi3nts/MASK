@@ -25,7 +25,7 @@ import time
 import os
 import smbus2
 #from i2cMints.i2c_scd30 import SCD30
-from i2cMints.i2c_bme280 import BME280
+from firmware.xu4Mqtt.i2cMints.i2c_bme280v3 import BME280V2
 from i2cMints.i2c_tmp117 import TMP117
 from mintsXU4 import mintsSensorReader as mSR
 
@@ -33,7 +33,7 @@ debug        = False
 bus          = smbus2.SMBus(5)
 
 # BME280
-bme280       = BME280(bus,debug)
+bme280v3       = BME280V2(bus,debug)
 
 # TMP117
 tmp117       = TMP117(bus,debug) 
@@ -42,20 +42,19 @@ checkTrials  = 0
 loopInterval = 5 
 
 def main(loopInterval):
-    bme280_valid   = bme280.initiate(30)
+    bme280v3_valid   = bme280v3.initiate(30)
     tmp117_valid   = tmp117.initiate(30)
     
     startTime    = time.time()
     while True:
         try:
             print("======= BME280 ========")
-            if bme280_valid:
-                mSR.BME280WriteI2c(bme280.read())
+            if bme280v3_valid:
+                mSR.BME280V3WriteI2c(bme280v3.read())
 
             print("======= TMP117 ========")
             if tmp117_valid:
-                print(tmp117.read())
-                # mSR.TMP117WriteI2c(tmp117.read())
+                mSR.TMP117WriteI2c(tmp117.read())
 
             print("=======================")
             time.sleep(2)       

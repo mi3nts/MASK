@@ -7,14 +7,14 @@ import smbus2
 import struct
 import time
 import bme280
-
+import math
 
 # to_s16 = lambda x: (x + 2**15) % 2**16 - 2**15
 # to_u16 = lambda x: x % 2**16
 
 BME280_I2C_ADDR = 0x77
 
-class BME280:
+class BME280V3:
 
     def __init__(self, i2c_dev,debugIn):
         
@@ -42,19 +42,29 @@ class BME280:
             print("BME 280 Found - Calibraion Params Set")
             time.sleep(1)
             return True       
-      
+        
+    def calculate_dew_point(self,temp, humid):
+        dew_point = 243.04 * (math.log(humid / 100.0) + ((17.625 * temp) / (243.04 + temp))) / (17.625 - math.log(humid / 100.0) - ((17.625 * temp) / (243.04 + temp)))
+        return dew_point
+    
+    def calculate_altitude(self,pressure):
+        A = (100*pressure) / 101325;
+        B = 1 / 5.25588
+        C = pow(A, B)
+        C = 1.0 - C
+        return C/0.0000225577;
+             
+
     def read(self):
+        dateTime = datetime.datetime.now() 
         measurement = bme280.sample(self.i2c, self.i2c_addr, self.calibration_params)
         if measurement is not None:
-            print("Temperature: {:.2f}'C, Pressure: {:.2f}'C, Relative Humidity: {:.2f}%".format(measurement.temperature,measurement.pressure,measurement.humidity))
-            dateTime = datetime.datetime.now() 
-            A = (100*measurement.pressure) / 101325;
-            B = 1 / 5.25588
-            C = pow(A, B)
-            C = 1.0 - C
-            altitude = C / 0.0000225577
-            time.sleep(1)
-            return [dateTime,measurement.temperature,100*measurement.pressure,measurement.humidity,altitude];
+            return [dateTime,\
+                    measurement.temperature,\
+                        100*measurement.pressure,\
+                            measurement.humidity,\
+                                self.calculate_dew_point(self,measurement.temperature, measurement.humidity),\
+                                    self.calculate_altitude(self,measurement.pressure)];
         else:
             time.sleep(1)
             print("BME280 Measurments not read")    
