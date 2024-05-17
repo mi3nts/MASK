@@ -54,7 +54,7 @@ def main(loopInterval):
 
             print("======= TMP117 ========")
             if tmp117_valid:
-                tmp117.read()
+                print(tmp117.read())
                 # mSR.TMP117WriteI2c(tmp117.read())
 
             print("=======================")
