@@ -91,7 +91,7 @@ def main(portNum):
                      dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
                      print(dataStringPost)
                      time.sleep(1)
-                     if check_format(dataStringPost):
+                     if contains_pattern(dataStringPost):
                         print("Pattern Matched")
                         ser.write(str.encode('Q\r\n'))
 
@@ -101,15 +101,15 @@ def main(portNum):
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
 
-def check_format(s):
+def contains_pattern(s):
     """
-    Check if the string has the format 'H ddddd T ddddd Z ddddd z ddddd'.
+    Check if the string contains the pattern 'H ddddd T ddddd Z ddddd z ddddd' anywhere within it.
     
     :param s: The string to check.
-    :return: True if the string matches the format, False otherwise.
+    :return: True if the string contains the pattern, False otherwise.
     """
-    pattern = r'^H \d{5} T \d{5} Z \d{5} z \d{5}$'
-    match = re.match(pattern, s)
+    pattern = r'H \d{5} T \d{5} Z \d{5} z \d{5}'
+    match = re.search(pattern, s)
     return bool(match)
 
 
