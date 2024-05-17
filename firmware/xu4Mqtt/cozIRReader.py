@@ -107,7 +107,7 @@ def check_format(s):
     :param s: The string to check.
     :return: True if the string matches the format, False otherwise.
     """
-    pattern = r'^H \d{5} T \d{5} Z \d{5} z \d{5}$'
+    pattern = r'^H\d{5}T\d{5}Z\d{5}z\d{5}$'
     match = re.match(pattern, s)
     return bool(match)
 
