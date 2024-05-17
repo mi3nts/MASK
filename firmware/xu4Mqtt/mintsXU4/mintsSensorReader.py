@@ -490,6 +490,7 @@ def TMP117WriteI2c(sensorData):
 
 
 def BME280V3WriteI2c(sensorData):
+    print(sensorData)
     sensorName = "BME280V3"
     dataLength = 6
     if(len(sensorData) == dataLength):
