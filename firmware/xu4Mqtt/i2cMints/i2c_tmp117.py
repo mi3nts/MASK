@@ -116,7 +116,7 @@ class TMP117:
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
         print("Serial Number")
-        print(self.serial_num)
+        print(f"TMP117 Serial Number: 0x{self.serial_number:08X}")
         # print(self.serial_num)
         # self.combined_id = bytearray(
         #         [
