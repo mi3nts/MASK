@@ -110,7 +110,7 @@ class TMP117:
         serial_num3_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_SERIAL_NUM_3, 2)
 
         # Combine the data to form the 32-bit serial number
-        self.serial_num = (
+        self.serial_number = (
             (serial_num1_data[0] << 8 | serial_num1_data[1]) << 32 | 
             (serial_num2_data[0] << 8 | serial_num2_data[1]) << 16 | 
             (serial_num3_data[0] << 8 | serial_num3_data[1])
