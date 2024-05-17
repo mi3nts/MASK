@@ -138,7 +138,7 @@ class BNO080:
             quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
             heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
             steps                                               = self.bno.steps
-            time.sleep(.5)
+            time.sleep(1)
             shake                                               = self.shake_summary(self.bno.shake)
             [   most_likely_index,\
                 most_likely_conf,\
