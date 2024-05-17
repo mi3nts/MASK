@@ -61,33 +61,35 @@ def main(portNum):
     print(" ")
     line = []
 
+    print("Setting the sensor into polling mode")
     ser.write(str.encode('K 2\r\n'))
     time.sleep(1)
-
-    ser.write(str.encode('.\r\n'))
-    time.sleep(1)
-
-    ser.write(str.encode('z\r\n'))
-    time.sleep(1)
-
+    
+    print("Reading CO2 Data Point")
     ser.write(str.encode('Z\r\n'))
     time.sleep(1)
+    
+    print("Setting COZIR to emit all data")
     ser.write(str.encode('M 04166\r\n'))
+    time.sleep(1)
+
+
+    
+    print("Asking for Data")
+    ser.write(str.encode('Q\r\n'))
     time.sleep(1)
 
     while True:
         try:
             for c in ser.read():
-    
                 line.append(chr(c))
-                
                 if chr(c) == '\n':
-                     dataString = ''.join(line)
+                     print("-------------------------------------------------------------")
+                     print(datetime.datetime.now())                     
                      dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
-                     print("================")
-                     print(datetime.datetime.now())
                      print(dataStringPost)
                      time.sleep(5)
+                     
                      ser.write(str.encode('Q\r\n'))
                      line = []
         except:
