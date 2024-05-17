@@ -74,8 +74,6 @@ def main(portNum):
     print("Setting COZIR to emit all data")
     ser.write(str.encode('M 04166\r\n'))
     time.sleep(1)
-
-
     
     print("Asking for Data")
     ser.write(str.encode('Q\r\n'))
@@ -92,7 +90,7 @@ def main(portNum):
                     print(dataStringPost)
                     time.sleep(1)
                     if check_format(dataStringPost):
-                        decode_cozir_data(dataStringPost)
+                        print(decode_cozir_data(dataStringPost))
                         ser.write(str.encode('Q\r\n'))
 
                      
@@ -119,14 +117,12 @@ def decode_cozir_data(data):
     :return: A dictionary with decoded values.
     """
     try:
-        parts         = data.split()
-        print(parts)
-        humidity      = int(data[1:5]) / 10.0,          # Assuming the humidity is given in tenths of percentage
-        temperature   = (int(data[7:11]) -1000) / 10.0,  # Assuming the temperature is given in tenths of degrees Celsius
+        humidity      = int(data[1:5]) / 10.0,            # Assuming the humidity is given in tenths of percentage
+        temperature   = (int(data[7:11]) - 1000) / 10.0,  # Assuming the temperature is given in tenths of degrees Celsius
         co2Filtured   = int(data[13:17]),                 # CO2 concentration in ppm
-        co2Recent     = int(data[19:])                 # Another CO2 concentration in ppm or another parameter
+        co2Recent     = int(data[19:])                    # Another CO2 concentration in ppm or another parameter
 
-        return [co2Recent,co2Filtured,humidity,temperature]
+        return [co2Recent,co2Filtured,temperature,humidity]
     except (IndexError, ValueError) as e:
         print(f"Error decoding data: {e}")
         return None
