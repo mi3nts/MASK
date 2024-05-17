@@ -89,11 +89,9 @@ def main(portNum):
                     print("-------------------------------------------------------------")
                     print(datetime.datetime.now())                     
                     dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
-                    print("-")
                     print(dataStringPost)
-                    print("-")
                     time.sleep(1)
-                    if contains_pattern(dataStringPost):
+                    if check_format(dataStringPost):
                         ser.write(str.encode('Q\r\n'))
 
                      
@@ -102,15 +100,15 @@ def main(portNum):
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
 
-def contains_pattern(s):
+def check_format(s):
     """
-    Check if the string contains the pattern 'H ddddd T ddddd Z ddddd z ddddd' anywhere within it.
+    Check if the string has the format 'H ddddd T ddddd Z ddddd z ddddd'.
     
     :param s: The string to check.
-    :return: True if the string contains the pattern, False otherwise.
+    :return: True if the string matches the format, False otherwise.
     """
-    pattern = r'H \d{5} T \d{5} Z \d{5} z \d{5}'
-    match = re.search(pattern, s)
+    pattern = r'^H \d{5} T \d{5} Z \d{5} z \d{5}$'
+    match = re.match(pattern, s)
     return bool(match)
 
 def decode_cozir_data(data):
@@ -130,16 +128,6 @@ def decode_cozir_data(data):
     except (IndexError, ValueError) as e:
         print(f"Error decoding data: {e}")
         return None
-
-# Example usage
-data_string = "H 00418 T 01236 Z 00423 z 00432"
-decoded = decode_cozir_data(data_string)
-if decoded:
-    print(f"Decoded Data: {decoded}")
-else:
-    print("Failed to decode data.")
-
-
 
 
 
