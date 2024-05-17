@@ -57,5 +57,5 @@ class BME280:
             return [dateTime,measurement.temperature,100*measurement.pressure,measurement.humidity,altitude];
         else:
             time.sleep(1)
-            return [];
             print("BME280 Measurments not read")    
+            return [];

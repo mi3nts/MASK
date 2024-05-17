@@ -61,17 +61,17 @@ class TMP117:
             try:
                 self.soft_reset()
                 time.sleep(1)
+
                 self.serial_number = self.read_serial_number()
                 print("TMP117 Serial Number:")
                 print(self.serial_number)
+                time.sleep(1)
 
-                time.sleep(1)
                 self.device_id     = self.read_device_id()
+                print("TMP117 Device ID:")
+                print(self.device_id)
                 time.sleep(1)
-                # time.sleep(1)
-                # self.device_id_data = self.read_device_id()
-                # print(f"TMP117 Device ID: 0x{device_id_data:08X}")
-                # print(device_id_data)
+
                 # time.sleep(1)
                 # self.set_continuous_conversion_mode()
                 # time.sleep(1)
@@ -135,10 +135,9 @@ class TMP117:
         return  f"{device_id_pre:08X}";
 
 
-    def read_temperature():
+    def read_temperature(self):
         # Read 2 bytes from the temperature result register
         data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_TEMP_RESULT, 2)
-
         # Convert the data to temperature in Celsius
         temp_raw = (data[0] << 8) | data[1]
         temp_celsius = temp_raw * 0.0078125
@@ -146,58 +145,51 @@ class TMP117:
         return temp_celsius
 
 
-# def set_continuous_conversion_mode():
-#     # Read the current value of the configuration register
-#     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
-    
-#     # Clear the MODE bits and set them to continuous conversion mode
-#     config = (config & ~MODE_BITS_MASK) | CONTINUOUS_MODE
-    
-#     # Write the updated configuration back to the register
-#     bus.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
-    
-#     print("TMP117 set to continuous conversion mode.")
+    def set_continuous_conversion_mode(self):
+        # Read the current value of the configuration register
+        config = self.i2c.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
+        
+        # Clear the MODE bits and set them to continuous conversion mode
+        config = (config & ~MODE_BITS_MASK) | CONTINUOUS_MODE
+        
+        # Write the updated configuration back to the register
+        self.i2c.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
+        
+        print("TMP117 set to continuous conversion mode.")
 
 
-# def set_conversion_cycle_time(conv_cycle):
-#     # Read the current value of the configuration register
-#     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
-    
-#     # Clear the CONV bits and set them to the specified conversion cycle time
-#     config = (config & ~CONV_BITS_MASK) | conv_cycle
-    
-#     # Write the updated configuration back to the register
-#     bus.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
-    
-#     print(f"TMP117 conversion cycle time set to: {conv_cycle >> 10}.")
+    def set_conversion_cycle_time(self,conv_cycle):
+        # Read the current value of the configuration register
+        config = self.i2c.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
+        # Clear the CONV bits and set them to the specified conversion cycle time
+        config = (config & ~CONV_BITS_MASK) | conv_cycle
+        # Write the updated configuration back to the register
+        self.i2c.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
+        print(f"TMP117 conversion cycle time set to: {conv_cycle >> 10}.")
 
 
-# def set_averaged_times(average_times):
-#     # Read the current value of the configuration register
-#     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
-    
-#     # Clear the MODE bits and set them to the specified averaging mode
-#     config = (config & ~AVERAGE_WITH_MASK) | average_times
-    
-#     # Write the updated configuration back to the register
-#     bus.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
-    
-#     print(f"TMP117 set to mode: {average_times >> 10}.")
+    def set_averaged_times(self,average_times):
+        # Read the current value of the configuration register
+        config = self.i2c.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
+        # Clear the MODE bits and set them to the specified averaging mode
+        config = (config & ~AVERAGE_WITH_MASK) | average_times
+        # Write the updated configuration back to the register
+        self.i2c.write_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER, config)
+        print(f"TMP117 set to mode: {average_times >> 10}.")
 
 
+    def get_data_ready(self):
+        config = self.i2c.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
+        return config & DR_BIT_MASK
 
-
-
-# def get_data_ready():
-
-#     config = bus.read_word_data(TMP117_ADDRESS, TMP117_CONFIG_REGISTER)
-
-#     # Check the data ready bit
-#     # print(config & DR_BIT_MASK)
-#     return config & DR_BIT_MASK
-
-
-
+    def read(self):
+        if self.get_data_ready():
+            dateTime = datetime.datetime.now() 
+            return [dateTime,self.read_temperature()];
+        else:
+            time.sleep(1)
+            print("TMP117 measurments not read")    
+            return [];
 # def main():
 #     try:
 #         # Read the serial number of the TMP117 sensor
