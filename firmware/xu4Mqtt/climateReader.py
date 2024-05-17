@@ -51,13 +51,13 @@ def main(loopInterval):
             print("======= BME280V3 ========")
             if bme280v3_valid:
                 mSR.BME280V3WriteI2c(bme280v3.read())
-
+            time.sleep(1)     
             print("======= TMP117 ========")
             if tmp117_valid:
                 mSR.TMP117WriteI2c(tmp117.read())
 
             print("=======================")
-            time.sleep(2)       
+            time.sleep(1)       
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             
         except Exception as e:
