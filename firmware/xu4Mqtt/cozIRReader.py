@@ -108,7 +108,7 @@ def check_format(s):
     :return: True if the string matches the format, False otherwise.
     """
     pattern = r'^H\d{5}T\d{5}Z\d{5}z\d{5}$'
-    match = re.match(pattern, s)
+    match   = re.match(pattern, s)
     return bool(match)
 
 def decode_cozir_data(data):
@@ -119,10 +119,11 @@ def decode_cozir_data(data):
     """
     try:
         parts         = data.split()
-        humidity      = int(parts[1]) / 10.0,        # Assuming the humidity is given in tenths of percentage
-        temperature   = (int(parts[3]) -1000) / 10.0,  # Assuming the temperature is given in tenths of degrees Celsius
-        co2Filtured   = int(parts[5]),               # CO2 concentration in ppm
-        co2Recent     = int(parts[7])                # Another CO2 concentration in ppm or another parameter
+        print(parts)
+        humidity      = int(data[1:5]) / 10.0,          # Assuming the humidity is given in tenths of percentage
+        temperature   = (int(data[6:10]) -1000) / 10.0,  # Assuming the temperature is given in tenths of degrees Celsius
+        co2Filtured   = int(data[11:15]),                 # CO2 concentration in ppm
+        co2Recent     = int(data[16:])                 # Another CO2 concentration in ppm or another parameter
 
         return [co2Recent,co2Filtured,humidity,temperature]
     except (IndexError, ValueError) as e:
