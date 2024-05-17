@@ -88,7 +88,7 @@ def main(portNum):
                 if chr(c) == '\n':
                     print("-------------------------------------------------------------")
                     print(datetime.datetime.now())                     
-                    dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
+                    dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
                     print("-")
                     print(dataStringPost)
                     print("-")
