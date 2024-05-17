@@ -63,7 +63,8 @@ class TMP117:
                 time.sleep(1)
                 self.serial_number = self.read_serial_number()
                 time.sleep(1)
-                print(f"TMP117 Serial Number: 0x{self.serial_number:08X}")
+                print("TMP117 Serial Number:")
+                print(self.serial_number)
                 # print(serial_number)
                 # time.sleep(1)
                 # self.device_id_data = self.read_device_id()
@@ -115,21 +116,11 @@ class TMP117:
             (serial_num2_data[0] << 8 | serial_num2_data[1]) << 16 | 
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
-        print("Serial Number")
+        print("Serial Number:")
         self.serial_number_string = f"{self.serial_number:08X}"
         print(self.serial_number_string)
-        # self.combined_id = bytearray(
-        #         [
-        #             serial_num1_data[0],
-        #             serial_num1_data[1],
-        #             serial_num2_data[0],
-        #             serial_num2_data[1],
-        #             serial_num3_data[0],
-        #             serial_num3_data[1],
-        #         ]
-        #     )
-        # print(self.combined_id)
-        return serial_number_string
+
+        return self.serial_number_string
     
     def soft_reset(self):
         # Write the soft reset value to the configuration register
@@ -145,13 +136,13 @@ class TMP117:
 
 
 
-#     def set_device_id(self):
-#         device_id_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_DEVICE_ID, 2)
+    def read_device_id(self):
+        device_id_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_DEVICE_ID, 2)
         
-#         # Combine the data to form the 16-bit device ID
-#         self.device_id = (device_id_data[0] << 8) | device_id_data[1]
+        # Combine the data to form the 16-bit device ID
+        self.device_id = (device_id_data[0] << 8) | device_id_data[1]
         
-#         return;
+        return self.device_id;
 
 # # # Create an I2C bus object
 # # bus = smbus2.SMBus(4)  # 1 is the I2C bus number on Raspberry Pi; change as needed for your platform

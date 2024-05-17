@@ -32,10 +32,10 @@ from mintsXU4 import mintsSensorReader as mSR
 debug        = False 
 bus          = smbus2.SMBus(5)
 
-#  BME280
+# BME280
 bme280       = BME280(bus,debug)
 
-# BNO080
+# TMP117
 tmp117       = TMP117(bus,debug) 
 
 checkTrials  = 0
@@ -52,7 +52,7 @@ def main(loopInterval):
             if bme280_valid:
                 mSR.BME280WriteI2c(bme280.read())
 
-            print("======= BNO080 ========")
+            print("======= TMP117 ========")
             if tmp117_valid:
                 tmp117.read()
                 # mSR.TMP117WriteI2c(tmp117.read())
