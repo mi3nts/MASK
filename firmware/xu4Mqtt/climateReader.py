@@ -52,6 +52,7 @@ def main(loopInterval):
             if bme280v3_valid:
                 mSR.BME280V3WriteI2c(bme280v3.read())
             time.sleep(1)     
+            
             print("======= TMP117 ========")
             if tmp117_valid:
                 mSR.TMP117WriteI2c(tmp117.read())

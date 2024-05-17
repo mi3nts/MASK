@@ -86,17 +86,18 @@ def main(portNum):
             for c in ser.read():
                 line.append(chr(c))
                 if chr(c) == '\n':
-                     print("-------------------------------------------------------------")
-                     print(datetime.datetime.now())                     
-                     dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
-                     print(dataStringPost)
-                     time.sleep(1)
-                     if contains_pattern(dataStringPost):
-                        print("Pattern Matched")
+                    print("-------------------------------------------------------------")
+                    print(datetime.datetime.now())                     
+                    dataStringPost     = (''.join(line)).replace("\n","").replace("\r","")
+                    print("-")
+                    print(dataStringPost)
+                    print("-")
+                    time.sleep(1)
+                    if contains_pattern(dataStringPost):
                         ser.write(str.encode('Q\r\n'))
 
                      
-                     line = []
+                    line = []
         except:
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
@@ -111,6 +112,35 @@ def contains_pattern(s):
     pattern = r'H \d{5} T \d{5} Z \d{5} z \d{5}'
     match = re.search(pattern, s)
     return bool(match)
+
+def decode_cozir_data(data):
+    """
+    Decodes COZIR sensor data from a formatted string.
+    :param data: The string containing the sensor data.
+    :return: A dictionary with decoded values.
+    """
+    try:
+        parts         = data.split()
+        humidity      = int(parts[1]) / 10.0,        # Assuming the humidity is given in tenths of percentage
+        temperature   = int(parts[3] -1000) / 10.0,  # Assuming the temperature is given in tenths of degrees Celsius
+        co2Filtured   = int(parts[5]),               # CO2 concentration in ppm
+        co2Recent     = int(parts[7])                # Another CO2 concentration in ppm or another parameter
+
+        return [co2Recent,co2Filtured,humidity,temperature]
+    except (IndexError, ValueError) as e:
+        print(f"Error decoding data: {e}")
+        return None
+
+# Example usage
+data_string = "H 00418 T 01236 Z 00423 z 00432"
+decoded = decode_cozir_data(data_string)
+if decoded:
+    print(f"Decoded Data: {decoded}")
+else:
+    print("Failed to decode data.")
+
+
+
 
 
 if __name__ == "__main__":
