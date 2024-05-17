@@ -52,7 +52,6 @@ DR_BIT_MASK = 0b1 << 13  # Data ready bit (bit 3)
 class TMP117:
 
     def __init__(self, i2c_dev,debugIn):
-        
         self.i2c_addr = TMP117_ADDRESS
         self.i2c      = i2c_dev
         self.debug    = debugIn
@@ -226,42 +225,42 @@ class TMP117:
 
 
 
-def main():
-    try:
-        # Read the serial number of the TMP117 sensor
-        soft_reset()
-        time.sleep(1)
-        serial_number = read_serial_number()
-        time.sleep(1)
-        print(f"TMP117 Serial Number: 0x{serial_number:08X}")
-        print(serial_number)
-        time.sleep(1)
-        device_id_data = read_device_id()
-        #print(f"TMP117 Device ID: 0x{device_id_data:08X}")
-        print(device_id_data)
-        time.sleep(1)
-        set_continuous_conversion_mode()
-        time.sleep(1)
-        set_conversion_cycle_time(CONV_CYCLE_1000_MS)
-        time.sleep(1)
-        set_averaged_times(AVERAGE_WITH_8_POINTS)
-        time.sleep(1)
+# def main():
+#     try:
+#         # Read the serial number of the TMP117 sensor
+#         soft_reset()
+#         time.sleep(1)
+#         serial_number = read_serial_number()
+#         time.sleep(1)
+#         print(f"TMP117 Serial Number: 0x{serial_number:08X}")
+#         print(serial_number)
+#         time.sleep(1)
+#         device_id_data = read_device_id()
+#         #print(f"TMP117 Device ID: 0x{device_id_data:08X}")
+#         print(device_id_data)
+#         time.sleep(1)
+#         set_continuous_conversion_mode()
+#         time.sleep(1)
+#         set_conversion_cycle_time(CONV_CYCLE_1000_MS)
+#         time.sleep(1)
+#         set_averaged_times(AVERAGE_WITH_8_POINTS)
+#         time.sleep(1)
 
-        while True:
-            # Read temperature
-            if( get_data_ready()):
-                print(datetime.datetime.now())
-                temperature = read_temperature()
-                print(f"Temperature: {temperature:.2f} °C")
-            else:
-                time.sleep(.1)
-            # Wait for a second before reading the temperature again
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print("Program interrupted by user")
+#         while True:
+#             # Read temperature
+#             if( get_data_ready()):
+#                 print(datetime.datetime.now())
+#                 temperature = read_temperature()
+#                 print(f"Temperature: {temperature:.2f} °C")
+#             else:
+#                 time.sleep(.1)
+#             # Wait for a second before reading the temperature again
+#             time.sleep(1)
+#     except KeyboardInterrupt:
+#         print("Program interrupted by user")
 
-    # Close the I2C bus
-    bus.close()
+#     # Close the I2C bus
+#     bus.close()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
