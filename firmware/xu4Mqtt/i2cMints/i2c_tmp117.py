@@ -50,12 +50,14 @@ DR_BIT_MASK = 0b1 << 13  # Data ready bit (bit 3)
 class TMP117:
 
     def __init__(self, i2c_dev,debugIn):
+        
         self.i2c_addr = TMP117_ADDRESS
         self.i2c      = i2c_dev
         self.debug    = debugIn
 
 
     def initiate(self,retriesIn):
+        print("============== TMP117 ==============")        
         ready = None
         while ready is None and retriesIn:
             try:

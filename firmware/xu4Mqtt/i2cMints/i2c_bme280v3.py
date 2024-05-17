@@ -23,6 +23,7 @@ class BME280V3:
         self.debug    = debugIn
 
     def initiate(self,retriesIn):
+        print("============== BME280V3 ==============")
         ready = None
         while ready is None and retriesIn:
             try:
