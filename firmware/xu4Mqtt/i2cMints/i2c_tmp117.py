@@ -93,7 +93,7 @@ class TMP117:
             return True       
       
 
-    def set_serial_number(self):
+    def read_serial_number(self):
         
         serial_num1_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_SERIAL_NUM_1, 2)
         serial_num2_data = self.i2c.read_i2c_block_data(TMP117_ADDRESS, TMP117_SERIAL_NUM_2, 2)
