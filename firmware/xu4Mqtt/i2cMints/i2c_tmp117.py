@@ -115,6 +115,7 @@ class TMP117:
             (serial_num2_data[0] << 8 | serial_num2_data[1]) << 16 | 
             (serial_num3_data[0] << 8 | serial_num3_data[1])
         )
+        print("Serial Number")
         print(self.serial_num)
         # print(self.serial_num)
         # self.combined_id = bytearray(
