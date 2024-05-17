@@ -46,7 +46,6 @@ class BME280V3:
         
     def calculate_dew_point(self,temp, humid):
         dew_point = 243.04 * (math.log(humid / 100.0) + ((17.625 * temp) / (243.04 + temp))) / (17.625 - math.log(humid / 100.0) - ((17.625 * temp) / (243.04 + temp)))
-        print(dew_point)
         return dew_point
     
     def calculate_altitude(self,pressure):
