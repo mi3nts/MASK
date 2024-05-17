@@ -489,8 +489,8 @@ def TMP117WriteI2c(sensorData):
         sensorFinisher(sensorData[0],sensorName,sensorDictionary)   
 
 
+
 def BME280V3WriteI2c(sensorData):
-    print(sensorData)
     sensorName = "BME280V3"
     dataLength = 6
     if(len(sensorData) == dataLength):
@@ -499,7 +499,7 @@ def BME280V3WriteI2c(sensorData):
         		("temperature"  ,sensorData[1]),
             	("pressure"     ,sensorData[2]),
                 ("humidity"     ,sensorData[3]),
-            	("dewPoint"     ,sensorData[4])
+            	("dewPoint"     ,sensorData[4]),
             	("altitude"     ,sensorData[5])
                 ])
         sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
