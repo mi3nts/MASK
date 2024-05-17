@@ -92,6 +92,7 @@ def main(portNum):
                     print(dataStringPost)
                     time.sleep(1)
                     if check_format(dataStringPost):
+                        decode_cozir_data(dataStringPost)
                         ser.write(str.encode('Q\r\n'))
 
                      
