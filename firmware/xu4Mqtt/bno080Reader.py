@@ -5,17 +5,9 @@ import time
 import datetime
 import board
 import busio
-import sys
 from i2cMints.i2c_bno080 import BNO080
 from mintsXU4 import mintsSensorReader as mSR
 
-
-from adafruit_bno08x import (
-    BNO_REPORT_ACCELEROMETER,
-    BNO_REPORT_GYROSCOPE,
-    BNO_REPORT_MAGNETOMETER,
-    BNO_REPORT_ROTATION_VECTOR,
-)
 from adafruit_bno08x.i2c import BNO08X_I2C
 
 from adafruit_extended_bus import ExtendedI2C as I2C
@@ -38,7 +30,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
     bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()
     while True:
-        # try:
+        try:
             print("======= BNO080 ========")
             if bno080_valid:
                 bno080Data = bno080.read()
@@ -68,11 +60,12 @@ def main(loopInterval, checkTrials, checkCurrent ):
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             print("=======================")  
 
-        # except Exception as e:
-        #     print(e)
-        #     print("Restarting script")
-        #     time.sleep(10)
-        #     exec(open(sys.argv[0]).read())
+
+        except Exception as e:
+            print(e)
+            print("Resetting BNO080")
+            bno080_valid   =  bno080.initiate(initTrials)
+            time.sleep(10)
         
 if __name__ == "__main__":
     print("=============")
@@ -80,4 +73,3 @@ if __name__ == "__main__":
     print("=============")
     print("Monitoring Climate data for MASK")
     main(loopInterval, checkTrials, checkCurrent )
-
