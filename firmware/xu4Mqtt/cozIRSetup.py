@@ -75,7 +75,7 @@ def main(portNum):
     time.sleep(1)
     # Make sure that it returns @1.08.0
 
-    print("Truning the auto zero value off")
+    print("Turning the auto zero value off")
     ser.write(str.encode('@ 0\r\n'))
     time.sleep(1)
 
