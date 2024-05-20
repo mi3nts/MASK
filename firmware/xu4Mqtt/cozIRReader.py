@@ -46,67 +46,8 @@ def main(portNum):
     print("Setting the sensor into polling mode")
     ser.write(str.encode('K 2\r\n'))
     time.sleep(1)
+
     
-    print("Setting COZIR to emit all data")
-    ser.write(str.encode('M 04166\r\n'))
-    time.sleep(1)
-
-    # # print("Asking for Data")
-    # # ser.write(str.encode('Q\r\n'))
-    # # time.sleep(1)
-
-    # print("Reading the altitude compensation value")
-    # ser.write(str.encode('s\r\n'))
-    # time.sleep(1)
-
-    # print("Setting Compensation Value")
-    # ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
-    # time.sleep(1)
-    
-    # print("Reading the altitude compensation value")
-    # ser.write(str.encode('s\r\n'))
-    # time.sleep(1)
-
-    # print("Reading the auto zero value")
-    # ser.write(str.encode('@\r\n'))
-    # time.sleep(1)
-    # # Make sure that it returns @1.08.0
-
-    # # print("Turning the auto zero value off")
-    # # ser.write(str.encode('@ 0\r\n'))
-    # # time.sleep(1)
-
-    # # print("Reading the auto zero value")
-    # # ser.write(str.encode('@\r\n'))
-    # # time.sleep(1)
-
-    # # print("Setting the auto zero value")
-    # # ser.write(str.encode('@ 1.0 8.0\r\n'))
-    # # time.sleep(1)
-
-    # # print("Reading the auto zero value")
-    # # ser.write(str.encode('@\r\n'))
-    # # time.sleep(1)
-    # # According to climate.gov (https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide)
-    # # the lowest atmospheric co2 levels is 418.5 ppm 
-    # # As such setting the auto zero co2 level as 418.0 
-
-    # # This has to be added for the final code 
-    # print("Setting the value of auto calibration")
-    # ser.write(str.encode('P 8 1\r\n'))
-    # time.sleep(1)
-    # ser.write(str.encode('P 9 162\r\n'))
-    # time.sleep(1)
-
-    # print("Reading the digital filter value")
-    # ser.write(str.encode('a\r\n'))
-    # time.sleep(1)
-
-    # print("Asking for Data")
-    # dateTime = datetime.datetime.now()
-    # startTime = dateTime
-    # ser.write(str.encode('Q\r\n'))
-    # time.sleep(1)
     setupDone  = False; 
     
     
@@ -122,9 +63,9 @@ def main(portNum):
                     # ser.write(str.encode('K 2\r\n'))
                     # time.sleep(1)
                     
-                    # print("Setting COZIR to emit all data")
-                    # ser.write(str.encode('M 04166\r\n'))
-                    # time.sleep(1)
+                    print("Setting COZIR to emit all data")
+                    ser.write(str.encode('M 04166\r\n'))
+                    time.sleep(1)
 
                     # print("Asking for Data")
                     # ser.write(str.encode('Q\r\n'))
@@ -191,12 +132,12 @@ def main(portNum):
                 if chr(c) == '\n' and (menuSetUp):
                     # dateTime = datetime.datetime.now()
                     dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
-                    print(dataStringPost)
+                    # print(dataStringPost)
                     line = []
                     if check_format(dataStringPost):
                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
                         # ser.write(str.encode('Q\r\n'))
-                    time.sleep(.1)
+                time.sleep(.1)
 
                      
 
@@ -204,40 +145,7 @@ def main(portNum):
             print(f"Incomplete read. Something may be wrong with {portIn}: {e}")
             line = []
 
-    # while True:
-    #     try:
-    #         for c in ser.read():
-    #             line.append(chr(c))
-                
-    #             if chr(c) == '\n' and not(menuSetUp):
-    #                 dataString = ''.join(line)
-    #                 dataString     = (''.join(line)).replace("\n","").replace("\r","")
-                    
-
-    # while True:
-    #     try:
-    #         for c in ser.read():
-    #             line.append(chr(c))
-    #             if chr(c) == '\n':
-    #                 print("-------------------------------------------------------------")                    
-    #                 dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
-    #                 print(dataStringPost)
-    #                 # ser.write(str.encode('Q\r\n'))
-                    
-    #                 if check_format(dataStringPost):
-    #                     if setupDone:
-    #                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost,dateTime)))
-    #                     setupDone = True;
-                    
-    #                 dateTime =datetime.datetime.now()
-    #                 ser.write(str.encode('Q\r\n'))
-    #                 line = []
-    #                 startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-    #     except:
-    #         print("Incomplete read. Something may be wrong with {0}".format(portIn))
-    #         line = []
-
-
+   
 def altitude_compensation_string(altitude):
     cv = compensation_value(altitude)
     print("Compensation Value: ")
