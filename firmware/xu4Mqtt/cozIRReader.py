@@ -184,7 +184,7 @@ def main(portNum):
                     print("Setting the sensor into Streaming mode")
                     ser.write(str.encode('K 1\r\n'))
                     time.sleep(1)
-                    
+
                     menuSetUp = True
                     line = []
 
@@ -194,7 +194,7 @@ def main(portNum):
                     print(dataStringPost)
                     line = []
                     if check_format(dataStringPost):
-                        print(decode_cozir_data(dataStringPost))
+                        mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
                         # ser.write(str.encode('Q\r\n'))
                 time.sleep(.1)
 
