@@ -118,7 +118,7 @@ def sea_level_difference(meters):
     return (18/500)*meters_to_feet(meters)
 
 def compensation_value(meters):
-    return (8192+ (sea_level_difference(meters)*.14)/100)*8192
+    return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
 
 def meters_to_feet(meters):
     feet_per_meter = 3.280839895013123
