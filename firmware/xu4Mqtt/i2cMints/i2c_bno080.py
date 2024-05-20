@@ -62,6 +62,7 @@ class BNO080:
                 self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
                 self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
                 self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
+                time.sleep(1)
                 self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
                 self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
 
