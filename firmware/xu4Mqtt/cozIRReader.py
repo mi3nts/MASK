@@ -73,6 +73,7 @@ def main(portNum):
                 if chr(c) == '\n':
                     print("-------------------------------------------------------------")
                     dataStringPost = (''.join(line)).replace("\n", "").replace("\r", "").replace(" ", "")
+                    print(dataStringPost)
                     time.sleep(1)
                     if check_format(dataStringPost):
                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
