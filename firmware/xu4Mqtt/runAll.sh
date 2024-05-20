@@ -1,24 +1,34 @@
 #!/bin/bash
 #
 sleep 60
-kill $(pgrep -f 'ips7100ReaderV1.py')
+kill $(pgrep -f 'ipsI2CReader.py')
 sleep 5
-python3 ips7100ReaderV1.py 2>> /home/teamlary/gitHubRepos/errorLogs/ips7100Error.log &
+python3 ipsI2CReader.py &
 sleep 5
 
-kill $(pgrep -f 'i2cReader.py')
+kill $(pgrep -f 'climateReader.py')
 sleep 5
-python3 i2cReader.py 2>> /home/teamlary/gitHubRepos/errorLogs/i2cError.log &
+python3 climateReader.py &
+sleep 5
+
+kill $(pgrep -f 'bno080Reader.py')
+sleep 5
+python3 bno080Reader.py &
+sleep 5
+
+kill $(pgrep -f 'cozIRReader.py')
+sleep 5
+python3 cozIRReader.py &
 sleep 5
 
 kill $(pgrep -f 'gpsReader.py')
 sleep 5
-python3 gpsReader.py 2>> /home/teamlary/gitHubRepos/errorLogs/gpsError.log &
+python3 gpsReader.py &
 sleep 5
 
 kill $(pgrep -f 'batteryReader.py')
 sleep 5
-python3 batteryReader.py 2>> /home/teamlary/gitHubRepos/errorLogs/batterryReaderError.log &
+python3 batteryReader.py &
 sleep 5
 
 
