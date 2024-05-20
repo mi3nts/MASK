@@ -55,7 +55,6 @@ def main(portNum):
     ser.write(str.encode('P 9 162\r\n'))
     time.sleep(1)
 
-
     print("Reading the altitude compensation value")
     ser.write(str.encode('s\r\n'))
     time.sleep(1)
@@ -68,12 +67,9 @@ def main(portNum):
     ser.write(str.encode('s\r\n'))
     time.sleep(1)
 
-
     print("Asking for Data")
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
-
-
 
     while True:
         try:
