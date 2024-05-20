@@ -71,7 +71,7 @@ def main(portNum):
     time.sleep(1)
 
     print("Reading the auto zero value")
-    ser.write(str.encode('@ \r\n'))
+    ser.write(str.encode('@\r\n'))
     time.sleep(1)
 
     print("Asking for Data")
