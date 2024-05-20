@@ -117,15 +117,27 @@ def decode_cozir_data(data):
 def sea_level_difference(meters):
     return (0.0316)*meters_to_feet(meters)
 
-def compensation_value(meters):
-    return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
+# def compensation_value(meters):
+#     return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
 
 def meters_to_feet(meters):
     feet_per_meter = 3.280839895013123
     feet = meters * feet_per_meter
     return feet
 
+def compensation_value(altitude_m):
+    """
+    Calculate the compensation value based on the altitude in meters.
 
+    Parameters:
+    altitude_m (float): Altitude in meters.
+
+    Returns:
+    float: Compensation value.
+    """
+    base_value = 8192  # Base compensation value
+    coefficient = 1.35  # Coefficient derived from the sea level difference formula
+    return base_value + coefficient * altitude_m
 
 
 
