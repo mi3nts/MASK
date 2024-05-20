@@ -25,11 +25,11 @@ baudRate = 9600
 
 def main(portNum):
 
-    print(compensation_value(153))
+    print(compensation_value(200))
 
-    print(compensation_value(610))
+    # print(compensation_value(610))
 
-    print(compensation_value(2745))
+    # print(compensation_value(2745))
 
     ser = serial.Serial(
     port= portIn,\
@@ -114,16 +114,16 @@ def decode_cozir_data(data):
         print(f"Error decoding data: {e}")
         return None
 
-def sea_level_difference(meters):
-    return (0.0316)*meters_to_feet(meters)
+# def sea_level_difference(meters):
+#     return (0.0316)*meters_to_feet(meters)
 
-# def compensation_value(meters):
-#     return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
+# # def compensation_value(meters):
+# #     return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
 
-def meters_to_feet(meters):
-    feet_per_meter = 3.280839895013123
-    feet = meters * feet_per_meter
-    return feet
+# def meters_to_feet(meters):
+#     feet_per_meter = 3.280839895013123
+#     feet = meters * feet_per_meter
+#     return feet
 
 def compensation_value(altitude_m):
     """
