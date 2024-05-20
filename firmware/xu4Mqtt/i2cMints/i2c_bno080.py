@@ -74,7 +74,7 @@ class BNO080:
                 # time.sleep(1)                
                 # self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
 
-                self.bno = BNO08X_I2C(i2c)
+                self.bno = BNO08X_I2C(self.i2c)
 
                 self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
                 self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
