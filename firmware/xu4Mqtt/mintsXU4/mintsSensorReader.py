@@ -504,7 +504,18 @@ def BME280V3WriteI2c(sensorData):
                 ])
         sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
 
-
+def COZIRAEH2000Write(sensorData):
+    sensorName = "COZIRAEH2000"
+    dataLength = 5
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("co2Recent"    ,sensorData[1]),
+            	("co2Filtered"  ,sensorData[2]),
+                ("temperature"  ,sensorData[3]),
+            	("humidity"     ,sensorData[4]),
+            	])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
 
 def BME280WriteI2c(sensorData):
     

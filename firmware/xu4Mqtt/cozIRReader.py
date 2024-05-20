@@ -90,7 +90,7 @@ def main(portNum):
                     print(dataStringPost)
                     time.sleep(1)
                     if check_format(dataStringPost):
-                        print(decode_cozir_data(dataStringPost))
+                        mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
                         ser.write(str.encode('Q\r\n'))
 
                      
@@ -117,18 +117,14 @@ def decode_cozir_data(data):
     :return: A dictionary with decoded values.
     """
     print(data)
-    try:
-
-        print(data[1:6])
-        print(data[7:12])
-        print(data[13:18])        
-        print(data[19:])       
+    try:     
+        dateTime  = datetime.datetime.now()
         humidity      = int(data[1:5]) / 10.0             # Assuming the humidity is given in tenths of percentage
         temperature   = (int(data[7:12]) - 1000) / 10.0   # Assuming the temperature is given in tenths of degrees Celsius
         co2Filtured   = int(data[13:18])                  # CO2 concentration in ppm
         co2Recent     = int(data[19:])                    # Another CO2 concentration in ppm or another parameter
-        
-        return [co2Recent,co2Filtured,temperature,humidity]
+        return [dateTime,co2Recent,co2Filtured,temperature,humidity]
+    
     except (IndexError, ValueError) as e:
         print(f"Error decoding data: {e}")
         return None
