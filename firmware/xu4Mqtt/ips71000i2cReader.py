@@ -45,7 +45,6 @@ def main(loopInterval):
         try:
             print("======= IPS7100 ========")
             if ips7100_valid:
-                print(ips7100.read())
                 mSR.IPS7100WriteI2c(ips7100.read())
             time.sleep(.5)    
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
