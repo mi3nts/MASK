@@ -7,7 +7,7 @@ import time
 
 IPS7100_I2C_ADDR = 0x4B
 
-class IpsSensor:
+class IPS7100:
     POLY = 0x8408
 
 

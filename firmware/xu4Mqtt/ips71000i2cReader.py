@@ -32,7 +32,7 @@ debug        = False
 bus          = smbus2.SMBus(3)
 
 # IPS7100
-ips7100      = IPS7100
+ips7100      = IPS7100(bus,debug)
 
 checkTrials  = 0
 loopInterval = 1 
@@ -54,7 +54,7 @@ def main(loopInterval):
             print(e)
             time.sleep(10)
 
-      
+
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
