@@ -75,21 +75,21 @@ def main(portNum):
     time.sleep(1)
     # Make sure that it returns @1.08.0
 
-    print("Turning the auto zero value off")
-    ser.write(str.encode('@ 0\r\n'))
-    time.sleep(1)
+    # print("Turning the auto zero value off")
+    # ser.write(str.encode('@ 0\r\n'))
+    # time.sleep(1)
 
-    print("Reading the auto zero value")
-    ser.write(str.encode('@\r\n'))
-    time.sleep(1)
+    # print("Reading the auto zero value")
+    # ser.write(str.encode('@\r\n'))
+    # time.sleep(1)
 
-    print("Setting the auto zero value")
-    ser.write(str.encode('@ 1.0 8.0\r\n'))
-    time.sleep(1)
+    # print("Setting the auto zero value")
+    # ser.write(str.encode('@ 1.0 8.0\r\n'))
+    # time.sleep(1)
 
-    print("Reading the auto zero value")
-    ser.write(str.encode('@\r\n'))
-    time.sleep(1)
+    # print("Reading the auto zero value")
+    # ser.write(str.encode('@\r\n'))
+    # time.sleep(1)
 
     print("Reading the digital filter value")
     ser.write(str.encode('a\r\n'))
