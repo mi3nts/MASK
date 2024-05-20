@@ -1,5 +1,4 @@
-# # 
-# Firmware adapted from https://github.com/RequestForCoffee/scd30
+
 import datetime
 from datetime import timedelta
 import logging
@@ -71,7 +70,7 @@ class BNO080:
             except Exception as e:
                 print(e)
                 print("Resetting BNO080")
-                time.sleep(10)
+                time.sleep(1)
                 pass
             time.sleep(1)
             retriesIn -= 1

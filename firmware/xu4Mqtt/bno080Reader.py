@@ -5,6 +5,7 @@ import time
 import datetime
 import board
 import busio
+import sys
 from i2cMints.i2c_bno080 import BNO080
 from mintsXU4 import mintsSensorReader as mSR
 
@@ -67,13 +68,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             print("=======================")  
 
-
         except Exception as e:
             print(e)
-            print("Resetting BNO080")
+            print("Restarting script")
             time.sleep(10)
-            bno080_valid   =  bno080.initiate(initTrials)
-            time.sleep(10)
+            exec(open(sys.argv[0]).read())
         
 if __name__ == "__main__":
     print("=============")
