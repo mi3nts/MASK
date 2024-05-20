@@ -1,18 +1,3 @@
-# ***************************************************************************
-#   ips7100I2cReader
-#   ---------------------------------
-#   Written by: Lakitha Omal Harindha Wijeratne
-#   - for -
-#   Mints: Multi-scale Integrated Sensing and Simulation
-#   ---------------------------------
-#   Date: May 3rd, 2024
-#   ---------------------------------
-#   This module is written for generic implimentation of MINTS projects
-#   --------------------------------------------------------------------------
-#   https://github.com/mi3nts
-#   http://utdmints.info/
-#  ***************************************************************************
-
 import datetime
 from datetime import timedelta
 import logging
@@ -20,15 +5,53 @@ import smbus2
 import struct
 import time
 
-
+IPS7100_I2C_ADDR = 0x4B
 
 class IpsSensor:
     POLY = 0x8408
 
-    def __init__(self,bus_number):
-        self.bus = smbus2.SMBus(bus_number)
-        self.pc_values = [0] * 7
-        self.pm_values = [0.0] * 7
+
+    def __init__(self, i2c_dev,debugIn):
+        
+        self.i2c_addr = IPS7100_I2C_ADDR
+        self.i2c      = i2c_dev
+        self.debug    = debugIn
+
+
+    def initiate(self,retriesIn):
+        print("============== BME280V3 ==============")
+        ready = None
+        while ready is None and retriesIn:
+            try:
+                print("Serial Number")
+                print(self.get_serial_number())
+
+                print("Version")
+                print(self.get_version())
+                
+                print("VREF")
+                print(self.get_vref())
+
+                ready = True
+                
+            except OSError:
+                pass
+            time.sleep(1)
+            retriesIn -= 1
+
+        if not retriesIn:
+            time.sleep(1)
+            return False
+        
+        else:
+            print("IPS7100 Found")
+            time.sleep(1)
+            return True  
+
+    # def __init__(self,bus_number):
+    #     self.bus       = smbus2.SMBus(bus_number)
+    #     self.pc_values = [0] * 7
+    #     self.pm_values = [0.0] * 7
 
 
     def read_i2c(self, command, reply_size):
@@ -36,10 +59,10 @@ class IpsSensor:
         received_bytes.clear()
 
         # Send command to the I2C device
-        self.bus.write_byte(0x4B, command)
+        self.i2c.write_byte(0x4B, command)
 
         # Request `reply_size` bytes from the I2C device
-        received_bytes = self.bus.read_i2c_block_data(0x4B, command, reply_size)
+        received_bytes = self.i2c.read_i2c_block_data(0x4B, command, reply_size)
 
         # print("[", end=" ")
         # print(" ".join(f"{byte:02X}" for byte in received_bytes), end=" ")
@@ -85,6 +108,46 @@ class IpsSensor:
             # Convert 4 bytes to float
             # import struct
             return struct.unpack('<f', bytes(byte_data))[0]
+
+
+
+    def read(self):
+        # Read PC data
+        dateTime = datetime.datetime.now() 
+        pc_raw_values, checkSumPassedPC = self.read_i2c(0x11, 30)
+        pm_raw_values, checkSumPassedPM = self.read_i2c(0x12, 32)
+        # Assemble PC values (unsigned long) from 4 bytes using bitwise operations
+        time.sleep(0.1)
+        for i in range(7):
+            self.pc_values[i] = (pc_raw_values[(i * 4) + 3] |
+                                 (pc_raw_values[(i * 4) + 2] << 8) |
+                                 (pc_raw_values[(i * 4) + 1] << 16) |
+                                 (pc_raw_values[(i * 4)]) << 24)
+        time.sleep(0.1)
+        for i in range(7):
+            start_idx = i * 4
+            float_bytes = pm_raw_values[start_idx:start_idx + 4]
+            self.pm_values[i] = self.bytes_to_float(float_bytes)
+
+        return [dateTime, \
+                self.pc_values[0],\
+                self.pc_values[1],\
+                self.pc_values[2],\
+                self.pc_values[3],\
+                self.pc_values[4],\
+                self.pc_values[5],\
+                self.pc_values[6],\
+                self.pm_values[0],\
+                self.pm_values[1],\
+                self.pm_values[2],\
+                self.pm_values[3],\
+                self.pm_values[4],\
+                self.pm_values[5],\
+                self.pm_values[6],\
+                ]
+
+
+
 
     def update(self):
         # Read PC data
@@ -140,42 +203,4 @@ class IpsSensor:
             version_data[7] = 0
         
         return version_data,checkSumPassed
-    
-
-
-ips7100      = IpsSensor(3)
-
-loopInterval = 5 
-
-
-if __name__ == "__main__":
-    print("=============")
-    print("    MINTS    ")
-    print("=============")
-    print("Serial Number")
-    print(ips7100.get_serial_number())
-
-    print("Version")
-    print(ips7100.get_version())
-    
-    print("VREF")
-    print(ips7100.get_vref())
-
-    while True:
-        try:
-            
-            PCData, PMData, PCCS, PMCS =  ips7100.update()        
-            print(datetime.datetime.now())
-            print("PC Data")
-            print(PCData)
-            print(" PM Data" )
-            print(PMData)
-            time.sleep(1)
-        except Exception as e:
-            # Code to handle any other exception
-            print(f"An error occurred: {e}")
-          
-
-
-
     
