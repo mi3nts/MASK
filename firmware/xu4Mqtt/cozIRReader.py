@@ -24,7 +24,7 @@ baudRate               = 9600
 
 # May change depending on location
 expectedAltitude       = 200;
-
+loopInterval           = 1 
 def main(portNum):
 
     print(altitude_compensation_string(expectedAltitude))
@@ -126,7 +126,7 @@ def main(portNum):
                     dateTime =datetime.datetime.now()
                     ser.write(str.encode('Q\r\n'))
                     line = []
-                    time.sleep(1)
+                    startTime = mSR.delayMints(time.time() - startTime,loopInterval)
         except:
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
