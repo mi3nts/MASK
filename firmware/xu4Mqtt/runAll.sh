@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 sleep 6
-kill $(pgrep -f 'ips71000Reader.py')
+kill $(pgrep -f 'ips7100Reader.py')
 sleep 5
-python3 ips71000Reader.py &
+python3 ips7100Reader.py &
 sleep 5
 
 kill $(pgrep -f 'climateReader.py')
