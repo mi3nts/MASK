@@ -53,7 +53,8 @@ def main(loopInterval):
         except Exception as e:
             print(e)
             time.sleep(10)
-        
+
+      
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
