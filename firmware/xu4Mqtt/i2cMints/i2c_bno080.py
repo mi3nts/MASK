@@ -1,4 +1,5 @@
-
+# # 
+# Firmware adapted from https://github.com/RequestForCoffee/scd30
 import datetime
 from datetime import timedelta
 import logging
@@ -53,44 +54,24 @@ class BNO080:
     def initiate(self,retriesIn):
         ready = None
         while ready is None and retriesIn:
-            # try:
+            try:
                 self.bno = BNO08X_I2C(self.i2c)
-                time.sleep(1)
                 self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
-                time.sleep(1)
                 self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
-                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
-
-                # self.bno = BNO08X_I2C(self.i2c)
-
-                # self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
-                # self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
-                # self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
-                # self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
-
 
                 ready = True
                 
-            # except Exception as e:
-            #     print(e)
-            #     print("Resetting BNO080")
-            #     time.sleep(1)
-            #     pass
-                time.sleep(1)
-                retriesIn -= 1
+            except OSError:
+                pass
+            time.sleep(1)
+            retriesIn -= 1
 
         if not retriesIn:
             time.sleep(1)
@@ -199,5 +180,4 @@ class BNO080:
             print(e)
             time.sleep(1)
             return [];
-
 
