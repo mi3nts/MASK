@@ -38,7 +38,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
     bno080_valid   =  bno080.initiate(initTrials)
     startTime    = time.time()
     while True:
-        try:
+        # try:
             print("======= BNO080 ========")
             if bno080_valid:
                 bno080Data = bno080.read()
@@ -68,11 +68,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             print("=======================")  
 
-        except Exception as e:
-            print(e)
-            print("Restarting script")
-            time.sleep(10)
-            exec(open(sys.argv[0]).read())
+        # except Exception as e:
+        #     print(e)
+        #     print("Restarting script")
+        #     time.sleep(10)
+        #     exec(open(sys.argv[0]).read())
         
 if __name__ == "__main__":
     print("=============")
