@@ -53,7 +53,7 @@ class BNO080:
     def initiate(self,retriesIn):
         ready = None
         while ready is None and retriesIn:
-            try:
+            # try:
                 self.bno = BNO08X_I2C(self.i2c)
                 self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
                 self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
@@ -67,11 +67,11 @@ class BNO080:
 
                 ready = True
                 
-            except Exception as e:
-                print(e)
-                print("Resetting BNO080")
-                time.sleep(1)
-                pass
+            # except Exception as e:
+            #     print(e)
+            #     print("Resetting BNO080")
+            #     time.sleep(1)
+            #     pass
             time.sleep(1)
             retriesIn -= 1
 
