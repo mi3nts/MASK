@@ -20,12 +20,14 @@ import sys
 
 dataFolderReference    = mD.dataFolderReference
 portIn                 = "/dev/ttyS0"
+baudRate               = 9600
 
-baudRate = 9600
+# May change depending on location
+expectedAltitude       = 200;
 
 def main(portNum):
 
-    print(compensation_value(200))
+    print(altitude_compensation_string(expectedAltitude))
 
     # print(compensation_value(610))
 
@@ -83,6 +85,15 @@ def main(portNum):
         except:
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
+
+
+def altitude_compensation_string(altitude):
+    compensation_value = compensation_value(altitude)
+    print("Compensation Value: ")
+    print(compensation_value)
+    setString  = 'S '+ str(compensation_value) + '\r\n'
+    return setString
+    
 
 def check_format(s):
     """
