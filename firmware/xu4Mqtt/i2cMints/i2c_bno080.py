@@ -68,7 +68,10 @@ class BNO080:
 
                 ready = True
                 
-            except OSError:
+            except Exception as e:
+                print(e)
+                print("Resetting BNO080")
+                time.sleep(10)
                 pass
             time.sleep(1)
             retriesIn -= 1

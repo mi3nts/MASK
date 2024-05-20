@@ -71,6 +71,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
         except Exception as e:
             print(e)
             print("Resetting BNO080")
+            time.sleep(10)
             bno080_valid   =  bno080.initiate(initTrials)
             time.sleep(10)
         
