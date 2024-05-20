@@ -88,10 +88,10 @@ def main(portNum):
 
 
 def altitude_compensation_string(altitude):
-    compensation_value = compensation_value(altitude)
+    cv = compensation_value(altitude)
     print("Compensation Value: ")
-    print(compensation_value)
-    setString  = 'S '+ str(compensation_value) + '\r\n'
+    print(cv)
+    setString  = 'S '+ str(cv) + '\r\n'
     return setString
     
 
