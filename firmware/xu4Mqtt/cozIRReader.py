@@ -107,9 +107,11 @@ def main(portNum):
 
     print("Asking for Data")
     dateTime = datetime.datetime.now()
+    startTime = dateTime
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
-    
+    setupDone  = False; 
+
     while True:
         try:
             for c in ser.read():
@@ -121,7 +123,9 @@ def main(portNum):
                     # ser.write(str.encode('Q\r\n'))
                     
                     if check_format(dataStringPost):
-                        mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost,dateTime)))
+                        if setupDone:
+                            mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost,dateTime)))
+                        setupDone = True;
                     
                     dateTime =datetime.datetime.now()
                     ser.write(str.encode('Q\r\n'))
