@@ -50,22 +50,26 @@ def main(portNum):
     ser.write(str.encode('K 2\r\n'))
     time.sleep(1)
     
+    print("Setting COZIR to emit all data")
+    ser.write(str.encode('M 04166\r\n'))
+    time.sleep(1)
+
+    print("Asking for Data")
+    ser.write(str.encode('Q\r\n'))
+    time.sleep(1)
+
     print("Reading the altitude compensation value")
     ser.write(str.encode('s\r\n'))
     time.sleep(1)
 
-    # print("Reading CO2 Data Point")
-    # ser.write(str.encode('Z\r\n'))
-    # time.sleep(1)
+    print("Setting Compensation Value")
+    ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
+    time.sleep(1)
     
-    # print("Setting COZIR to emit all data")
-    # ser.write(str.encode('M 04166\r\n'))
-    # time.sleep(1)
+    print("Asking for Data")
+    ser.write(str.encode('Q\r\n'))
+    time.sleep(1)
     
-    # print("Asking for Data")
-    # ser.write(str.encode('Q\r\n'))
-    # time.sleep(1)
-
     while True:
         try:
             for c in ser.read():
