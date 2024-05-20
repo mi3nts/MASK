@@ -94,14 +94,12 @@ def main(portNum):
     # the lowest atmospheric co2 levels is 418.5 ppm 
     # As such setting the auto zero co2 level as 418.0 
 
+    # This has to be added for the final code 
     print("Setting the value of auto calibration")
-    ser.write(str.encode('@ 0\r\n'))
+    ser.write(str.encode('P 8 1\r\n'))
     time.sleep(1)
-
-
-
-
-
+    ser.write(str.encode('P 9 162\r\n'))
+    time.sleep(1)
 
     print("Reading the digital filter value")
     ser.write(str.encode('a\r\n'))
