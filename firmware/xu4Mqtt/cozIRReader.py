@@ -51,62 +51,62 @@ def main(portNum):
     ser.write(str.encode('M 04166\r\n'))
     time.sleep(1)
 
+    # # print("Asking for Data")
+    # # ser.write(str.encode('Q\r\n'))
+    # # time.sleep(1)
+
+    # print("Reading the altitude compensation value")
+    # ser.write(str.encode('s\r\n'))
+    # time.sleep(1)
+
+    # print("Setting Compensation Value")
+    # ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
+    # time.sleep(1)
+    
+    # print("Reading the altitude compensation value")
+    # ser.write(str.encode('s\r\n'))
+    # time.sleep(1)
+
+    # print("Reading the auto zero value")
+    # ser.write(str.encode('@\r\n'))
+    # time.sleep(1)
+    # # Make sure that it returns @1.08.0
+
+    # # print("Turning the auto zero value off")
+    # # ser.write(str.encode('@ 0\r\n'))
+    # # time.sleep(1)
+
+    # # print("Reading the auto zero value")
+    # # ser.write(str.encode('@\r\n'))
+    # # time.sleep(1)
+
+    # # print("Setting the auto zero value")
+    # # ser.write(str.encode('@ 1.0 8.0\r\n'))
+    # # time.sleep(1)
+
+    # # print("Reading the auto zero value")
+    # # ser.write(str.encode('@\r\n'))
+    # # time.sleep(1)
+    # # According to climate.gov (https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide)
+    # # the lowest atmospheric co2 levels is 418.5 ppm 
+    # # As such setting the auto zero co2 level as 418.0 
+
+    # # This has to be added for the final code 
+    # print("Setting the value of auto calibration")
+    # ser.write(str.encode('P 8 1\r\n'))
+    # time.sleep(1)
+    # ser.write(str.encode('P 9 162\r\n'))
+    # time.sleep(1)
+
+    # print("Reading the digital filter value")
+    # ser.write(str.encode('a\r\n'))
+    # time.sleep(1)
+
     # print("Asking for Data")
+    # dateTime = datetime.datetime.now()
+    # startTime = dateTime
     # ser.write(str.encode('Q\r\n'))
     # time.sleep(1)
-
-    print("Reading the altitude compensation value")
-    ser.write(str.encode('s\r\n'))
-    time.sleep(1)
-
-    print("Setting Compensation Value")
-    ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
-    time.sleep(1)
-    
-    print("Reading the altitude compensation value")
-    ser.write(str.encode('s\r\n'))
-    time.sleep(1)
-
-    print("Reading the auto zero value")
-    ser.write(str.encode('@\r\n'))
-    time.sleep(1)
-    # Make sure that it returns @1.08.0
-
-    # print("Turning the auto zero value off")
-    # ser.write(str.encode('@ 0\r\n'))
-    # time.sleep(1)
-
-    # print("Reading the auto zero value")
-    # ser.write(str.encode('@\r\n'))
-    # time.sleep(1)
-
-    # print("Setting the auto zero value")
-    # ser.write(str.encode('@ 1.0 8.0\r\n'))
-    # time.sleep(1)
-
-    # print("Reading the auto zero value")
-    # ser.write(str.encode('@\r\n'))
-    # time.sleep(1)
-    # According to climate.gov (https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide)
-    # the lowest atmospheric co2 levels is 418.5 ppm 
-    # As such setting the auto zero co2 level as 418.0 
-
-    # This has to be added for the final code 
-    print("Setting the value of auto calibration")
-    ser.write(str.encode('P 8 1\r\n'))
-    time.sleep(1)
-    ser.write(str.encode('P 9 162\r\n'))
-    time.sleep(1)
-
-    print("Reading the digital filter value")
-    ser.write(str.encode('a\r\n'))
-    time.sleep(1)
-
-    print("Asking for Data")
-    dateTime = datetime.datetime.now()
-    startTime = dateTime
-    ser.write(str.encode('Q\r\n'))
-    time.sleep(1)
     setupDone  = False; 
     
     
@@ -117,18 +117,18 @@ def main(portNum):
                 if chr(c) == '\n' and not(menuSetUp):
                     dataString = ''.join(line)
                     dataString     = (''.join(line)).replace("\n","").replace("\r","")
-                    print("Setting COZIR Sensor")
-                    print("Setting the sensor into polling mode")
-                    ser.write(str.encode('K 2\r\n'))
-                    time.sleep(1)
+                    # print("Setting COZIR Sensor")
+                    # print("Setting the sensor into polling mode")
+                    # ser.write(str.encode('K 2\r\n'))
+                    # time.sleep(1)
                     
-                    print("Setting COZIR to emit all data")
-                    ser.write(str.encode('M 04166\r\n'))
-                    time.sleep(1)
+                    # print("Setting COZIR to emit all data")
+                    # ser.write(str.encode('M 04166\r\n'))
+                    # time.sleep(1)
 
-                    print("Asking for Data")
-                    ser.write(str.encode('Q\r\n'))
-                    time.sleep(1)
+                    # print("Asking for Data")
+                    # ser.write(str.encode('Q\r\n'))
+                    # time.sleep(1)
 
                     print("Reading the altitude compensation value")
                     ser.write(str.encode('s\r\n'))
@@ -177,15 +177,16 @@ def main(portNum):
                     ser.write(str.encode('a\r\n'))
                     time.sleep(1)
 
-                    print("Asking for Data")
-                    ser.write(str.encode('Q\r\n'))
-                    time.sleep(1)
-                    menuSetUp = True
-                    line = []
+                    # print("Asking for Data")
+                    # ser.write(str.encode('Q\r\n'))
+                    # time.sleep(1)
 
                     print("Setting the sensor into Streaming mode")
                     ser.write(str.encode('K 1\r\n'))
                     time.sleep(1)
+                    
+                    menuSetUp = True
+                    line = []
 
                 if chr(c) == '\n' and (menuSetUp):
                     # dateTime = datetime.datetime.now()
