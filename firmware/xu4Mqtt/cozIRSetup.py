@@ -90,6 +90,18 @@ def main(portNum):
     # print("Reading the auto zero value")
     # ser.write(str.encode('@\r\n'))
     # time.sleep(1)
+    # According to climate.gov (https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide)
+    # the lowest atmospheric co2 levels is 418.5 ppm 
+    # As such setting the auto zero co2 level as 418.0 
+
+    print("Setting the value of auto calibration")
+    ser.write(str.encode('@ 0\r\n'))
+    time.sleep(1)
+
+
+
+
+
 
     print("Reading the digital filter value")
     ser.write(str.encode('a\r\n'))
