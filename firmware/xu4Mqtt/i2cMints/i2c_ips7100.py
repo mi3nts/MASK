@@ -13,10 +13,11 @@ class IPS7100:
 
     def __init__(self, i2c_dev,debugIn):
         
-        self.i2c_addr = IPS7100_I2C_ADDR
-        self.i2c      = i2c_dev
-        self.debug    = debugIn
-
+        self.i2c_addr  = IPS7100_I2C_ADDR
+        self.i2c       = i2c_dev
+        self.debug     = debugIn
+        self.pc_values = [0] * 7
+        self.pm_values = [0.0] * 7
 
     def initiate(self,retriesIn):
         print("============== BME280V3 ==============")
