@@ -72,8 +72,8 @@ class BNO080:
             #     print("Resetting BNO080")
             #     time.sleep(1)
             #     pass
-            time.sleep(1)
-            retriesIn -= 1
+                time.sleep(1)
+                retriesIn -= 1
 
         if not retriesIn:
             time.sleep(1)
