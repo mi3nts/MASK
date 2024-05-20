@@ -115,7 +115,7 @@ def decode_cozir_data(data):
         return None
 
 def sea_level_difference(meters):
-    return (18/500)*meters_to_feet(meters)
+    return (0.0316)*meters_to_feet(meters)
 
 def compensation_value(meters):
     return 8192+ ((sea_level_difference(meters)*.14)/100)*8192
