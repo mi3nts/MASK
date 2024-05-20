@@ -123,7 +123,7 @@ def main(portNum):
                     if check_format(dataStringPost):
                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost,dateTime)))
                     
-                    datetime.datetime.now()
+                    dateTime =datetime.datetime.now()
                     ser.write(str.encode('Q\r\n'))
                     line = []
                     time.sleep(1)
