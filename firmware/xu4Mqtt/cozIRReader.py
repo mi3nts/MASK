@@ -106,6 +106,7 @@ def main(portNum):
     time.sleep(1)
 
     print("Asking for Data")
+    dateTime = datetime.datetime.now()
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
     
@@ -114,17 +115,18 @@ def main(portNum):
             for c in ser.read():
                 line.append(chr(c))
                 if chr(c) == '\n':
-                    print("-------------------------------------------------------------")
-                    # print(datetime.datetime.now())                     
+                    print("-------------------------------------------------------------")                    
                     dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
                     print(dataStringPost)
-                    time.sleep(1)
+                    ser.write(str.encode('Q\r\n'))
+                    
                     if check_format(dataStringPost):
-                        print(decode_cozir_data(dataStringPost))
-                        ser.write(str.encode('Q\r\n'))
-
-                     
+                        mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost,dateTime)))
+                    
+                    datetime.datetime.now()
+                    ser.write(str.encode('Q\r\n'))
                     line = []
+                    time.sleep(1)
         except:
             print("Incomplete read. Something may be wrong with {0}".format(portIn))
             line = []
@@ -149,7 +151,7 @@ def check_format(s):
     match   = re.match(pattern, s)
     return bool(match)
 
-def decode_cozir_data(data):
+def decode_cozir_data(data,dateTime):
     """
     Decodes COZIR sensor data from a formatted string.
     :param data: The string containing the sensor data.
@@ -157,7 +159,7 @@ def decode_cozir_data(data):
     """
     print(data)
     try:     
-        dateTime  = datetime.datetime.now()
+        dateTime  = dateTime
         humidity      = int(data[1:6]) / 10.0             # Assuming the humidity is given in tenths of percentage
         temperature   = (int(data[7:12]) - 1000) / 10.0   # Assuming the temperature is given in tenths of degrees Celsius
         co2Filtured   = int(data[13:18])                  # CO2 concentration in ppm
