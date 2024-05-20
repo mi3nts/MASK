@@ -18,6 +18,3 @@ sleep 1
 
 kill $(pgrep -f 'batteryReader.py')
 sleep 1
-
-python3 ipReader.py
-sleep 5
