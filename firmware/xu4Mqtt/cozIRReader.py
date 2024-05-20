@@ -196,7 +196,7 @@ def main(portNum):
                     if check_format(dataStringPost):
                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
                         # ser.write(str.encode('Q\r\n'))
-                time.sleep(.1)
+                    # time.sleep(.1)
 
                      
 
