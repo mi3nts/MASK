@@ -504,6 +504,30 @@ def BME280V3WriteI2c(sensorData):
                 ])
         sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
 
+
+def IPS7100WriteI2c(sensorData):
+    sensorName = "IPS7100"
+    dataLength = 15
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+           		("pc0_1"        ,sensorData[1]), 
+            	("pc0_3"        ,sensorData[2]),
+                ("pc0_5"        ,sensorData[3]),
+                ("pc1_0"        ,sensorData[4]),
+            	("pc2_5"        ,sensorData[5]),
+        		("pc5_0"        ,sensorData[6]),
+            	("pc10_0"       ,sensorData[7]),
+                ("pm0_1"        ,sensorData[8]),
+            	("pm0_3"        ,sensorData[9]),
+        		("pm0_5"        ,sensorData[10]), 
+            	("pm1_0"        ,sensorData[11]),
+                ("pm2_5"        ,sensorData[12]),
+            	("pm5_0"        ,sensorData[13]),      
+                ("pm10_0"       ,sensorData[14]),
+                ])
+    sensorFinisher(sensorData[0],sensorName,sensorDictionary)     
+
 def COZIRAEH2000Write(sensorData):
     sensorName = "COZIRAEH2000"
     dataLength = 5

@@ -119,33 +119,36 @@ class IPS7100:
         pm_raw_values, checkSumPassedPM = self.read_i2c(0x12, 32)
         # Assemble PC values (unsigned long) from 4 bytes using bitwise operations
         time.sleep(0.1)
-        for i in range(7):
-            self.pc_values[i] = (pc_raw_values[(i * 4) + 3] |
-                                 (pc_raw_values[(i * 4) + 2] << 8) |
-                                 (pc_raw_values[(i * 4) + 1] << 16) |
-                                 (pc_raw_values[(i * 4)]) << 24)
-        time.sleep(0.1)
-        for i in range(7):
-            start_idx = i * 4
-            float_bytes = pm_raw_values[start_idx:start_idx + 4]
-            self.pm_values[i] = self.bytes_to_float(float_bytes)
+        if checkSumPassedPC and checkSumPassedPM:
+            for i in range(7):
+                self.pc_values[i] = (pc_raw_values[(i * 4) + 3] |
+                                    (pc_raw_values[(i * 4) + 2] << 8) |
+                                    (pc_raw_values[(i * 4) + 1] << 16) |
+                                    (pc_raw_values[(i * 4)]) << 24)
+            time.sleep(0.1)
+            for i in range(7):
+                start_idx = i * 4
+                float_bytes = pm_raw_values[start_idx:start_idx + 4]
+                self.pm_values[i] = self.bytes_to_float(float_bytes)
 
-        return [dateTime, \
-                self.pc_values[0],\
-                self.pc_values[1],\
-                self.pc_values[2],\
-                self.pc_values[3],\
-                self.pc_values[4],\
-                self.pc_values[5],\
-                self.pc_values[6],\
-                self.pm_values[0],\
-                self.pm_values[1],\
-                self.pm_values[2],\
-                self.pm_values[3],\
-                self.pm_values[4],\
-                self.pm_values[5],\
-                self.pm_values[6],\
-                ]
+            return [dateTime, \
+                    self.pc_values[0],\
+                    self.pc_values[1],\
+                    self.pc_values[2],\
+                    self.pc_values[3],\
+                    self.pc_values[4],\
+                    self.pc_values[5],\
+                    self.pc_values[6],\
+                    self.pm_values[0],\
+                    self.pm_values[1],\
+                    self.pm_values[2],\
+                    self.pm_values[3],\
+                    self.pm_values[4],\
+                    self.pm_values[5],\
+                    self.pm_values[6],\
+                    ]
+        else:
+            return [];
 
 
 
