@@ -9,10 +9,12 @@ import re
 
 import sys
 
+# Based on https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2433/CozIR-A%20Data%20Sheet%20Rev%204.4.pdf?_gl=1*1nab7ce*_up*MQ..&gclid=CjwKCAjwtqmwBhBVEiwAL-WAYQRqjE1UBgrvfW2jrsM1j-nJ7-PI5OQRqYQ3tWSDYkmZwsPiYiQkXBoCa8EQAvD_BwE
 #  Set auto calibration 
 ##  Set calibration interval
 ##  Set Averaging intervals
 ##  
+# Setting Altitude compensation based on UTD COordinates - Setting it to 200 m
 
 
 
@@ -23,7 +25,11 @@ baudRate = 9600
 
 def main(portNum):
 
-    menuSetUp = False
+    print(compensation_value(153))
+
+    print(compensation_value(610))
+
+    print(compensation_value(2745))
 
     ser = serial.Serial(
     port= portIn,\
@@ -107,6 +113,21 @@ def decode_cozir_data(data):
     except (IndexError, ValueError) as e:
         print(f"Error decoding data: {e}")
         return None
+
+def sea_level_difference(meters):
+    return (18/500)*meters_to_feet(meters)
+
+def compensation_value(meters):
+    return (8192+ (sea_level_difference(meters)*.14)/100)*8192
+
+def meters_to_feet(meters):
+    feet_per_meter = 3.280839895013123
+    feet = meters * feet_per_meter
+    return feet
+
+
+
+
 
 if __name__ == "__main__":
     print("=============")
