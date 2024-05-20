@@ -9,6 +9,13 @@ import re
 
 import sys
 
+#  Set auto calibration 
+##  Set calibration interval
+##  Set Averaging intervals
+##  
+
+
+
 dataFolderReference    = mD.dataFolderReference
 portIn                 = "/dev/ttyS0"
 
@@ -35,17 +42,21 @@ def main(portNum):
     ser.write(str.encode('K 2\r\n'))
     time.sleep(1)
     
-    print("Reading CO2 Data Point")
-    ser.write(str.encode('Z\r\n'))
+    print("Reading the altitude compensation value")
+    ser.write(str.encode('s\r\n'))
     time.sleep(1)
+
+    # print("Reading CO2 Data Point")
+    # ser.write(str.encode('Z\r\n'))
+    # time.sleep(1)
     
-    print("Setting COZIR to emit all data")
-    ser.write(str.encode('M 04166\r\n'))
-    time.sleep(1)
+    # print("Setting COZIR to emit all data")
+    # ser.write(str.encode('M 04166\r\n'))
+    # time.sleep(1)
     
-    print("Asking for Data")
-    ser.write(str.encode('Q\r\n'))
-    time.sleep(1)
+    # print("Asking for Data")
+    # ser.write(str.encode('Q\r\n'))
+    # time.sleep(1)
 
     while True:
         try:
@@ -55,10 +66,10 @@ def main(portNum):
                     print("-------------------------------------------------------------")
                     # print(datetime.datetime.now())                     
                     dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
-                    # print(dataStringPost)
+                    print(dataStringPost)
                     time.sleep(1)
                     if check_format(dataStringPost):
-                        mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
+                        print(decode_cozir_data(dataStringPost))
                         ser.write(str.encode('Q\r\n'))
 
                      
