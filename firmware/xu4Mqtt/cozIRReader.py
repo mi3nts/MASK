@@ -14,9 +14,11 @@ portIn                 = "/dev/ttyS0"
 
 baudRate = 9600
 
+expectedAltitude       = 200;
+
 def main(portNum):
 
-    menuSetUp = False
+    # print(altitude_compensation_string(expectedAltitude))
 
     ser = serial.Serial(
     port= portIn,\
@@ -43,9 +45,35 @@ def main(portNum):
     ser.write(str.encode('M 04166\r\n'))
     time.sleep(1)
     
+    # print("Asking for Data")
+    # ser.write(str.encode('Q\r\n'))
+    # time.sleep(1)
+
+    print("Setting the value of auto calibration")
+    ser.write(str.encode('P 8 1\r\n'))
+    time.sleep(1)
+    ser.write(str.encode('P 9 162\r\n'))
+    time.sleep(1)
+
+
+    print("Reading the altitude compensation value")
+    ser.write(str.encode('s\r\n'))
+    time.sleep(1)
+
+    print("Setting Compensation Value")
+    ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
+    time.sleep(1)
+
+    print("Reading the altitude compensation value")
+    ser.write(str.encode('s\r\n'))
+    time.sleep(1)
+
+
     print("Asking for Data")
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
+
+
 
     while True:
         try:
@@ -96,6 +124,29 @@ def decode_cozir_data(data):
     except (IndexError, ValueError) as e:
         print(f"Error decoding data: {e}")
         return None
+
+def altitude_compensation_string(altitude):
+    cv = compensation_value(altitude)
+    print("Compensation Value: ")
+    print(cv)
+    setString  = "S "+ str(round(cv)) + "\r\n"
+    return setString
+
+
+def compensation_value(altitude_m):
+    """
+    Calculate the compensation value based on the altitude in meters.
+
+    Parameters:
+    altitude_m (float): Altitude in meters.
+
+    Returns:
+    float: Compensation value.
+    """
+    base_value = 8192  # Base compensation value
+    coefficient = 1.35  # Coefficient derived from the sea level difference formula
+    return base_value + coefficient * altitude_m
+    
 
 if __name__ == "__main__":
     print("=============")
