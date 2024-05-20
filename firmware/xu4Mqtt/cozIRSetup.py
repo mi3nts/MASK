@@ -66,6 +66,14 @@ def main(portNum):
     ser.write(str.encode(altitude_compensation_string(expectedAltitude)))
     time.sleep(1)
     
+    print("Reading the altitude compensation value")
+    ser.write(str.encode('s\r\n'))
+    time.sleep(1)
+
+    print("Reading the auto zero value")
+    ser.write(str.encode('@ \r\n'))
+    time.sleep(1)
+
     print("Asking for Data")
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
