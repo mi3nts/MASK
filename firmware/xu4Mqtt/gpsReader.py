@@ -57,6 +57,7 @@ def main():
             print("Error and type: %s - %s." % (e, type(e)))
 
 
+
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
