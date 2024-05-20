@@ -95,7 +95,7 @@ def altitude_compensation_string(altitude):
     cv = compensation_value(altitude)
     print("Compensation Value: ")
     print(cv)
-    setString  = "S "+ str(cv) + "\r\n"
+    setString  = "S "+ str(round(cv)) + "\r\n"
     return setString
     
 
