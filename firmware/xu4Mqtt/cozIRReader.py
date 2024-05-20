@@ -75,6 +75,7 @@ def main(portNum):
                     dataStringPost = (''.join(line)).replace("\n", "").replace("\r", "").replace(" ", "")
                     print(dataStringPost)
                     time.sleep(1)
+                    ser.write(str.encode('Q\r\n'))
                     if check_format(dataStringPost):
                         mSR.COZIRAEH2000Write((decode_cozir_data(dataStringPost)))
                         ser.write(str.encode('Q\r\n'))
