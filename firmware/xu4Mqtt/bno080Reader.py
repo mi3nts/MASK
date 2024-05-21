@@ -28,7 +28,7 @@ checkLimit   = 5
 def restart_program():
     """Restarts the current program."""
     print("Restarting program...")
-    os.execv(sys.executable, ['python'] + sys.argv)
+    os.execv(sys.executable, ['python3'] + sys.argv)
 
 
 def main(loopInterval, checkTrials, checkCurrent ):
@@ -59,8 +59,8 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 if checkTrials > checkLimit :
                     print("Resetting BNO080")
                     restart_program()
-                    time.sleep(10)
-                    continue;
+                    # time.sleep(10)
+                    # continue;
 
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             print("=======================")  
@@ -71,7 +71,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
             print("Resetting BNO080")
             time.sleep(1)
             restart_program()
-            time.sleep(1)
+            # time.sleep(1)
         
 if __name__ == "__main__":
     print("=============")
