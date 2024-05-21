@@ -16,10 +16,10 @@ sleep 5
 python3 bno080Reader.py &
 sleep 5
 
-#kill $(pgrep -f 'cozIRReader.py')
-#sleep 5
-#python3 cozIRReader.py &
-#sleep 5
+kill $(pgrep -f 'cozIRReader.py')
+sleep 5
+python3 cozIRReader.py &
+sleep 5
 
 kill $(pgrep -f 'gpsReader.py')
 sleep 5
