@@ -84,6 +84,7 @@ class BNO080:
         
     def reset(self):
         time.sleep(1)
+        print("Resetting the sensor")
         self.bno.initialize()
         time.sleep(1)
 

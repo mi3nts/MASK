@@ -8,19 +8,13 @@ from adafruit_bno08x.i2c import BNO08X_I2C
 i2c     = I2C(4)
 bno     = BNO08X_I2C(i2c)
 
-time.sleep(1)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_ACCELEROMETER)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_GYROSCOPE)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_MAGNETOMETER)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_LINEAR_ACCELERATION)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_ROTATION_VECTOR)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_STEP_COUNTER)
-bno.enable_feature(adafruit_bno08x.BNO_REPORT_ACTIVITY_CLASSIFIER)
-
+bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+bno.enable_feature(BNO_REPORT_GYROSCOPE)
+bno.enable_feature(BNO_REPORT_MAGNETOMETER)
+bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
 
 while True:
-    time.sleep(0.1)
-
+    time.sleep(0.5)
     print("Acceleration:")
     accel_x, accel_y, accel_z = bno.acceleration  # pylint:disable=no-member
     print("X: %0.6f  Y: %0.6f Z: %0.6f  m/s^2" % (accel_x, accel_y, accel_z))
@@ -36,38 +30,9 @@ while True:
     print("X: %0.6f  Y: %0.6f Z: %0.6f uT" % (mag_x, mag_y, mag_z))
     print("")
 
-    print("Linear Acceleration:")
-    (
-        linear_accel_x,
-        linear_accel_y,
-        linear_accel_z,
-    ) = bno.linear_acceleration  # pylint:disable=no-member
-    print(
-        "X: %0.6f  Y: %0.6f Z: %0.6f m/s^2"
-        % (linear_accel_x, linear_accel_y, linear_accel_z)
-    )
-    print("")
-
     print("Rotation Vector Quaternion:")
     quat_i, quat_j, quat_k, quat_real = bno.quaternion  # pylint:disable=no-member
     print(
         "I: %0.6f  J: %0.6f K: %0.6f  Real: %0.6f" % (quat_i, quat_j, quat_k, quat_real)
     )
     print("")
-
-    print("Steps detected:", bno.steps)
-    print("")
-
-    print("Stability classification:", bno.stability_classification)
-    print("")
-
-    activity_classification = bno.activity_classification
-    most_likely = activity_classification["most_likely"]
-    print(
-        "Activity classification:",
-        most_likely,
-        "confidence: %d/100" % activity_classification[most_likely],
-    )
-
-   
-  
