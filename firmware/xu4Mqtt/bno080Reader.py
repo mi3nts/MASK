@@ -17,7 +17,7 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 # bno     = BNO08X_I2C(i2c)
 
 debug        = False 
-bus          = I2C(4)
+bus          = I2C(4,frequency=400000)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 2
