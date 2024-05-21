@@ -56,14 +56,23 @@ class BNO080:
         while ready is None and retriesIn:
             try:
                 self.bno = BNO08X_I2C(self.i2c)
+                time.sleep(1)
                 self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
-                self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
+                time.sleep(1)
                 self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+                time.sleep(1)
+                self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
+                time.sleep(1)                
                 self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
                 ready = True
                 
