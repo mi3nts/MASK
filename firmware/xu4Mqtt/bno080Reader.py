@@ -78,7 +78,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
 
         except Exception as e:
             print(e)
-            print("Resetting BNO080")
+            print("An exception occurred:", type(e).__name__, "–", e) 
             time.sleep(1)
             restart_program()
             # time.sleep(1)
