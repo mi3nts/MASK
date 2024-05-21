@@ -86,7 +86,9 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 restart_program()
                 
             
-        
+        except KeyboardInterrupt:
+            bno080.reset()
+
 
 
         except Exception as e:
