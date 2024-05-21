@@ -28,7 +28,7 @@ checkLimit   = 5
 def restart_program():
     """Restarts the current program."""
     print("Restarting program...")
-    time.sleep(10.1)
+    time.sleep(60.1)
     os.execv(sys.executable, ['python3'] + sys.argv)
 
 
