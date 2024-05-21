@@ -54,6 +54,8 @@ class BNO080:
     def initiate(self):
         try:
             self.bno = BNO08X_I2C(self.i2c)
+            self.bno.hard_reset()
+            self.bno.soft_reset()
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
             self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
             self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
