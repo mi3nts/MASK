@@ -10,7 +10,7 @@ from mintsXU4 import mintsSensorReader as mSR
 import os
 import sys
 from adafruit_bno08x.i2c import BNO08X_I2C
-
+import subprocess
 from adafruit_extended_bus import ExtendedI2C as I2C
 
 # i2c     = I2C(4)
@@ -28,6 +28,9 @@ checkLimit   = 5
 def restart_program():
     """Restarts the current program."""
     print("Restarting program...")
+    time.sleep(1)
+    subprocess.run(["sudo i2cdetect -y 4"])
+    time.sleep(1)
     os.execv(sys.executable, ['python3'] + sys.argv)
 
 
@@ -67,7 +70,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 print("=======================")  
 
             else:
-                print("Rebbot and check")
+                print("Reboot and check")
                 time.sleep(10)
                 restart_program()
                 
