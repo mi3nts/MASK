@@ -19,10 +19,17 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 debug        = False 
 bus          = I2C(4)
 
+time.sleep(1)
 print(bus.try_lock())
+
 time.sleep(1)
 print(bus.scan())
 
+time.sleep(1)
+print(bus.unlock())
+
+
+time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 2
