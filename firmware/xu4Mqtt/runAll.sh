@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-sleep 6
+sleep 60
 kill $(pgrep -f 'ips7100Reader.py')
 sleep 5
 python3 ips7100Reader.py &
