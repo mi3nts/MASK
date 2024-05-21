@@ -87,6 +87,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 
             
         except KeyboardInterrupt:
+            print("Keybaord Interupt")
             bno080.reset()
 
 
