@@ -7,7 +7,8 @@ import board
 import busio
 from i2cMints.i2c_bno080 import BNO080
 from mintsXU4 import mintsSensorReader as mSR
-
+import os
+import sys
 from adafruit_bno08x.i2c import BNO08X_I2C
 
 from adafruit_extended_bus import ExtendedI2C as I2C
@@ -24,6 +25,10 @@ checkCurrent = 0
 checkTrials  = 0 
 checkLimit   = 5
 
+def restart_program():
+    """Restarts the current program."""
+    print("Restarting program...")
+    os.execv(sys.executable, ['python'] + sys.argv)
 
 
 def main(loopInterval, checkTrials, checkCurrent ):
@@ -53,7 +58,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
 
                 if checkTrials > checkLimit :
                     print("Resetting BNO080")
-                    bno080_valid   =  bno080.initiate(initTrials)
+                    restart_program()
                     time.sleep(10)
                     continue;
 
@@ -64,8 +69,9 @@ def main(loopInterval, checkTrials, checkCurrent ):
         except Exception as e:
             print(e)
             print("Resetting BNO080")
-            bno080_valid   =  bno080.initiate(initTrials)
-            time.sleep(10)
+            time.sleep(1)
+            restart_program()
+            time.sleep(1)
         
 if __name__ == "__main__":
     print("=============")
