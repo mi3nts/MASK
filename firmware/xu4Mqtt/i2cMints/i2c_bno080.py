@@ -53,6 +53,7 @@ class BNO080:
 
     def initiate(self):
         try:
+            print("Initiating BNO")
             self.bno = BNO08X_I2C(self.i2c)
             time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
@@ -66,8 +67,13 @@ class BNO080:
             self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
             # ready = True
 
+            print("BNO080 Found")
+            time.sleep(1)
+            return True     
+
         except KeyboardInterrupt:
             self.bno.reset()
+            return False
 
 
         except Exception as e:
@@ -76,11 +82,8 @@ class BNO080:
             time.sleep(10)
             print("BNO080 Not Found")
             return False
-        
-        else:
-            print("BNO080 Found")
-            time.sleep(1)
-            return True       
+
+  
         
     def reset(self):
         time.sleep(1)
