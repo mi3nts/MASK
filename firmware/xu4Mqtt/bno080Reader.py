@@ -43,6 +43,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
                 # print(bno080Data)
                 if checkCurrent == bno080Data[12]:
                     checkTrials = checkTrials + 1 
+                    time.sleep(1)
                 else: 
                     checkTrials  = 0 
                     checkCurrent = bno080Data[12]
@@ -59,7 +60,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
 
                 if checkTrials > checkLimit :
                     print("Resetting BNO080")
-                    time.sleep(10)
+                    time.sleep(30)
                     restart_program()
                     # time.sleep(10)
                     # continue;

@@ -55,10 +55,6 @@ class BNO080:
         try:
             self.bno = BNO08X_I2C(self.i2c)
             time.sleep(1)
-            self.bno.hard_reset()
-            time.sleep(1)
-            self.bno.soft_reset()
-            time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
             self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
             self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
