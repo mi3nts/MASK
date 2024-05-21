@@ -70,7 +70,7 @@ class BNO080:
         except Exception as e:
             print(f"Something may be wrong with the BNO080: {e}")
             time.sleep(1)
-            pass
+            # pass
             
         #     time.sleep(1)
         #     retriesIn -= 1
