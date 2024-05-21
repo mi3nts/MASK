@@ -69,6 +69,7 @@ class BNO080:
                 ready = True
                 
             except OSError:
+                time.sleep(1)
                 pass
             time.sleep(1)
             retriesIn -= 1

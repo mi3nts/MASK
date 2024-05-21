@@ -78,5 +78,5 @@ if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
     print("=============")
-    print("Monitoring Climate data for MASK")
+    print("Monitoring gyro data for MASK")
     main(loopInterval, checkTrials, checkCurrent )
