@@ -65,12 +65,13 @@ class BNO080:
                 self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
                 self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
                 self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
-
                 ready = True
                 
-            except OSError:
+            except Exception as e:
+                print(f"Something may be wrong with the BNO080: {e}")
                 time.sleep(1)
                 pass
+            
             time.sleep(1)
             retriesIn -= 1
 
