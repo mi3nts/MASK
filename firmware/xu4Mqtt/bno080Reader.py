@@ -33,7 +33,7 @@ def restart_program():
 
 
 def main(loopInterval, checkTrials, checkCurrent ):
-    bno080_valid   =  bno080.initiate(initTrials)
+    bno080_valid   =  bno080.initiate()
     startTime    = time.time()
     while True:
         try:

@@ -51,9 +51,7 @@ class BNO080:
 
 
 
-    def initiate(self,retriesIn):
-        ready = None
-        # while ready is None and retriesIn:
+    def initiate(self):
         try:
             self.bno = BNO08X_I2C(self.i2c)
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
