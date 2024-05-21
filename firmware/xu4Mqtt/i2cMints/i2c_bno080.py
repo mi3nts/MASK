@@ -65,6 +65,7 @@ class BNO080:
             self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
             self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
             # ready = True
+
         except KeyboardInterrupt:
             self.bno.reset()
 
@@ -81,10 +82,10 @@ class BNO080:
             time.sleep(1)
             return True       
         
-    def resetSensor(self):
-        time.sleep()
+    def reset(self):
+        time.sleep(1)
         self.bno.initialize()
-
+        time.sleep(1)
 
 
     def find_heading(self,dqw, dqx, dqy, dqz):
