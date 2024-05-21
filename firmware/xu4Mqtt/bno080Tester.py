@@ -5,6 +5,13 @@ import adafruit_bno08x
 from adafruit_extended_bus import ExtendedI2C as I2C
 from adafruit_bno08x.i2c import BNO08X_I2C
 
+from adafruit_bno08x import (
+    BNO_REPORT_ACCELEROMETER,
+    BNO_REPORT_GYROSCOPE,
+    BNO_REPORT_MAGNETOMETER,
+    BNO_REPORT_ROTATION_VECTOR,
+)
+
 i2c     = I2C(4)
 bno     = BNO08X_I2C(i2c)
 
