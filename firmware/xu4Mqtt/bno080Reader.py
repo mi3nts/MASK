@@ -20,7 +20,7 @@ debug        = False
 bus          = I2C(4)
 
 print(bus.try_lock())
-
+time.sleep(1)
 print(bus.scan())
 
 bno080       = BNO080(bus,debug)
