@@ -53,29 +53,29 @@ class BNO080:
 
     def initiate(self,retriesIn):
         ready = None
-        while ready is None and retriesIn:
-            try:
-                self.bno = BNO08X_I2C(self.i2c)
-                self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
-                self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
-                self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
-                self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
-                self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
-                self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
-                self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
-                self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
-                self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
-                ready = True
-                
-            except Exception as e:
-                print(f"Something may be wrong with the BNO080: {e}")
-                time.sleep(1)
-                pass
-            
+        # while ready is None and retriesIn:
+        try:
+            self.bno = BNO08X_I2C(self.i2c)
+            self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+            self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
+            self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
+            self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
+            self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
+            self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
+            self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
+            self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
+            # ready = True
+                    
+        except Exception as e:
+            print(f"Something may be wrong with the BNO080: {e}")
             time.sleep(1)
-            retriesIn -= 1
+            pass
+            
+        #     time.sleep(1)
+        #     retriesIn -= 1
 
-        if not retriesIn:
+        # if not retriesIn:
             time.sleep(1)
             print("BNO080 Not Found")
             return False
