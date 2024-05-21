@@ -54,8 +54,11 @@ class BNO080:
     def initiate(self):
         try:
             self.bno = BNO08X_I2C(self.i2c)
+            time.sleep(1)
             self.bno.hard_reset()
+            time.sleep(1)
             self.bno.soft_reset()
+            time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
             self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
             self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
@@ -68,7 +71,8 @@ class BNO080:
             # ready = True
                     
         except Exception as e:
-            print(f"Something may be wrong with the BNO080: {e}")
+            print(e)
+            print("An exception occurred:", type(e).__name__, "–", e) 
             time.sleep(10)
             print("BNO080 Not Found")
             return False
