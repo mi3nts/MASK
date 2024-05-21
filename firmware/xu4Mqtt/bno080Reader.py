@@ -58,6 +58,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
 
                 if checkTrials > checkLimit :
                     print("Resetting BNO080")
+                    time.sleep(10)
                     restart_program()
                     # time.sleep(10)
                     # continue;
