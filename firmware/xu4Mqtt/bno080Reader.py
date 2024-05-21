@@ -29,7 +29,8 @@ def restart_program():
     """Restarts the current program."""
     print("Restarting program...")
     time.sleep(1)
-    subprocess.run(["sudo i2cdetect -y 4"])
+    print("Running i2cdetect command...")
+    subprocess.run(["sudo", "i2cdetect", "-y", "4"])
     time.sleep(1)
     os.execv(sys.executable, ['python3'] + sys.argv)
 
