@@ -81,7 +81,7 @@ def main(loopInterval, checkTrials, checkCurrent ):
             print(e)
             print("An exception occurred:", type(e).__name__, "–", e) 
             time.sleep(1)
-            restart_program()
+            # restart_program()
             # time.sleep(1)
         
 if __name__ == "__main__":
