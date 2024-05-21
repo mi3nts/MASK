@@ -28,7 +28,7 @@ checkLimit   = 5
 def restart_program():
     """Restarts the current program."""
     print("Restarting program...")
-    time.sleep(1)
+    time.sleep(10)
     print("Running i2cdetect command...")
     subprocess.run(["sudo", "i2cdetect", "-y", "4"])
     time.sleep(1)
