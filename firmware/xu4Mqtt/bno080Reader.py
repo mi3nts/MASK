@@ -32,7 +32,7 @@ print(bus.unlock())
 time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
-loopInterval = 2
+loopInterval = 5
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5

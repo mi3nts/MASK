@@ -1,45 +1,35 @@
-import time
+# SPDX-FileCopyrightText: 2020 Bryan Siepert, written for Adafruit Industries
+#
+# SPDX-License-Identifier: Unlicense
+from time import sleep
 import board
 import busio
-import adafruit_bno08x
-from adafruit_extended_bus import ExtendedI2C as I2C
-from adafruit_bno08x.i2c import BNO08X_I2C
+from digitalio import DigitalInOut, Direction
+from adafruit_bno08x.spi import BNO08X_SPI
 
-from adafruit_bno08x import (
-    BNO_REPORT_ACCELEROMETER,
-    BNO_REPORT_GYROSCOPE,
-    BNO_REPORT_MAGNETOMETER,
-    BNO_REPORT_ROTATION_VECTOR,
-)
+# need to limit clock to 3Mhz
+spi = busio.SPI(board.SCK, MISO=board.MISO, MOSI=board.MOSI)
 
-i2c     = I2C(4)
-bno     = BNO08X_I2C(i2c)
+cs = DigitalInOut(board.D12)
+cs.direction = Direction.OUTPUT
 
-bno.enable_feature(BNO_REPORT_ACCELEROMETER)
-bno.enable_feature(BNO_REPORT_GYROSCOPE)
-bno.enable_feature(BNO_REPORT_MAGNETOMETER)
-bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+int_pin = DigitalInOut(board.D13)
+int_pin.direction = Direction.INPUT
+
+wake_pin = DigitalInOut(board.D4)
+wake_pin.direction = Direction.INPUT
+
+reset_pin = DigitalInOut(board.D4)
+reset_pin.direction = Direction.INPUT
+
+bno = BNO08X_SPI(spi, cs, int_pin, wake_pin, reset_pin, debug=True)
 
 while True:
-    time.sleep(0.5)
-    print("Acceleration:")
-    accel_x, accel_y, accel_z = bno.acceleration  # pylint:disable=no-member
-    print("X: %0.6f  Y: %0.6f Z: %0.6f  m/s^2" % (accel_x, accel_y, accel_z))
-    print("")
-
-    print("Gyro:")
-    gyro_x, gyro_y, gyro_z = bno.gyro  # pylint:disable=no-member
-    print("X: %0.6f  Y: %0.6f Z: %0.6f rads/s" % (gyro_x, gyro_y, gyro_z))
-    print("")
-
-    print("Magnetometer:")
-    mag_x, mag_y, mag_z = bno.magnetic  # pylint:disable=no-member
-    print("X: %0.6f  Y: %0.6f Z: %0.6f uT" % (mag_x, mag_y, mag_z))
-    print("")
-
+    print("getting quat")
+    quat = bno.quaternion  # pylint:disable=no-member
     print("Rotation Vector Quaternion:")
-    quat_i, quat_j, quat_k, quat_real = bno.quaternion  # pylint:disable=no-member
     print(
-        "I: %0.6f  J: %0.6f K: %0.6f  Real: %0.6f" % (quat_i, quat_j, quat_k, quat_real)
+        "I: %0.6f  J: %0.6f K: %0.6f  Real: %0.6f" % (quat.i, quat.j, quat.k, quat.real)
     )
     print("")
+    sleep(0.5)
