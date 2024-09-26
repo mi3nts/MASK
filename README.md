@@ -20,6 +20,19 @@ Mints Automobile Sensing Kit
     - `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=29,i2c_gpio_scl=31` Connecting the secondary I2C devices to gpio pins 29(05) and 31(06).
     - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` Connecting  the secondary I2C devices to gpio pins 25(22) and 26(37).
 
+```
+## Added by Lakitha
+# for the HW Clock 
+dtoverlay=i2c-rtc,ds3231
+
+
+# Extra i2c port 
+dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22
+dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24
+dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=05,i2c_gpio_scl=06
+dtoverlay=i2c-gpio,bus=6,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26
+```
+
 - Check Devices<br>
   ```sudo i2cdetect -y 1```<br>
   ```sudo i2cdetect -y 2```<br>
