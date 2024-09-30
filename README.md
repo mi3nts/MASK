@@ -12,10 +12,10 @@ Mints Automobile Sensing Kit
     - `dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22` Connecting the secondary I2C devices to gpio pins 27(13) and 22(15).
   - BNO085            : I2c, SPI and Uart   : I2c Bus 4
     - `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24` Connecting the tertiary I2C devices to gpio pins 23(16) and 24(18).
-  - BME280            : I2c                 : I2c Bus 4
-  - TMP117            : I2c                 : I2c Bus 4
+  - BME280            : I2c                 : I2c Bus 5
+  - TMP117            : I2c                 : I2c Bus 5
     - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=05,i2c_gpio_scl=06` Connecting the tertiary I2C devices to gpio pins 05(29) and 06(31).
-  - PA1010D           : I2c, SPI and Uart   : I2c Bus 5
+  - PA1010D           : I2c, SPI and Uart   : I2c Bus 6
     - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` Connecting  the secondary I2C devices to gpio pins 25(22) and 26(37).
 
 - Add an extra I2c Pipeline On the to /boot/config.txt add the following lines via ```sudo nano /boot/config.txt```.
