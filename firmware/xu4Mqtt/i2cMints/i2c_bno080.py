@@ -79,9 +79,9 @@ class BNO080:
             print("Initiating ACT")            
             self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
             time.sleep(1)     
-            print("Initiating SHK")          
-            self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
-            # ready = True
+            # print("Initiating SHK")          
+            # self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
+            # # ready = True
 
             print("BNO080 Found")
             time.sleep(1)
