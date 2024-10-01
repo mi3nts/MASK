@@ -80,12 +80,11 @@ def main(loopInterval, checkTrials, checkCurrent ):
             
         except KeyboardInterrupt:
             print("Keybaord Interupt")
-            bno080.reset()
+            # bno080.reset()
 
 
 
         except Exception as e:
-            print(e)
             print("An exception occurred:", type(e).__name__, "–", e) 
             time.sleep(1)
             # restart_program()
