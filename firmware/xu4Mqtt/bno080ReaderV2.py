@@ -20,16 +20,6 @@ debug        = False
 bus          = I2C(4)
 
 time.sleep(1)
-print(bus.try_lock())
-
-time.sleep(1)
-print(bus.scan())
-
-time.sleep(1)
-print(bus.unlock())
-
-
-time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
 loopInterval = 5
@@ -44,64 +34,73 @@ def restart_program():
     os.execv(sys.executable, ['python3'] + sys.argv)
 
 
-def main(loopInterval, checkTrials, checkCurrent ):
+def main(loopInterval):
     bno080_valid   =  bno080.initiate()
     startTime    = time.time()
-    while True:
-        try:
-            print("======= BNO080 ========")
-            if bno080_valid:
-                bno080Data = bno080.read()
-                # print(bno080Data)
-                if checkCurrent == bno080Data[12]:
-                    checkTrials = checkTrials + 1 
-                    time.sleep(1)
-                else: 
-                    checkTrials  = 0 
-                    checkCurrent = bno080Data[12]
+    while bno080_valid:
+        bno080Data = bno080.read()
+        print(bno080Data)
+        mSR.BNO080WriteI2c(bno080Data)
+        startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+
+    print(bno080_valid)
+
+
+    # while True:
+    #     try:
+    #         print("======= BNO080 ========")
+    #         if bno080_valid:
+    #             bno080Data = bno080.read()
+    #             # print(bno080Data)
+    #             if checkCurrent == bno080Data[12]:
+    #                 checkTrials = checkTrials + 1 
+    #                 time.sleep(1)
+    #             else: 
+    #                 checkTrials  = 0 
+    #                 checkCurrent = bno080Data[12]
                 
-                print(checkTrials)
-                # print(bno080Data)
+    #             print(checkTrials)
+    #             # print(bno080Data)
 
-                if checkTrials == 0:
-                    print("Writing Data")
-                    # print(bno080Data)
-                    mSR.BNO080WriteI2c(bno080Data)
-                    startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-                    continue;
+    #             if checkTrials == 0:
+    #                 print("Writing Data")
+    #                 # print(bno080Data)
+    #                 mSR.BNO080WriteI2c(bno080Data)
+    #                 startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+    #                 continue;
 
-                if checkTrials > checkLimit :
-                    print("Resetting BNO080")
-                    time.sleep(30)
-                    restart_program()
-                    # time.sleep(10)
-                    # continue;
+    #             if checkTrials > checkLimit :
+    #                 print("Resetting BNO080")
+    #                 time.sleep(30)
+    #                 restart_program()
+    #                 # time.sleep(10)
+    #                 # continue;
 
-                startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-                print("=======================")  
+    #             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+    #             print("=======================")  
 
-            else:
-                print("Reboot and check")
-                time.sleep(10)
-                restart_program()
+    #         else:
+    #             print("Reboot and check")
+    # #             time.sleep(10)
+    # #             restart_program()
                 
             
-        except KeyboardInterrupt:
-            print("Keybaord Interupt")
-            bno080.reset()
+    #     except KeyboardInterrupt:
+    #         print("Keybaord Interupt")
+    #         bno080.reset()
 
 
 
-        except Exception as e:
-            print(e)
-            print("An exception occurred:", type(e).__name__, "–", e) 
-            time.sleep(1)
-            # restart_program()
-            # time.sleep(1)
+    #     except Exception as e:
+    #         print(e)
+    #         print("An exception occurred:", type(e).__name__, "–", e) 
+    #         time.sleep(1)
+    #         # restart_program()
+    #         # time.sleep(1)
         
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
     print("=============")
     print("Monitoring gyro data for MASK")
-    main(loopInterval, checkTrials, checkCurrent )
+    main(loopInterval)
