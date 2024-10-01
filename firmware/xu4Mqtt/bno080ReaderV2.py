@@ -39,9 +39,9 @@ def main(loopInterval):
     print(bno080_valid)
     startTime    = time.time()
     while bno080_valid:
-        bno080Data = bno080.read()
+        bno080Data = bno080.readV2()
         print(bno080Data)
-        mSR.BNO080WriteI2c(bno080Data)
+        # mSR.BNO080WriteI2c(bno080Data)
         startTime = mSR.delayMints(time.time() - startTime,loopInterval)
 
     print(bno080_valid)

@@ -64,12 +64,12 @@ class BNO080:
             print("Initiating MAG")
             self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
             time.sleep(1)
-            # print("Initiating ROT")
-            # self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
-            # time.sleep(1)   
-            # print("Initiating LINACC")         
-            # self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
-            # time.sleep(1)     
+            print("Initiating ROT")
+            self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            time.sleep(1)   
+            print("Initiating LINACC")         
+            self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
+            time.sleep(1)     
             # print("Initiating STEP")          
             # self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
             # time.sleep(1)
@@ -218,4 +218,53 @@ class BNO080:
             time.sleep(5)
             return [];
 
+
+    def readV2(self):
+        try:
+            dateTime                                            = datetime.datetime.now() 
+            time.sleep(.1)
+            accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
+            time.sleep(.1)            
+            linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
+            time.sleep(.1)            
+            gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
+            time.sleep(.1)            
+            mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
+            time.sleep(.1)            
+            quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
+            time.sleep(.1)            
+            heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
+            # time.sleep(.1)            
+            # steps                                               = self.bno.steps
+            # time.sleep(1)
+            # shake                                               = self.shake_summary(self.bno.shake)
+            # [   most_likely_index,\
+            #     most_likely_conf,\
+            #     unknown, \
+            #     in_vehicle, \
+            #     on_bicycle, \
+            #     on_foot, \
+            #     still, \
+            #     tilting, \
+            #     walking, \
+            #     running, \
+            #     on_stairs \
+            #     ]                                                = self.activity_classification_summary(self.bno.activity_classification)
+
+
+            return [dateTime,\
+                    accel_x, accel_y, accel_z,\
+                    linear_accel_x,linear_accel_y, linear_accel_z,\
+                    gyro_x, gyro_y, gyro_z,\
+                    mag_x, mag_y, mag_z,\
+                    quat_i, quat_j, quat_k, quat_real,\
+                    heading,\
+                  ];
+    
+        except Exception as e:
+            time.sleep(5)
+            self.reset()
+            print("An exception occurred:", type(e).__name__, "–", e) 
+            time.sleep(5)
+            return [];
 
