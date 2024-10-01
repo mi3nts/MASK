@@ -36,6 +36,7 @@ def restart_program():
 
 def main(loopInterval):
     bno080_valid   =  bno080.initiate()
+    print(bno080_valid)
     startTime    = time.time()
     while bno080_valid:
         bno080Data = bno080.read()
