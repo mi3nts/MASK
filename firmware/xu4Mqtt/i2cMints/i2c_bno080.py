@@ -8,6 +8,8 @@ import struct
 import time
 from math import atan2, sqrt, pi
 
+from adafruit_bno08x.i2c import BNO08X_I2C
+from adafruit_extended_bus import ExtendedI2C as I2C
 
 from adafruit_bno08x import (
     BNO_REPORT_ACCELEROMETER,
@@ -20,9 +22,6 @@ from adafruit_bno08x import (
     BNO_REPORT_ACTIVITY_CLASSIFIER,
     BNO_REPORT_SHAKE_DETECTOR,
 )
-from adafruit_bno08x.i2c import BNO08X_I2C
-from adafruit_extended_bus import ExtendedI2C as I2C
-
 
 # # to_s16 = lambda x: (x + 2**15) % 2**16 - 2**15
 # # to_u16 = lambda x: x % 2**16
@@ -57,13 +56,21 @@ class BNO080:
             self.bno = BNO08X_I2C(self.i2c)
             time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+            time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
+            time.sleep(1)            
             self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
+            time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            time.sleep(1)            
             self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
+            time.sleep(1)            
             self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
+            time.sleep(1)
             self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
+            time.sleep(1)            
             self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
+            time.sleep(1)            
             self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
             # ready = True
 
@@ -72,14 +79,15 @@ class BNO080:
             return True     
 
         except KeyboardInterrupt:
-            self.bno.reset()
+            self.reset()
             return False
 
 
         except Exception as e:
-            print(e)
+            time.sleep(5)
+            self.reset()
             print("An exception occurred:", type(e).__name__, "–", e) 
-            time.sleep(10)
+            time.sleep(5)
             print("BNO080 Not Found")
             return False
 
@@ -142,12 +150,19 @@ class BNO080:
     def read(self):
         try:
             dateTime                                            = datetime.datetime.now() 
+            time.sleep(.1)
             accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
+            time.sleep(.1)            
             linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
+            time.sleep(.1)            
             gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
+            time.sleep(.1)            
             mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
+            time.sleep(.1)            
             quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
+            time.sleep(.1)            
             heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
+            time.sleep(.1)            
             steps                                               = self.bno.steps
             time.sleep(1)
             shake                                               = self.shake_summary(self.bno.shake)
@@ -188,7 +203,9 @@ class BNO080:
                   ];
     
         except Exception as e:
-            print(e)
-            time.sleep(1)
+            time.sleep(5)
+            self.reset()
+            print("An exception occurred:", type(e).__name__, "–", e) 
+            time.sleep(5)
             return [];
 

@@ -17,18 +17,8 @@ from adafruit_bno08x import (
     BNO_REPORT_ROTATION_VECTOR,
 )
 
-
 debug        = False 
 bus          = I2C(4)
-
-#time.sleep(1)
-#print(bus.try_lock())
-
-#time.sleep(1)
-#print(bus.scan())
-
-#time.sleep(1)
-#print(bus.unlock())
 
 
 time.sleep(1)
