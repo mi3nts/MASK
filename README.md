@@ -135,4 +135,7 @@ The pin diagrams for the rasbery pi zero are given below:
      alt="Rasberry Pi Zero Pin Outs"
      style="float: left; margin-right: 10px;" />
 
+For RTC Problems
+```https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi/set-rtc-time```
+
 
