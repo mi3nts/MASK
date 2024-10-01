@@ -263,7 +263,7 @@ class BNO080:
     
         except Exception as e:
             time.sleep(5)
-            self.reset()
+            # self.reset()
             print("An exception occurred:", type(e).__name__, "–", e) 
             time.sleep(5)
             return [];
