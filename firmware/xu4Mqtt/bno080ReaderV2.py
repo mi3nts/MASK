@@ -22,7 +22,7 @@ bus          = I2C(4)
 time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
-loopInterval = 3
+loopInterval = 2.5
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5
@@ -48,7 +48,7 @@ def main(loopInterval):
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(2)
+            time.sleep(10)
             # time.sleep(20)
             
             # # Attempt to reinitialize the sensor
