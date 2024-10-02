@@ -48,16 +48,17 @@ def main(loopInterval):
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(20)
+            time.sleep(2)
+            # time.sleep(20)
             
-            # Attempt to reinitialize the sensor
-            bno080_initialized = bno080.initiate()
+            # # Attempt to reinitialize the sensor
+            # bno080_initialized = bno080.initiate()
             
-            if not bno080_initialized:
-                print("Failed to reinitialize BNO080 sensor. Exiting.")
-                quit()  # Consider using a proper exit or exception handling mechanism
+            # if not bno080_initialized:
+            #     print("Failed to reinitialize BNO080 sensor. Exiting.")
+            #     quit()  # Consider using a proper exit or exception handling mechanism
             
-            time.sleep(10)  # Optional second sleep, depending on your needs
+            # time.sleep(10)  # Optional second sleep, depending on your needs
 
 
 
