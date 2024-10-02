@@ -35,29 +35,38 @@ def restart_program():
 
 
 def main(loopInterval):
-    bno080_initialized = bno080.initiate()
-    print(bno080_initialized)
+    for i in range(11):
+        print(i)
+        if(bno080.initiate()):
+            print("bno080 Initialized")
+            break
+        time.sleep(30)
+        if i == 10:
+            print("bno080 not found")
+            quit()
+
     startTime = time.time()
     preCheck = -10.0
-    while bno080_initialized:
+    while True:
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.readV2()
-            # print(bno080Data)
             if preCheck !=bno080Data[11]:
                 preCheck = bno080Data[11]
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
                 print("Values Have not changed")
-                # bno080.hardReset()
                 time.sleep(30)
-                for i in range(10):
+                for i in range(11):
                     print(i)
                     if(bno080.initiate()):
+                        print("bno080 Initialized")
                         break
                     time.sleep(30)
-
+                    if i == 10:
+                        print("bno080 not found")
+                        quit()
 
 
         except Exception as e:
