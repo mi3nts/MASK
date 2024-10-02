@@ -53,6 +53,10 @@ def main(loopInterval):
                 print("Values Have not changed")
                 bno080.softReset()
                 time.sleep(10)
+                bno080Data = bno080.readV2()
+                print(bno080Data)
+                time.sleep(10)
+                
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
