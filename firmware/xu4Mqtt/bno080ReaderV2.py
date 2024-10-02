@@ -35,23 +35,33 @@ def restart_program():
 
 
 def main(loopInterval):
-    bno080_valid   =  bno080.initiate()
-    print(bno080_valid)
-    startTime    = time.time()
-    while bno080_valid:
+    bno080_initialized = bno080.initiate()
+    print(bno080_initialized)
+    startTime = time.time()
+
+    while bno080_initialized:
         try:
             bno080Data = bno080.readV2()
             print(bno080Data)
             # mSR.BNO080WriteI2c(bno080Data)
-            startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+            startTime = mSR.delayMints(time.time() - startTime, loopInterval)
+
         except Exception as e:
+            print(f"An exception occurred: {type(e).__name__} – {e}")
             time.sleep(5)
-            print("An exception occurred:", type(e).__name__, "–", e) 
-            time.sleep(5)
+            
+            # Attempt to reinitialize the sensor
+            bno080_initialized = bno080.initiate()
+            
+            if not bno080_initialized:
+                print("Failed to reinitialize BNO080 sensor. Exiting.")
+                quit()  # Consider using a proper exit or exception handling mechanism
+            
+            time.sleep(10)  # Optional second sleep, depending on your needs
 
 
 
-    print(bno080_valid)
+
 
 
 if __name__ == "__main__":
