@@ -26,6 +26,8 @@ loopInterval = 2.5
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5
+changeTimes  = 0
+
 
 def restart_program():
     """Restarts the current program."""
@@ -56,17 +58,20 @@ def main(loopInterval):
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
-                print("Values Have not changed")
-                time.sleep(30)
-                for i in range(11):
-                    print(i)
-                    if(bno080.initiate()):
-                        print("bno080 Initialized")
-                        break
+                print("Values have not changed")
+                changeTimes = changeTimes +1 
+                if changeTimes >= 2:
+                    changeTimes = 0 
                     time.sleep(30)
-                    if i == 10:
-                        print("bno080 not found")
-                        quit()
+                    for i in range(11):
+                        print(i)
+                        if(bno080.initiate()):
+                            print("bno080 Initialized")
+                            break
+                        time.sleep(30)
+                        if i == 10:
+                            print("bno080 not found")
+                            quit()
 
 
         except Exception as e:
