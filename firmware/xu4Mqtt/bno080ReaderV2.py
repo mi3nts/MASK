@@ -52,7 +52,7 @@ def main(loopInterval):
             else:
                 print("Values Have not changed")
                 bno080.softReset()
-
+                time.sleep(10)
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
