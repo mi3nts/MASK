@@ -59,7 +59,7 @@ def main(loopInterval):
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
-                print("Values have not changed")
+                print("Values have not changed: " + str(changeTimes))
                 changeTimes = changeTimes +1 
                 if changeTimes >= 2:
                     changeTimes = 0 
