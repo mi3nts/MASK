@@ -22,7 +22,7 @@ bus          = I2C(4)
 time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
-loopInterval = 5
+loopInterval = 1
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5
@@ -45,16 +45,14 @@ def main(loopInterval):
             bno080Data = bno080.readV2()
             print(bno080Data)
             if preCheck !=[bno080Data[7],bno080Data[8],bno080Data[9]]:
-                print("Checked")
-
-                # mSR.BNO080WriteI2c(bno080Data)
                 preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
+
             else:
                 print("Values Have not changed")
                 time.sleep(10)
-                bno080Data = bno080.readV2()
-                time.sleep(10)
-                bno080.initiate()
+                # bno080Data = bno080.readV2()
+                # time.sleep(10)
+                # bno080.initiate()
                 
 
         except Exception as e:
