@@ -48,7 +48,7 @@ def main(loopInterval):
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(5)
+            time.sleep(20)
             
             # Attempt to reinitialize the sensor
             bno080_initialized = bno080.initiate()
