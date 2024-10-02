@@ -39,10 +39,17 @@ def main(loopInterval):
     print(bno080_valid)
     startTime    = time.time()
     while bno080_valid:
-        bno080Data = bno080.readV2()
-        print(bno080Data)
-        # mSR.BNO080WriteI2c(bno080Data)
-        startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+        try:
+            bno080Data = bno080.readV2()
+            print(bno080Data)
+            # mSR.BNO080WriteI2c(bno080Data)
+            startTime = mSR.delayMints(time.time() - startTime,loopInterval)
+        except Exception as e:
+            time.sleep(5)
+            print("An exception occurred:", type(e).__name__, "–", e) 
+            time.sleep(5)
+
+
 
     print(bno080_valid)
 

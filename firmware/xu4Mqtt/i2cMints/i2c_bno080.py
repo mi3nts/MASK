@@ -217,32 +217,32 @@ class BNO080:
 
 
     def readV2(self):
-        try:
-            dateTime                                            = datetime.datetime.now() 
-            time.sleep(.1)
-            accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
-            time.sleep(.1)            
-            linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
-            time.sleep(.1)            
-            gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
-            time.sleep(.1)            
-            mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
-            time.sleep(.1)            
-            quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
-            time.sleep(.1)            
-            heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
-            return [dateTime,\
-                    accel_x, accel_y, accel_z,\
-                    linear_accel_x,linear_accel_y, linear_accel_z,\
-                    gyro_x, gyro_y, gyro_z,\
-                    mag_x, mag_y, mag_z,\
-                    quat_i, quat_j, quat_k, quat_real,\
-                    heading,\
-                  ];
+        # try:
+        dateTime                                            = datetime.datetime.now() 
+        time.sleep(.1)
+        accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
+        time.sleep(.1)            
+        linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
+        time.sleep(.1)            
+        gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
+        time.sleep(.1)            
+        mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
+        time.sleep(.1)            
+        quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
+        time.sleep(.1)            
+        heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
+        return [dateTime,\
+                accel_x, accel_y, accel_z,\
+                linear_accel_x,linear_accel_y, linear_accel_z,\
+                gyro_x, gyro_y, gyro_z,\
+                mag_x, mag_y, mag_z,\
+                quat_i, quat_j, quat_k, quat_real,\
+                heading,\
+                ];
     
-        except Exception as e:
-            time.sleep(5)
-            print("An exception occurred:", type(e).__name__, "–", e) 
-            time.sleep(5)
-            return [];
+        # except Exception as e:
+        #     time.sleep(5)
+        #     print("An exception occurred:", type(e).__name__, "–", e) 
+        #     time.sleep(5)
+        #     return [];
 
