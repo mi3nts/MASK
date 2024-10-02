@@ -139,3 +139,17 @@ For RTC Problems
 ```https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi/set-rtc-time```
 
 
+# Setting Up NTP and RTC on Raspberry Pi
+
+This guide covers how to set up NTP (Network Time Protocol) for synchronizing time from internet servers and configure an RTC (Real-Time Clock) on your Raspberry Pi for fallback timekeeping when the internet is unavailable.
+
+---
+
+## 1. Install NTP (Network Time Protocol)
+
+First, install NTP to synchronize time from a time server:
+
+```bash
+sudo apt update
+sudo apt install ntp
+```
