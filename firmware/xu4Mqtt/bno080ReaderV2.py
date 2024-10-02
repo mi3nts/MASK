@@ -46,30 +46,18 @@ def main(loopInterval):
             print(bno080Data)
             if preCheck !=[bno080Data[7],bno080Data[8],bno080Data[9]]:
                 preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
+                mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
                 print("Values Have not changed")
+                bno080.hardReset()
                 time.sleep(10)
-                # bno080Data = bno080.readV2()
-                # time.sleep(10)
-                # bno080.initiate()
                 
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
             time.sleep(10)
             
-            
-            # # Attempt to reinitialize the sensor
-            # bno080_initialized = bno080.initiate()
-            
-            # if not bno080_initialized:
-            #     print("Failed to reinitialize BNO080 sensor. Exiting.")
-            #     quit()  # Consider using a proper exit or exception handling mechanism
-            
-            # time.sleep(10)  # Optional second sleep, depending on your needs
-
-
 
 
 

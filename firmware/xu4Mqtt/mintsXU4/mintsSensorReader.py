@@ -439,6 +439,27 @@ def BME680Write(sensorData,dateTime):
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
+def BNO080V2WriteI2c(sensorData):
+    sensorName = "BNO080V2"
+    dataLength = 12  # Adjusted to match the actual number of elements expected in sensorData
+    if len(sensorData) == dataLength:
+        sensorDictionary = OrderedDict([
+            ("dateTime",             str(sensorData[0])), 
+            ("accelerationX",        sensorData[1]),
+            ("accelerationY",        sensorData[2]),
+            ("accelerationZ",        sensorData[3]),
+            ("angularVelocityX",     sensorData[4]),
+            ("angularVelocityY",     sensorData[5]),
+            ("angularVelocityZ",     sensorData[6]),
+            ("quaternionI",          sensorData[7]),
+            ("quaternionJ",          sensorData[8]),
+            ("quaternionK",          sensorData[9]),
+            ("quaternionReal",       sensorData[10]),
+            ("heading",              sensorData[11]),
+        ])
+        sensorFinisher(sensorData[0], sensorName, sensorDictionary)
+
+
 def BNO080WriteI2c(sensorData):
     sensorName = "BNO080"
     dataLength = 31  # Adjusted to match the actual number of elements expected in sensorData
