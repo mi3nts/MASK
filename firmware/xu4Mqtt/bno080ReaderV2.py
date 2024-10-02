@@ -55,7 +55,7 @@ def main(loopInterval):
                 for i in range(10):
                     print(i)
                     if(bno080.initiate()):
-                        continue
+                        break
                     time.sleep(30)
 
 
