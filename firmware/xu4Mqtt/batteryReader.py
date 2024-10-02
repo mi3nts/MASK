@@ -17,6 +17,9 @@ def getPiSugarOutput(command,ignoreStr):
     data = run("echo " +command + " | nc -q 1 127.0.0.1 8423",capture_output=True,shell=True)
     outValue = data.stdout.decode().replace("\n","").replace(ignoreStr,"").replace("true","1").replace("false","0")
     errCode  = data.stderr
+    print(command)
+    print(outValue)
+    print(errCode)
     return outValue, errCode;
 
 def main(loopInterval):
