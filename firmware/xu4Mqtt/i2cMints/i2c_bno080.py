@@ -11,17 +11,26 @@ from math import atan2, sqrt, pi
 from adafruit_bno08x.i2c import BNO08X_I2C
 from adafruit_extended_bus import ExtendedI2C as I2C
 
+# from adafruit_bno08x import (
+#     BNO_REPORT_ACCELEROMETER,
+#     BNO_REPORT_GYROSCOPE,
+#     BNO_REPORT_MAGNETOMETER,
+#     BNO_REPORT_ROTATION_VECTOR,
+#     BNO_REPORT_LINEAR_ACCELERATION,
+#     BNO_REPORT_STEP_COUNTER,
+#     BNO_REPORT_STABILITY_CLASSIFIER,
+#     BNO_REPORT_ACTIVITY_CLASSIFIER,
+#     BNO_REPORT_SHAKE_DETECTOR,
+# )
+
 from adafruit_bno08x import (
     BNO_REPORT_ACCELEROMETER,
     BNO_REPORT_GYROSCOPE,
     BNO_REPORT_MAGNETOMETER,
     BNO_REPORT_ROTATION_VECTOR,
-    BNO_REPORT_LINEAR_ACCELERATION,
-    BNO_REPORT_STEP_COUNTER,
-    BNO_REPORT_STABILITY_CLASSIFIER,
-    BNO_REPORT_ACTIVITY_CLASSIFIER,
-    BNO_REPORT_SHAKE_DETECTOR,
+    BNO_REPORT_LINEAR_ACCELERATION
 )
+
 
 # # to_s16 = lambda x: (x + 2**15) % 2**16 - 2**15
 # # to_u16 = lambda x: x % 2**16
@@ -70,19 +79,6 @@ class BNO080:
             print("Initiating LINACC")         
             self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
             time.sleep(1)     
-            # print("Initiating STEP")          
-            # self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
-            # time.sleep(1)
-            # print("Initiating STAB")   
-            # self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
-            # time.sleep(1)   
-            # print("Initiating ACT")            
-            # self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
-            # time.sleep(1)     
-            # print("Initiating SHK")          
-            # self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
-            # # ready = True
-
             print("BNO080 Found")
             time.sleep(1)
             return True     
@@ -105,9 +101,9 @@ class BNO080:
     def reset(self):
         time.sleep(1)
         print("Resetting the sensor")
-        self.bno.hard_reset()
+        # self.bno.hard_reset()
         time.sleep(1)
-        self.bno.soft_reset()
+        # self.bno.soft_reset()
         time.sleep(1)
 
 
@@ -234,24 +230,6 @@ class BNO080:
             quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
             time.sleep(.1)            
             heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
-            # time.sleep(.1)            
-            # steps                                               = self.bno.steps
-            # time.sleep(1)
-            # shake                                               = self.shake_summary(self.bno.shake)
-            # [   most_likely_index,\
-            #     most_likely_conf,\
-            #     unknown, \
-            #     in_vehicle, \
-            #     on_bicycle, \
-            #     on_foot, \
-            #     still, \
-            #     tilting, \
-            #     walking, \
-            #     running, \
-            #     on_stairs \
-            #     ]                                                = self.activity_classification_summary(self.bno.activity_classification)
-
-
             return [dateTime,\
                     accel_x, accel_y, accel_z,\
                     linear_accel_x,linear_accel_y, linear_accel_z,\

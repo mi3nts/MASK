@@ -47,57 +47,7 @@ def main(loopInterval):
     print(bno080_valid)
 
 
-    # while True:
-    #     try:
-    #         print("======= BNO080 ========")
-    #         if bno080_valid:
-    #             bno080Data = bno080.read()
-    #             # print(bno080Data)
-    #             if checkCurrent == bno080Data[12]:
-    #                 checkTrials = checkTrials + 1 
-    #                 time.sleep(1)
-    #             else: 
-    #                 checkTrials  = 0 
-    #                 checkCurrent = bno080Data[12]
-                
-    #             print(checkTrials)
-    #             # print(bno080Data)
-
-    #             if checkTrials == 0:
-    #                 print("Writing Data")
-    #                 # print(bno080Data)
-    #                 mSR.BNO080WriteI2c(bno080Data)
-    #                 startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-    #                 continue;
-
-    #             if checkTrials > checkLimit :
-    #                 print("Resetting BNO080")
-    #                 time.sleep(30)
-    #                 restart_program()
-    #                 # time.sleep(10)
-    #                 # continue;
-
-    #             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
-    #             print("=======================")  
-
-    #         else:
-    #             print("Reboot and check")
-    # #             time.sleep(10)
-    # #             restart_program()
-                
-            
-    #     except KeyboardInterrupt:
-    #         print("Keybaord Interupt")
-    #         bno080.reset()
-
-
-
-    #     except Exception as e:
-    #         print(e)
-    #         print("An exception occurred:", type(e).__name__, "–", e) 
-    #         time.sleep(1)
-    #         # restart_program()
-    #         # time.sleep(1)
+    
         
 if __name__ == "__main__":
     print("=============")
