@@ -37,6 +37,7 @@ def restart_program():
 
 
 def main(loopInterval):
+    changeTimes = 0
     for i in range(11):
         print(i)
         if(bno080.initiate()):
