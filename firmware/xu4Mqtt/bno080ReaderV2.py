@@ -44,11 +44,11 @@ def main(loopInterval):
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.readV2()
             
-            if preCheck !=[bno080[7],bno080[8],bno080[9]]:
+            if preCheck !=[bno080Data[7],bno080Data[8],bno080Data[9]]:
                 print("Checked")
                 print(bno080Data)
                 # mSR.BNO080WriteI2c(bno080Data)
-                preCheck = [bno080[7],bno080[8],bno080[9]]
+                preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
             else:
                 print("Values Have not changed")
                 bno080.softReset()
