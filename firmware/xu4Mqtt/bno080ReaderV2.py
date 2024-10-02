@@ -43,20 +43,26 @@ def main(loopInterval):
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.readV2()
-            print(bno080Data)
+            # print(bno080Data)
             if preCheck !=[bno080Data[7],bno080Data[8],bno080Data[9]]:
                 preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
-                print("Values Have not changed - Resetting")
+                print("Values Have not changed")
                 # bno080.hardReset()
-                time.sleep(20)
-                bno080.initiate()
+                time.sleep(30)
+                for i in range(10):
+                    print(i)
+                    if(bno080.initiate()):
+                        continue
+                    time.sleep(30)
+
+
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(20)
+            time.sleep(30)
             
 
 
