@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 sleep 60
 kill $(pgrep -f 'ips7100Reader.py')
 sleep 5
@@ -11,9 +11,9 @@ sleep 5
 python3 climateReader.py &
 sleep 5
 
-kill $(pgrep -f 'bno080Reader.py')
+kill $(pgrep -f 'bno080ReaderV2.py')
 sleep 5
-python3 bno080Reader.py &
+python3 bno080ReaderV2.py &
 sleep 5
 
 kill $(pgrep -f 'cozIRReader.py')
@@ -30,7 +30,6 @@ kill $(pgrep -f 'batteryReader.py')
 sleep 5
 python3 batteryReader.py &
 sleep 5
-
 
 python3 ipReader.py
 sleep 5

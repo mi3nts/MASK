@@ -56,8 +56,9 @@ def main(loopInterval):
             bno080Data = bno080.readV2()
             if preCheck !=bno080Data[11]:
                 preCheck = bno080Data[11]
-                mSR.BNO080V2WriteI2c(bno080Data)
                 changeTimes = 0 
+                mSR.BNO080V2WriteI2c(bno080Data)
+                
             else:
                 print("Values have not changed: " + str(changeTimes))
                 changeTimes = changeTimes +1 
