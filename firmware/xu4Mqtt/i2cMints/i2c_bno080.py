@@ -215,6 +215,7 @@ class BNO080:
             return [];
 
 
+
     def readV2(self):
         try:
             dateTime                                            = datetime.datetime.now() 
