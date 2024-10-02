@@ -97,7 +97,18 @@ class BNO080:
             return False
 
   
-        
+    def softReset(self):
+        time.sleep(1)
+        self.bno.soft_reset()
+        time.sleep(1)
+
+
+    def hardReset(self):
+        time.sleep(1)
+        self.bno.hard_reset()
+        time.sleep(1)
+
+
     def reset(self):
         time.sleep(1)
         print("Resetting the sensor")

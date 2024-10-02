@@ -38,18 +38,26 @@ def main(loopInterval):
     bno080_initialized = bno080.initiate()
     print(bno080_initialized)
     startTime = time.time()
-
+    preCheck = [0,0,0]
     while bno080_initialized:
         try:
-            bno080Data = bno080.readV2()
-            print(bno080Data)
-            # mSR.BNO080WriteI2c(bno080Data)
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
+            bno080Data = bno080.readV2()
+            
+            if preCheck !=[bno080[7],bno080[8],bno080[9]]:
+                print("Checked")
+                print(bno080Data)
+                # mSR.BNO080WriteI2c(bno080Data)
+                preCheck = [bno080[7],bno080[8],bno080[9]]
+            else:
+                print("Values Have not changed")
+                bno080.softReset()
+
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
             time.sleep(10)
-            # time.sleep(20)
+            
             
             # # Attempt to reinitialize the sensor
             # bno080_initialized = bno080.initiate()
