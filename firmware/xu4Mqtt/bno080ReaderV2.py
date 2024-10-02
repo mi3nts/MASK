@@ -51,7 +51,7 @@ def main(loopInterval):
                 preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
             else:
                 print("Values Have not changed")
-                bno080.softReset()
+                bno080.hardReset()
                 time.sleep(10)
                 bno080Data = bno080.readV2()
                 print(bno080Data)
