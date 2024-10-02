@@ -26,9 +26,7 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 from adafruit_bno08x import (
     BNO_REPORT_ACCELEROMETER,
     BNO_REPORT_GYROSCOPE,
-    BNO_REPORT_MAGNETOMETER,
     BNO_REPORT_ROTATION_VECTOR,
-    BNO_REPORT_LINEAR_ACCELERATION
 )
 
 
@@ -237,21 +235,19 @@ class BNO080:
         dateTime                                            = datetime.datetime.now() 
         time.sleep(.1)
         accel_x, accel_y, accel_z                           = self.bno.acceleration  # pylint:disable=no-member
-        time.sleep(.1)            
-        linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
+        # time.sleep(.1)            
+        # linear_accel_x,linear_accel_y, linear_accel_z       = self.bno.linear_acceleration
         time.sleep(.1)            
         gyro_x, gyro_y, gyro_z                              = self.bno.gyro  # pylint:disable=no-member
         time.sleep(.1)            
-        mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
-        time.sleep(.1)            
+        # mag_x, mag_y, mag_z                                 = self.bno.magnetic  # pylint:disable=no-member
+        # time.sleep(.1)            
         quat_i, quat_j, quat_k, quat_real                   = self.bno.quaternion  # pylint:disable=no-member
         time.sleep(.1)            
         heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
         return [dateTime,\
                 accel_x, accel_y, accel_z,\
-                linear_accel_x,linear_accel_y, linear_accel_z,\
                 gyro_x, gyro_y, gyro_z,\
-                mag_x, mag_y, mag_z,\
                 quat_i, quat_j, quat_k, quat_real,\
                 heading,\
                 ];
