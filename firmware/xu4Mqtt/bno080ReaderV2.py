@@ -54,8 +54,6 @@ def main(loopInterval):
     print(bno080_valid)
 
 
-    
-        
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
