@@ -49,14 +49,14 @@ def main(loopInterval):
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
-                print("Values Have not changed")
-                bno080.hardReset()
-                time.sleep(10)
-                
+                print("Values Have not changed - Resetting")
+                # bno080.hardReset()
+                time.sleep(20)
+                bno080.initiate()
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(10)
+            time.sleep(20)
             
 
 
