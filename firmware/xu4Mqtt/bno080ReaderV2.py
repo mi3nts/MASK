@@ -38,14 +38,14 @@ def main(loopInterval):
     bno080_initialized = bno080.initiate()
     print(bno080_initialized)
     startTime = time.time()
-    preCheck = [-10.0,-10.0,-10.0]
+    preCheck = -10.0
     while bno080_initialized:
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.readV2()
             # print(bno080Data)
-            if preCheck !=[bno080Data[7],bno080Data[8],bno080Data[9]]:
-                preCheck = [bno080Data[7],bno080Data[8],bno080Data[9]]
+            if preCheck !=bno080Data[11]:
+                preCheck = bno080Data[11]
                 mSR.BNO080V2WriteI2c(bno080Data)
 
             else:
