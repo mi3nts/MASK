@@ -96,9 +96,9 @@ def main(portNum):
                     # ser.write(str.encode('@\r\n'))
                     # time.sleep(1)
 
-                    # print("Setting the auto zero value")
-                    # ser.write(str.encode('@ 1.0 8.0\r\n'))
-                    # time.sleep(1)
+                    print("Setting the auto zero value")
+                    ser.write(str.encode('@ 1.0 8.0\r\n'))
+                    time.sleep(1)
 
                     # print("Reading the auto zero value")
                     # ser.write(str.encode('@\r\n'))

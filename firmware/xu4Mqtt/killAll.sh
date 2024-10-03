@@ -7,7 +7,7 @@ sleep 1
 kill $(pgrep -f 'climateReader.py')
 sleep 1
 
-kill $(pgrep -f 'bno080Reader.py')
+kill $(pgrep -f 'bno080ReaderV2.py')
 sleep 1
 
 kill $(pgrep -f 'cozIRReader.py')
