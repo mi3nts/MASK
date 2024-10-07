@@ -55,10 +55,9 @@ def main(loopInterval):
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.read()
-            print(datetime.datetime.now())
-            print(bno080Data)
+
             if preCheck !=bno080Data[11]:
-                print("---------------------------------------------------")
+                print("-----------------------------------")
                 # preCheck = bno080Data[11]
                 print(bno080Data[11])
                 print(bno080Data[12])
