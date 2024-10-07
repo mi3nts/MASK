@@ -36,6 +36,7 @@ def restart_program():
     os.execv(sys.executable, ['python3'] + sys.argv)
 
 
+
 def main(loopInterval):
     changeTimes = 0
     for i in range(11):

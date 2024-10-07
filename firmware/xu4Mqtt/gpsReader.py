@@ -8,7 +8,7 @@ from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 
 def main():
-    delta = 1
+    delta = .5
     resetDelta = 300
     lastGPRMC = time.time()
     lastGPGGA = time.time()
@@ -25,10 +25,10 @@ def main():
             gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
             time.sleep(1)
             print("Changing Update Frequency")
-            gps.send_command(b"PMTK220,1000")
+            gps.send_command(b"PMTK220,100")
 
             while True:
-                time.sleep(1)
+                time.sleep(0.1)
                 if not gps.update() or not gps.has_fix:
                     print("No Coordinates found")
                     print(gps.nmea_sentence) 
@@ -44,7 +44,7 @@ def main():
                     mSR.GPSGPRMC2Write(dataString, dateTime)
                     lastGPRMC = time.time()
                 
-                time.sleep(1)
+                time.sleep(.1)
                 if mSR.getDeltaTime(lastGPGGA, resetDelta):
                     # Restarting the process
                     print("Resetting GPS")
