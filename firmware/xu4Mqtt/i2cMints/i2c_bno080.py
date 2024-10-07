@@ -203,7 +203,7 @@ class BNO080:
             heading                                             = self.find_heading(quat_real, quat_i, quat_j, quat_k)
             time.sleep(.1)            
             steps                                               = self.bno.steps
-            time.sleep(1)
+            time.sleep(.1)
             shake                                               = self.shake_summary(self.bno.shake)
             [   most_likely_index,\
                 most_likely_conf,\
