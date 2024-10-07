@@ -11,10 +11,10 @@ sleep 5
 python3 climateReader.py &
 sleep 5
 
-kill $(pgrep -f 'bno080ReaderV2.py')
-sleep 5
-python3 bno080ReaderV2.py &
-sleep 5
+# kill $(pgrep -f 'bno080ReaderV2.py')
+# sleep 5
+# python3 bno080ReaderV2.py &
+# sleep 5
 
 kill $(pgrep -f 'cozIRReader.py')
 sleep 5
