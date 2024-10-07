@@ -55,8 +55,35 @@ class BNO080:
         self.i2c      = i2c_dev
         self.debug    = debugIn
 
+    def initiateV2(self):
+        try:
+            print("Initiating BNO")
+            self.bno = BNO08X_I2C(self.i2c)
+            time.sleep(1)
+            print("Initiating ACC")
+            self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+            time.sleep(1)
+            print("Initiating GYR")
+            self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
+            time.sleep(1)            
+            print("Initiating ROT")
+            self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            time.sleep(1)     
+            print("BNO080 Found")
+            time.sleep(1)
+            return True     
+
+        except KeyboardInterrupt:
+            self.reset()
+            return False
 
 
+        except Exception as e:
+            time.sleep(5)
+            print("An exception occurred:", type(e).__name__, "–", e) 
+            time.sleep(5)
+            print("BNO080 Not Found")
+            return False
     def initiate(self):
         try:
             print("Initiating BNO")

@@ -40,7 +40,7 @@ def main(loopInterval):
     changeTimes = 0
     for i in range(11):
         print(i)
-        if(bno080.initiate()):
+        if(bno080.initiateV2()):
             print("bno080 Initialized")
             break
         time.sleep(30)
