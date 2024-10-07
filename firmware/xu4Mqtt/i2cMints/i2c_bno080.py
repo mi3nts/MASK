@@ -85,7 +85,6 @@ class BNO080:
             time.sleep(1)
             print("Initiating STAB")   
             self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
-           
             time.sleep(1)     
             print("Initiating SHK")          
             self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)

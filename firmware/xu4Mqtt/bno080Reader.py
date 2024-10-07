@@ -22,7 +22,7 @@ bus          = I2C(4)
 time.sleep(1)
 bno080       = BNO080(bus,debug)
 initTrials   = 5
-loopInterval = 2.5
+loopInterval = 1
 checkCurrent = 0 
 checkTrials  = 0 
 checkLimit   = 5
