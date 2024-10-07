@@ -11,23 +11,23 @@ from math import atan2, sqrt, pi
 from adafruit_bno08x.i2c import BNO08X_I2C
 from adafruit_extended_bus import ExtendedI2C as I2C
 
-# from adafruit_bno08x import (
-#     BNO_REPORT_ACCELEROMETER,
-#     BNO_REPORT_GYROSCOPE,
-#     BNO_REPORT_MAGNETOMETER,
-#     BNO_REPORT_ROTATION_VECTOR,
-#     BNO_REPORT_LINEAR_ACCELERATION,
-#     BNO_REPORT_STEP_COUNTER,
-#     BNO_REPORT_STABILITY_CLASSIFIER,
-#     BNO_REPORT_ACTIVITY_CLASSIFIER,
-#     BNO_REPORT_SHAKE_DETECTOR,
-# )
-
 from adafruit_bno08x import (
     BNO_REPORT_ACCELEROMETER,
     BNO_REPORT_GYROSCOPE,
+    BNO_REPORT_MAGNETOMETER,
     BNO_REPORT_ROTATION_VECTOR,
+    BNO_REPORT_LINEAR_ACCELERATION,
+    BNO_REPORT_STEP_COUNTER,
+    BNO_REPORT_STABILITY_CLASSIFIER,
+    BNO_REPORT_ACTIVITY_CLASSIFIER,
+    BNO_REPORT_SHAKE_DETECTOR,
 )
+
+# from adafruit_bno08x import (
+#     BNO_REPORT_ACCELEROMETER,
+#     BNO_REPORT_GYROSCOPE,
+#     BNO_REPORT_ROTATION_VECTOR,
+# )
 
 
 # # to_s16 = lambda x: (x + 2**15) % 2**16 - 2**15
@@ -68,9 +68,41 @@ class BNO080:
             print("Initiating GYR")
             self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
             time.sleep(1)            
+            print("Initiating MAG")
+            self.bno.enable_feature(BNO_REPORT_MAGNETOMETER)
+            time.sleep(1)
             print("Initiating ROT")
             self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            time.sleep(1)   
+            print("Initiating LINACC")         
+            self.bno.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
             time.sleep(1)     
+            print("Initiating STEP")          
+            self.bno.enable_feature(BNO_REPORT_STEP_COUNTER)
+            time.sleep(1)
+            print("Initiating STAB")   
+            self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
+            time.sleep(1)   
+            print("Initiating ACT")            
+            self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
+            time.sleep(1)     
+            print("Initiating SHK")          
+            self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
+
+            # ready = True
+            # print("Initiating BNO")
+            # self.bno = BNO08X_I2C(self.i2c)
+            # time.sleep(1)
+            # print("Initiating ACC")
+            # self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
+            # time.sleep(1)
+            # print("Initiating GYR")
+            # self.bno.enable_feature(BNO_REPORT_GYROSCOPE)
+            # time.sleep(1)            
+            # print("Initiating ROT")
+            # self.bno.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+            # time.sleep(1)     
+          
             print("BNO080 Found")
             time.sleep(1)
             return True     
