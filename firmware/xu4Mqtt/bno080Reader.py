@@ -58,6 +58,7 @@ def main(loopInterval):
             print(datetime.datetime.now())
             print(bno080Data)
             if preCheck !=bno080Data[11]:
+                print("---------------------------------------------------")
                 # preCheck = bno080Data[11]
                 print(bno080Data[11])
                 print(bno080Data[12])
