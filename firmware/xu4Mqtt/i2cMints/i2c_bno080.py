@@ -61,6 +61,9 @@ class BNO080:
         try:
             print("Initiating BNO")
             self.bno = BNO08X_I2C(self.i2c)
+            time.sleep(1)   
+            print("Initiating ACT")            
+            self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
             time.sleep(1)
             print("Initiating ACC")
             self.bno.enable_feature(BNO_REPORT_ACCELEROMETER)
@@ -82,9 +85,7 @@ class BNO080:
             time.sleep(1)
             print("Initiating STAB")   
             self.bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
-            time.sleep(1)   
-            print("Initiating ACT")            
-            self.bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
+           
             time.sleep(1)     
             print("Initiating SHK")          
             self.bno.enable_feature(BNO_REPORT_SHAKE_DETECTOR)
