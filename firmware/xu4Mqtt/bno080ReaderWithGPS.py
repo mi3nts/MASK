@@ -43,16 +43,7 @@ def main(loopInterval):
     lastGPRMC = time.time()
     lastGPGGA = time.time()
 
-    gps = adafruit_gps.GPS_GtopI2C(bus, debug=False) # Use I2C interface
-    print("GPS found")
 
-    # Turn on everything (not all of it is parsed!)
-    print("Sending GPS Command")
-    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-    time.sleep(1)
-    print("Changing Update Frequency")
-    gps.send_command(b"PMTK220,100")
-    changeTimes = 0
 
     for i in range(11):
         print(i)
@@ -63,7 +54,17 @@ def main(loopInterval):
         if i == 10:
             print("bno080 not found")
             quit()
+            
+    gps = adafruit_gps.GPS_GtopI2C(bus, debug=False) # Use I2C interface
+    print("GPS found")
 
+    # Turn on everything (not all of it is parsed!)
+    print("Sending GPS Command")
+    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+    time.sleep(1)
+    print("Changing Update Frequency")
+    gps.send_command(b"PMTK220,100")
+    changeTimes = 0
     startTime = time.time()
     preCheck = [-1.0,-1.0,-1.0]
     while True:
