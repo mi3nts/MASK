@@ -14,6 +14,6 @@ sleep 1
 kill $(pgrep -f 'cozIRReader.py')
 sleep 1
 
-kill $(pgrep -f 'batteryReader.py')
+kill $(pgrep -f 'piSugarReader.py')
 sleep 1
 
