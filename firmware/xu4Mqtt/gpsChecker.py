@@ -8,7 +8,7 @@ from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 
 def main():
-    delta = 0
+    delta = .1
     resetDelta = 300
     lastGPRMC = time.time()
     lastGPGGA = time.time()
@@ -23,7 +23,7 @@ def main():
             # Turn on everything (not all of it is parsed!)
             print("Sending GPS Command")
             gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-            time.sleep(1)
+            time.sleep(10)
             print("Changing Update Frequency")
             gps.send_command(b"PMTK220,100")
 
@@ -36,17 +36,21 @@ def main():
                 
                 dateTime = datetime.datetime.now()
                 dataString = gps.nmea_sentence
-                if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
-                    mSR.GPSGPGGA2Write(dataString, dateTime)
-                    lastGPGGA = time.time()
+                print("----------------------")
+                print(dataString)
+                print(dateTime)
+                #if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
+                #    mSR.GPSGPGGA2Write(dataString, dateTime)
+                #    lastGPGGA = time.time()
 
-                if (dataString.startswith("$GPRMC") or dataString.startswith("$GNRMC")) and mSR.getDeltaTime(lastGPRMC, delta):
-                    mSR.GPSGPRMC2Write(dataString, dateTime)
-                    lastGPRMC = time.time()
+                #if (dataString.startswith("$GPRMC") or dataString.startswith("$GNRMC")) and mSR.getDeltaTime(lastGPRMC, delta):
+                #    mSR.GPSGPRMC2Write(dataString, dateTime)
+                #    lastGPRMC = time.time()
                 
                 if mSR.getDeltaTime(lastGPGGA, resetDelta):
                     # Restarting the process
                     print("Resetting GPS")
+                    time.sleep(.1)
                     break
                 
         except Exception as e:

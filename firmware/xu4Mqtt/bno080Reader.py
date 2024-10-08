@@ -56,26 +56,26 @@ def main(loopInterval):
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
             bno080Data = bno080.read()
 
-            # if preCheck !=[bno080Data[11],bno080Data[12],bno080Data[13]]:
-            #     preCheck =  [bno080Data[11],bno080Data[12],bno080Data[13]]
-            #     changeTimes = 0 
-            #     mSR.BNO080WriteI2c(bno080Data)
+            if preCheck !=[bno080Data[11],bno080Data[12],bno080Data[13]]:
+                preCheck =  [bno080Data[11],bno080Data[12],bno080Data[13]]
+                changeTimes = 0 
+                mSR.BNO080WriteI2c(bno080Data)
                 
-            # else:
-            #     print("Values have not changed: " + str(changeTimes))
-            #     changeTimes = changeTimes +1 
-            #     if changeTimes >= 2:
-            #         changeTimes = 0 
-            #         time.sleep(30)
-            #         for i in range(11):
-            #             print(i)
-            #             if(bno080.initiate()):
-            #                 print("bno080 Initialized")
-            #                 break
-            #             time.sleep(30)
-            #             if i == 10:
-            #                 print("bno080 Halted and Quitting")
-            #                 quit()
+            else:
+                print("Values have not changed: " + str(changeTimes))
+                changeTimes = changeTimes +1 
+                if changeTimes >= 2:
+                    changeTimes = 0 
+                    time.sleep(30)
+                    for i in range(11):
+                        print(i)
+                        if(bno080.initiate()):
+                            print("bno080 Initialized")
+                            break
+                        time.sleep(30)
+                        if i == 10:
+                            print("bno080 Halted and Quitting")
+                            quit()
 
 
         except Exception as e:
