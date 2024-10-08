@@ -36,6 +36,8 @@ def main():
                 
                 dateTime = datetime.datetime.now()
                 dataString = gps.nmea_sentence
+                print(dateTime)
+                print(dataString)
                 if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
                     mSR.GPSGPGGA2Write(dataString, dateTime)
                     lastGPGGA = time.time()
