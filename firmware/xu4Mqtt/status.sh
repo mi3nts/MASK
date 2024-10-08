@@ -1,18 +1,27 @@
 #!/bin/bash
 #
 sleep 1
+echo "BNO080With PA1010D"
+echo $(pgrep -f 'bno080WithPa1010dReader.py')
+sleep 2
+
 echo "IPS7100"
-echo $(pgrep -f 'ips7100ReaderV1.py')
+echo $(pgrep -f 'ips7100Reader.py')
 sleep 2
 
-echo "i2c"
-echo  $(pgrep -f 'i2cReader.py')
+echo "BME280 With TMP117"
+echo $(pgrep -f 'bme280WithTmp117Reader.py')
 sleep 2
 
-echo "GPS"
-echo $(pgrep -f 'gpsReader.py')
+echo "COZIR"
+echo $(pgrep -f 'cozIRReader.py')
 sleep 2
 
-echo "battery reader"
-echo $(pgrep -f 'batteryReader.py')
+echo "PI SUGAR"
+echo $(pgrep -f 'piSugarReader.py')
 sleep 2
+
+echo "IP"
+echo $(pgrep -f 'ipReader.py')
+sleep 2
+

@@ -109,25 +109,25 @@ def main(portNum):
     ser.write(str.encode('Q\r\n'))
     time.sleep(1)
     
-    while True:
-        try:
-            for c in ser.read():
-                line.append(chr(c))
-                if chr(c) == '\n':
-                    print("-------------------------------------------------------------")
-                    # print(datetime.datetime.now())                     
-                    dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
-                    print(dataStringPost)
-                    time.sleep(1)
-                    if check_format(dataStringPost):
-                        print(decode_cozir_data(dataStringPost))
-                        ser.write(str.encode('Q\r\n'))
+    # while True:
+    #     try:
+    #         for c in ser.read():
+    #             line.append(chr(c))
+    #             if chr(c) == '\n':
+    #                 print("-------------------------------------------------------------")
+    #                 # print(datetime.datetime.now())                     
+    #                 dataStringPost     = (''.join(line)).replace("\n","").replace("\r","").replace(" ","")
+    #                 print(dataStringPost)
+    #                 time.sleep(1)
+    #                 if check_format(dataStringPost):
+    #                     print(decode_cozir_data(dataStringPost))
+    #                     ser.write(str.encode('Q\r\n'))
 
                      
-                    line = []
-        except:
-            print("Incomplete read. Something may be wrong with {0}".format(portIn))
-            line = []
+    #                 line = []
+    #     except:
+    #         print("Incomplete read. Something may be wrong with {0}".format(portIn))
+    #         line = []
 
 
 def altitude_compensation_string(altitude):
