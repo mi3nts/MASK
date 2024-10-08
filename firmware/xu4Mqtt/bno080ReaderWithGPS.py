@@ -54,7 +54,7 @@ def main(loopInterval):
         if i == 10:
             print("bno080 not found")
             quit()
-            
+
     gps = adafruit_gps.GPS_GtopI2C(bus, debug=False) # Use I2C interface
     print("GPS found")
 
@@ -62,11 +62,19 @@ def main(loopInterval):
     print("Sending GPS Command")
     gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
     time.sleep(1)
+
+
     print("Changing Update Frequency")
     gps.send_command(b"PMTK220,100")
     changeTimes = 0
     startTime = time.time()
     preCheck = [-1.0,-1.0,-1.0]
+
+    if not gps.update() or not gps.has_fix:
+        print("No Coordinates found")
+        print(gps.nmea_sentence) 
+
+
     while True:
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
@@ -93,11 +101,14 @@ def main(loopInterval):
                             print("bno080 Halted and Quitting")
                             quit()
             
+            if not gps.update() or not gps.has_fix:
+                print("No Coordinates found")
+                print(gps.nmea_sentence) 
+                continue
             dateTime = datetime.datetime.now()
             dataString = gps.nmea_sentence
             print(dateTime)
             print(dataString)
-
             if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
                 mSR.GPSGPGGA2Write(dataString, dateTime)
                 lastGPGGA = time.time()
