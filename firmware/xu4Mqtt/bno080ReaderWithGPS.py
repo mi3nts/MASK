@@ -9,8 +9,9 @@ from i2cMints.i2c_bno080 import BNO080
 from mintsXU4 import mintsSensorReader as mSR
 import os
 import sys
-from adafruit_bno08x.i2c import BNO08X_I2C
 import subprocess
+import adafruit_gps
+from adafruit_bno08x.i2c import BNO08X_I2C
 from adafruit_extended_bus import ExtendedI2C as I2C
 
 # i2c     = I2C(4)
