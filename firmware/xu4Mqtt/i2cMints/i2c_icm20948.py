@@ -15,7 +15,6 @@ class ICM20948:
         print("============== ICM20948 ==============")        
 
         try:
-            self.soft_reset()
             time.sleep(1)
             self.icm20948  = adafruit_icm20x.ICM20948(self.i2c)
             print("ICM20948 Device Initialized to defauls of +-8g and 500 dps:")
