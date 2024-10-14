@@ -66,8 +66,8 @@ def main(loopInterval):
             print(dateTime)
             print(dataString)
             print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
-            print("Gyro X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
-            print("Magnetometer X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
+            print("Gyro          X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
+            print("Magnetometer  X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
 
 
             if not(fixFound):
