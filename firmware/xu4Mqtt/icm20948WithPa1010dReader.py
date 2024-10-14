@@ -51,6 +51,7 @@ def main(loopInterval):
     startTime = time.time()
 
 
+
     while True:
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
