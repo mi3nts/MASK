@@ -35,105 +35,72 @@ changeTimes  = 0
 
 time.sleep(1)
 
-# pa1010d       = PA1010D(bus,debug)
+pa1010d       = PA1010D(bus,debug)
 
-# i2c = board.I2C()  # uses board.SCL and board.SDA
-# i2c = board.STEMMA_I2C()  # For using the built-in STEMMA QT connector on a microcontroller
 icm = adafruit_icm20x.ICM20948(bus)
 
 
 def main(loopInterval):
 
+
+    delta = 0
+    resetDelta = 300
+    lastGPRMC = time.time()
+    lastGPGGA = time.time()
+
+    for i in range(11):
+        print(i)
+        if(bno080.initiate()):
+            print("bno080 Initialized")
+            break
+        time.sleep(30)
+        if i == 10:
+            print("bno080 not found")
+            quit()
+
+    # Fix to check a few times  
+    pa1010d.initiate()
+
+    # changeTimes = 0
+    startTime = time.time()
+    # preCheck = [-1.0,-1.0,-1.0]
+
+
     while True:
-        print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
-        print("Gyro X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
-        print("Magnetometer X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
-        print("")
-        time.sleep(0.5)
+        try:
+            startTime = mSR.delayMints(time.time() - startTime, loopInterval)
+
+            print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
+            print("Gyro X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
+            print("Magnetometer X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
+            print("")
+            time.sleep(0.5)
+
+            
+            [fixFound, dateTime,dataString]  = pa1010d.read()
+            print(dateTime)
+            print(dataString)
+            if not(fixFound):
+                continue
+
+            if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
+                mSR.GPSGPGGA2Write(dataString, dateTime)
+                lastGPGGA = time.time()
+
+            if (dataString.startswith("$GPRMC") or dataString.startswith("$GNRMC")) and mSR.getDeltaTime(lastGPRMC, delta):
+                mSR.GPSGPRMC2Write(dataString, dateTime)
+                lastGPRMC = time.time()
+
+        except Exception as e:
+            print(f"An exception occurred: {type(e).__name__} – {e}")
+            time.sleep(10)
+            
+
+
+
+    while True:
+
         
-    # delta = 0
-    # resetDelta = 300
-    # lastGPRMC = time.time()
-    # lastGPGGA = time.time()
-
-    # for i in range(11):
-    #     print(i)
-    #     if(bno080.initiate()):
-    #         print("bno080 Initialized")
-    #         break
-    #     time.sleep(30)
-    #     if i == 10:
-    #         print("bno080 not found")
-    #         quit()
-
-    # # Fix to check a few times  
-    # pa1010d.initiate()
-
-    # # changeTimes = 0
-    # startTime = time.time()
-    # # preCheck = [-1.0,-1.0,-1.0]
-
-
-    # while True:
-    #     try:
-    #         startTime = mSR.delayMints(time.time() - startTime, loopInterval)
-    #         bno080Data = bno080.read()
-    #         # print(bno080Data)
-    #         mSR.BNO080WriteI2c(bno080Data)  
-
-
-    #         # if preCheck !=[bno080Data[11],bno080Data[12],bno080Data[13]]:
-    #         #     preCheck =  [bno080Data[11],bno080Data[12],bno080Data[13]]
-    #         #     changeTimes = 0 
-    #         #     # print(bno080Data)
-    #             # mSR.BNO080WriteI2c(bno080Data)  
-    #         # else:
-    #         #     print("Values have not changed: " + str(changeTimes))
-    #         #     changeTimes = changeTimes +1 
-    #         #     if changeTimes >= 2:
-    #         #         changeTimes = 0 
-    #         #         time.sleep(30)
-    #         #         for i in range(11):
-    #         #             print(i)
-    #         #             if(bno080.initiate()):
-    #         #                 print("bno080 Initialized")
-    #         #                 break
-    #         #             time.sleep(30)
-    #         #             if i == 10:
-    #         #                 print("bno080 Halted and Quitting")
-    #         #                 quit()
-            
-    #         # if not gps.update() or not gps.has_fix:
-    #         #     print("No Coordinates found")
-    #         #     print(gps.nmea_sentence) 
-    #         #     continue
-
-    #         # dateTime = datetime.datetime.now()
-    #         # dataString = gps.nmea_sentence
-    #         # print(dateTime)
-    #         # print(dataString)
-
-
-    #         [fixFound, dateTime,dataString]  = pa1010d.read()
-    #         if not(fixFound):
-    #             continue
-
-    #         if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
-    #             mSR.GPSGPGGA2Write(dataString, dateTime)
-    #             lastGPGGA = time.time()
-
-    #         if (dataString.startswith("$GPRMC") or dataString.startswith("$GNRMC")) and mSR.getDeltaTime(lastGPRMC, delta):
-    #             mSR.GPSGPRMC2Write(dataString, dateTime)
-    #             lastGPRMC = time.time()
-
-    #     except Exception as e:
-    #         print(f"An exception occurred: {type(e).__name__} – {e}")
-    #         time.sleep(10)
-            
-
-
-
-
 if __name__ == "__main__":
     print("=============")
     print("    MINTS    ")
