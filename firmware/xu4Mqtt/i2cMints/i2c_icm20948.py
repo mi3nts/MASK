@@ -38,11 +38,6 @@ class ICM20948:
             self.gyro         =  self.icm20948.gyro
             self.magnetic     =  self.icm20948.magnetic
 
-            print(dateTime)
-            print(self.acceleration)
-            print(self.gyro)
-            print(self.magnetic)
-
             return [dateTime,\
                     self.acceleration[0],\
                     self.acceleration[1],\ 
