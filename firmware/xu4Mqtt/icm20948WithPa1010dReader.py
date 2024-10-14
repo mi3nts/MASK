@@ -62,6 +62,7 @@ def main(loopInterval):
             print("--------------------------------------------------------")
             if pa1010d_valid:
                 [fixFound, dateTime, dataString]  = pa1010d.read()
+                print(dataString)
 
             if icm20948_valid:
                 mSR.ICM20948WriteI2c(icm20948.read())
