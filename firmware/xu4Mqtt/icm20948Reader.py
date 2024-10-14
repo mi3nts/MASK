@@ -60,6 +60,7 @@ def main(loopInterval):
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
 
+
             print("--------------------------------------------------------")
             print("--------------------------------------------------------")
             [fixFound, dateTime,dataString]  = pa1010d.read()
