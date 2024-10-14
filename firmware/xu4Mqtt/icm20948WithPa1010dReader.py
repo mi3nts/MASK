@@ -61,7 +61,7 @@ def main(loopInterval):
             [fixFound, dateTime,dataString]  = pa1010d.read()
             print(dateTime)
             print(dataString)
-            pa1010d.read()
+            icm20948.read()
 
             if not(fixFound):
                 continue
