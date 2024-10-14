@@ -65,7 +65,8 @@ def main(loopInterval):
             [fixFound, dateTime,dataString]  = pa1010d.read()
             print(dateTime)
             print(dataString)
-            print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
+            print("Temperature    :{:.2f} C".format(*icm.temperature))
+            print("Acceleration  X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
             print("Gyro          X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
             print("Magnetometer  X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
 
