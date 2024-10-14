@@ -48,16 +48,6 @@ def main(loopInterval):
     lastGPRMC = time.time()
     lastGPGGA = time.time()
 
-    for i in range(11):
-        print(i)
-        if(bno080.initiate()):
-            print("bno080 Initialized")
-            break
-        time.sleep(30)
-        if i == 10:
-            print("bno080 not found")
-            quit()
-
     # Fix to check a few times  
     pa1010d.initiate()
 
