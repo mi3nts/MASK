@@ -11,32 +11,25 @@ class ICM20948:
         self.debug    = debugIn
 
 
-    def initiate(self,retriesIn):
+    def initiate(self):
         print("============== ICM20948 ==============")        
-        ready = None
-        while ready is None and retriesIn:
-            try:
-                self.soft_reset()
-                time.sleep(1)
 
-                self.icm20948  = adafruit_icm20x.ICM20948(self.i2c)
-
-                print("ICM20948 Device Initialized to defauls of +-8g and 500 dps:")
-                time.sleep(1)
-                
-            except OSError:
-                pass
+        try:
+            self.soft_reset()
             time.sleep(1)
-            retriesIn -= 1
-
-        if not retriesIn:
+            self.icm20948  = adafruit_icm20x.ICM20948(self.i2c)
+            print("ICM20948 Device Initialized to defauls of +-8g and 500 dps:")
             time.sleep(1)
-            return False
         
-        else:
-            print("TMP117 Found")
-            time.sleep(1)
-            return True       
+        except KeyboardInterrupt:
+            return False
+
+        except Exception as e:
+            time.sleep(5)
+            print("An exception occurred:", type(e).__name__, "–", e) 
+            time.sleep(5)
+            print("ICM20948 Not Found")
+            return False 
       
     
     def read(self):
