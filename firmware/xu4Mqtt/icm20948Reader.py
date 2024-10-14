@@ -60,16 +60,16 @@ def main(loopInterval):
         try:
             startTime = mSR.delayMints(time.time() - startTime, loopInterval)
 
-            print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
-            print("Gyro X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
-            print("Magnetometer X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
-            print("")
-            time.sleep(0.5)
-
-            
+            print("--------------------------------------------------------")
+            print("--------------------------------------------------------")
             [fixFound, dateTime,dataString]  = pa1010d.read()
             print(dateTime)
             print(dataString)
+            print("Acceleration: X:{:.2f}, Y: {:.2f}, Z: {:.2f} m/s^2".format(*icm.acceleration))
+            print("Gyro X:{:.2f}, Y: {:.2f}, Z: {:.2f} rads/s".format(*icm.gyro))
+            print("Magnetometer X:{:.2f}, Y: {:.2f}, Z: {:.2f} uT".format(*icm.magnetic))
+
+
             if not(fixFound):
                 continue
 
