@@ -459,6 +459,23 @@ def BNO080V2WriteI2c(sensorData):
         ])
         sensorFinisher(sensorData[0], sensorName, sensorDictionary)
 
+def ICM20948WriteI2c(sensorData):
+    sensorName = "ICM20948"
+    dataLength = 10  # Adjusted to match the actual number of elements expected in sensorData
+    if len(sensorData) == dataLength:
+        sensorDictionary = OrderedDict([
+            ("dateTime",             str(sensorData[0])), 
+            ("accelerationX",        sensorData[1]),
+            ("accelerationY",        sensorData[2]),
+            ("accelerationZ",        sensorData[3]),
+            ("angularVelocityX",     sensorData[4]),
+            ("angularVelocityY",     sensorData[5]),
+            ("angularVelocityZ",     sensorData[6]),
+            ("magneticFluxDensityX", sensorData[7]),
+            ("magneticFluxDensityY", sensorData[8]),
+            ("magneticFluxDensityZ", sensorData[9]),
+        ])
+        sensorFinisher(sensorData[0], sensorName, sensorDictionary)
 
 def BNO080WriteI2c(sensorData):
     sensorName = "BNO080"
