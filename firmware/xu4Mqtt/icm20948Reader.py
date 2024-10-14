@@ -81,6 +81,7 @@ def main(loopInterval):
                 mSR.GPSGPRMC2Write(dataString, dateTime)
                 lastGPRMC = time.time()
 
+
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
             time.sleep(10)
