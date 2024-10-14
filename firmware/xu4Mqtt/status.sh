@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 sleep 1
-echo "BNO080With PA1010D"
-echo $(pgrep -f 'bno080WithPa1010dReader.py')
+echo "ICM2094 With PA1010D"
+echo $(pgrep -f 'icm20948WithPa1010dReader.py')
 sleep 2
 
 echo "IPS7100"

@@ -3,9 +3,9 @@
 sleep 60
 
 
-kill $(pgrep -f 'icm20948WithPa1010dReader')
+kill $(pgrep -f 'icm20948WithPa1010dReader.py')
 sleep 5
-python3 icm20948WithPa1010dReader &
+python3 icm20948WithPa1010dReader.py &
 sleep 5
 
 kill $(pgrep -f 'ips7100Reader.py')
