@@ -43,8 +43,8 @@ class PA1010D:
     def read(self):
         dateTime = datetime.datetime.now()
         if not self.pa1010d.update() or not self.pa1010d.has_fix:
-            print("No Coordinates found")
-            print(self.pa1010d.nmea_sentence) 
+            # print("No Coordinates found")
+            # print(self.pa1010d.nmea_sentence) 
             return [False,dateTime,self.pa1010d.nmea_sentence]
         else:
             return [True,dateTime,self.pa1010d.nmea_sentence] 
