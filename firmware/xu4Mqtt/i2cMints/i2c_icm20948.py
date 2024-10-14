@@ -38,17 +38,16 @@ class ICM20948:
             self.gyro         =  self.icm20948.gyro
             self.magnetic     =  self.icm20948.magnetic
 
-            return [dateTime,\
-                    self.acceleration[0],\
-                    self.acceleration[1],\ 
-                    self.acceleration[2],\ 
-                    self.gyro[0],\
-                    self.gyro[1],\ 
-                    self.gyro[2],\                    
-                    self.magnetic[0],\
-                    self.magnetic[1],\ 
-                    self.magnetic[2],\                      
-                    ];
+            return [dateTime,
+                    self.acceleration[0],
+                    self.acceleration[1],
+                    self.acceleration[2],
+                    self.gyro[0],
+                    self.gyro[1],
+                    self.gyro[2],
+                    self.magnetic[0],
+                    self.magnetic[1],
+                    self.magnetic[2]]
         
         except Exception as e:
         
