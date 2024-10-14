@@ -43,14 +43,16 @@ def main(loopInterval):
     lastGPRMC = time.time()
     lastGPGGA = time.time()
 
-    pa1010d.initiate()
+    pa1010d_valid   = pa1010d.initiate()
     time.sleep(1)
-    icm20948.initiate()
+    icm20948_valid   = icm20948.initiate()
     time.sleep(1)
     
     startTime = time.time()
 
+    fixFound  = False
 
+    dataString = " "
 
     while True:
         try:
@@ -58,11 +60,12 @@ def main(loopInterval):
 
             print("--------------------------------------------------------")
             print("--------------------------------------------------------")
-            [fixFound, dateTime,dataString]  = pa1010d.read()
-            print(dateTime)
-            print(dataString)
-            print(icm20948.read())
+            if pa1010d_valid:
+                [fixFound, dateTime, dataString]  = pa1010d.read()
 
+            if icm20948_valid:
+                mSR.ICM20948WriteI2c(icm20948.read())
+            
             if not(fixFound):
                 continue
 
