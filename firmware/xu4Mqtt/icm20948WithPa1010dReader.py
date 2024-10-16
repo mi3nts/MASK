@@ -13,9 +13,6 @@ import sys
 import subprocess
 from adafruit_extended_bus import ExtendedI2C as I2C
 
-# i2c     = I2C(4)
-# bno     = BNO08X_I2C(i2c)
-
 debug        = False 
 
 bus          = I2C(4)
@@ -32,7 +29,7 @@ changeTimes  = 0
 time.sleep(1)
 
 pa1010d       = PA1010D(bus,debug)
-icm20948      = ICM20948(bus,debug)
+# icm20948      = ICM20948(bus,debug)
 
 
 def main(loopInterval):
@@ -45,8 +42,8 @@ def main(loopInterval):
 
     pa1010d_valid   = pa1010d.initiate()
     time.sleep(1)
-    icm20948_valid   = icm20948.initiate()
-    time.sleep(1)
+    # icm20948_valid   = icm20948.initiate()
+    # time.sleep(1)
     
     startTime = time.time()
 
@@ -62,10 +59,10 @@ def main(loopInterval):
             print("--------------------------------------------------------")
             if pa1010d_valid:
                 [fixFound, dateTime, dataString]  = pa1010d.read()
-                print(dataString)
+                # print(dataString)
 
-            if icm20948_valid:
-                mSR.ICM20948WriteI2c(icm20948.read())
+            # if icm20948_valid:
+            #     mSR.ICM20948WriteI2c(icm20948.read())
             
             if not(fixFound):
                 continue
