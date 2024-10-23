@@ -29,7 +29,7 @@ changeTimes  = 0
 time.sleep(1)
 
 pa1010d       = PA1010D(bus,debug)
-# icm20948      = ICM20948(bus,debug)
+icm20948      = ICM20948(bus,debug)
 
 
 def main(loopInterval):
@@ -42,8 +42,8 @@ def main(loopInterval):
 
     pa1010d_valid   = pa1010d.initiate()
     time.sleep(1)
-    # icm20948_valid   = icm20948.initiate()
-    # time.sleep(1)
+    icm20948_valid   = icm20948.initiate()
+    time.sleep(1)
     
     startTime = time.time()
 
@@ -61,10 +61,11 @@ def main(loopInterval):
                 [fixFound, dateTime, dataString]  = pa1010d.read()
                 # print(dataString)
 
-            # if icm20948_valid:
-            #     mSR.ICM20948WriteI2c(icm20948.read())
+            if icm20948_valid:
+                mSR.ICM20948WriteI2c(icm20948.read())
             
             if not(fixFound):
+                pa1010d.initiate()
                 continue
 
             if (dataString.startswith("$GPGGA") or dataString.startswith("$GNGGA")) and mSR.getDeltaTime(lastGPGGA, delta):
@@ -78,7 +79,8 @@ def main(loopInterval):
 
         except Exception as e:
             print(f"An exception occurred: {type(e).__name__} – {e}")
-            time.sleep(1)
+            pa1010d.initiate()
+            time.sleep(.1)
             
 
 
