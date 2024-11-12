@@ -20,7 +20,7 @@ class IPS7100:
         self.pm_values = [0.0] * 7
 
     def initiate(self,retriesIn):
-        print("============== BME280V3 ==============")
+        print("============== IPS7100 I2C ==============")
         ready = None
         while ready is None and retriesIn:
             try:

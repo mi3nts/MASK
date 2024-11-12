@@ -27,16 +27,22 @@ import smbus2
 #from i2cMints.i2c_scd30 import SCD30
 from i2cMints.i2c_bme280v3 import BME280V3
 from i2cMints.i2c_tmp117 import TMP117
+from i2cMints.i2c_cht8305c import CHT8305C
+
 from mintsXU4 import mintsSensorReader as mSR
 
 debug        = False 
 bus          = smbus2.SMBus(5)
 
 # BME280V3
-bme280v3       = BME280V3(bus,debug)
+bme280v3     = BME280V3(bus,debug)
 
 # TMP117
-tmp117       = TMP117(bus,debug) 
+tmp117      = TMP117(bus,debug) 
+ 
+# CHT8305C
+cht8305c    = CHT8305C(bus,debug) 
+
 
 checkTrials  = 0
 loopInterval = 5 
@@ -44,8 +50,9 @@ loopInterval = 5
 def main(loopInterval):
     bme280v3_valid   = bme280v3.initiate(30)
     tmp117_valid     = tmp117.initiate(30)
-    
+    cht8305c_valid   = cht8305c.initiate(30)
     startTime    = time.time()
+
     while True:
         try:
             print("======= BME280V3 ========")
@@ -56,9 +63,14 @@ def main(loopInterval):
             print("======= TMP117 ========")
             if tmp117_valid:
                 mSR.TMP117WriteI2c(tmp117.read())
-
-            print("=======================")
             time.sleep(1)       
+
+            print("======= CHT8305C ========")
+            if cht8305c_valid:
+                print(cht8305c.read())
+            time.sleep(1)     
+
+
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             
         except Exception as e:
