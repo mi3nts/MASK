@@ -55,28 +55,28 @@ class CHT8305C:
             
             print(received_bytes)
 
-            
+
         except Exception as e:
             time.sleep(0.01)
             print(f"Error reading I2C: {e}")
         return received_bytes;
 
-    def get_manufacturer(self):
-        manufacturer_data = self.read_i2c(CHT8305C_REG_MANUFACTURER, 2)
-        if manufacturer_data is None:
-            print("Failed to read manufacturer ID from sensor.")
-            return None
-        manufacturer_id = (manufacturer_data[0] << 8) | manufacturer_data[1]
-        return manufacturer_id
+    # def get_manufacturer(self):
+    #     manufacturer_data = self.read_i2c(CHT8305C_REG_MANUFACTURER, 2)
+    #     if manufacturer_data is None:
+    #         print("Failed to read manufacturer ID from sensor.")
+    #         return None
+    #     manufacturer_id = (manufacturer_data[0] << 8) | manufacturer_data[1]
+    #     return manufacturer_id
 
-    def get_version_id(self):
-        version_data = self.read_i2c(CHT8305C_REG_VERSION, 2)
-        if version_data is None:
-            print("Failed to read version ID.")
-            return None
-        # Convert the byte data into a 16-bit integer
-        version_id = (version_data[0] << 8) | version_data[1]
-        return version_id
+    # def get_version_id(self):
+    #     version_data = self.read_i2c(CHT8305C_REG_VERSION, 2)
+    #     if version_data is None:
+    #         print("Failed to read version ID.")
+    #         return None
+    #     # Convert the byte data into a 16-bit integer
+    #     version_id = (version_data[0] << 8) | version_data[1]
+    #     return version_id
 
 
 
@@ -84,7 +84,7 @@ class CHT8305C:
         # Read PC data
         dateTime  = datetime.datetime.now() 
         rawValues = self.read_i2c(0x00, 4)
-
+        print(rawValues)
         if rawValues is None:
             return [];
 
