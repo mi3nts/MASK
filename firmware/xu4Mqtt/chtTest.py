@@ -26,6 +26,7 @@ def calculate_temperature_and_humidity(buf):
     """
     Calculate temperature (C) and humidity (%RH) from raw data.
     """
+    
     # Combine bytes into integers
     data = (buf[0] << 8) | buf[1]
     data1 = (buf[2] << 8) | buf[3]
