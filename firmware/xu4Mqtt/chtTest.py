@@ -15,7 +15,7 @@ def read_reg(reg, length):
         # Write the register address we want to read from
         bus.write_byte(address, reg)
         # Delay to allow sensor time for processing
-        time.sleep(0.05)
+        # time.sleep(0.05)
         # Read the specified number of bytes
         return bus.read_i2c_block_data(address, reg, length)
     except Exception as e:
@@ -26,7 +26,7 @@ def calculate_temperature_and_humidity(buf):
     """
     Calculate temperature (C) and humidity (%RH) from raw data.
     """
-    
+
     # Combine bytes into integers
     data = (buf[0] << 8) | buf[1]
     data1 = (buf[2] << 8) | buf[3]
