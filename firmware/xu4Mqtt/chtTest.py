@@ -15,7 +15,7 @@ def read_reg(reg, length):
         # Write the register address we want to read from
         bus.write_byte(address, reg)
         # Delay to allow sensor time for processing
-        time.sleep(0.02)
+        time.sleep(0.05)
         # Read the specified number of bytes
         return bus.read_i2c_block_data(address, reg, length)
     except Exception as e:
