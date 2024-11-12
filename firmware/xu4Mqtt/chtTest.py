@@ -1,8 +1,8 @@
-import smbus
+import smbus2
 import time
 
 # Open the I2C bus (bus 5 in this case)
-bus = smbus.SMBus(5)
+bus = smbus2.SMBus(5)
 
 # Device address (0x40)
 device_address = 0x40
