@@ -47,7 +47,13 @@ def main():
         print(buf)
 
         time.sleep(1.5)
-        buf = read_reg(0x02, 1)
+        buf = read_reg(0x04, 1)
+        print(buf)
+        time.sleep(1.5)
+
+
+        time.sleep(1.5)
+        buf = read_reg(0x05, 1)
         print(buf)
         time.sleep(1.5)
         # if buf:
