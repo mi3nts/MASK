@@ -53,6 +53,9 @@ class CHT8305C:
             received_bytes = self.i2c.read_i2c_block_data(
                 CHT8305C_I2C_ADDR, command, reply_size)
             
+            print(received_bytes)
+
+            
         except Exception as e:
             time.sleep(0.01)
             print(f"Error reading I2C: {e}")
