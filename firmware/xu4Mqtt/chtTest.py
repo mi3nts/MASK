@@ -13,7 +13,7 @@ def read_reg(reg, length):
     """
     try:
         # Write the register address we want to read from
-        bus.write_byte(address, reg)
+        # bus.write_byte(address, reg)
         # Delay to allow sensor time for processing
         # time.sleep(0.05)
         # Read the specified number of bytes
