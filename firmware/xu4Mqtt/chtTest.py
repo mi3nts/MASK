@@ -40,21 +40,11 @@ def calculate_temperature_and_humidity(buf):
 def main():
     while True:
         # Read 4 bytes from register 0x00
-        buf = read_reg(0x02, 1)
-        print(buf)
         time.sleep(1.5)
-        buf = read_reg(0x03, 1)
+        buf = read_reg(0x03, 2)
         print(buf)
 
-        time.sleep(1.5)
-        buf = read_reg(0x04, 1)
-        print(buf)
-        time.sleep(1.5)
 
-
-        time.sleep(1.5)
-        buf = read_reg(0x05, 1)
-        print(buf)
         time.sleep(1.5)
         # if buf:
         #     # Calculate temperature and humidity
