@@ -47,7 +47,7 @@ class CHT8305C:
             self.i2c.write_byte(
                 CHT8305C_I2C_ADDR, command)
             # Delay for the I2C response
-            time.sleep(0.02)  
+            time.sleep(1)  
     
             # Delay for the I2C response
             received_bytes = self.i2c.read_i2c_block_data(
@@ -83,21 +83,25 @@ class CHT8305C:
     def read(self):
         # Read PC data
         dateTime  = datetime.datetime.now() 
-        rawValues = self.read_i2c(0x00, 4)
-        print(rawValues)
-        if rawValues is None:
-            return [];
+        
+        while True:
+            rawValues = self.read_i2c(0x00, 4)
+            print(rawValues)
+            time.sleep(1)
 
-        # Convert the data into two 16-bit integers
-        temperatureRaw = (rawValues[0] << 8) | rawValues[1]
-        humidityRaw    = (rawValues[2] << 8) | rawValues[3]
+        # if rawValues is None:
+        #     return [];
 
-        time.sleep(0.1)
+        # # Convert the data into two 16-bit integers
+        # temperatureRaw = (rawValues[0] << 8) | rawValues[1]
+        # humidityRaw    = (rawValues[2] << 8) | rawValues[3]
 
-        temperature = ((float(temperatureRaw) * 165 / 65535.0) - 40.0)
-        humidity    = ((float(humidityRaw) / 65535.0) * 100)
+        # time.sleep(0.1)
+
+        # temperature = ((float(temperatureRaw) * 165 / 65535.0) - 40.0)
+        # humidity    = ((float(humidityRaw) / 65535.0) * 100)
     
-        return [dateTime, \
-                  temperature,\
-                  humidity]
+        # return [dateTime, \
+        #           temperature,\
+        #           humidity]
 
