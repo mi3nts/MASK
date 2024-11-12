@@ -7,13 +7,19 @@ bus = smbus2.SMBus(5)
 # Device address (0x40)
 device_address = 0x40
 
-# Number of bytes to read (we can read up to 256 bytes at a time)
+# Number of bytes to read (we will read 256 bytes, but will do so in 32-byte chunks)
 num_bytes = 256
+chunk_size = 32
 
-# Read bytes from the device (starting from register 0x00)
+# Read data in chunks
+data = []
+
 try:
-    # Read block of data from the device (starting from register 0x00)
-    data = bus.read_i2c_block_data(device_address, 0x00, num_bytes)
+    # Loop over chunks of data
+    for i in range(0, num_bytes, chunk_size):
+        # Read a block of 32 bytes
+        chunk = bus.read_i2c_block_data(device_address, 0x00 + i, chunk_size)
+        data.extend(chunk)  # Add the chunk to the data list
     
     # Print data in a format similar to i2cdump
     print("     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef")
