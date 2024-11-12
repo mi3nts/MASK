@@ -41,7 +41,7 @@ def main():
     while True:
         # Read 4 bytes from register 0x00
         time.sleep(1.5)
-        buf = read_reg(0x03, 2)
+        buf = read_reg(0x00, 3)
         print(buf)
 
 
