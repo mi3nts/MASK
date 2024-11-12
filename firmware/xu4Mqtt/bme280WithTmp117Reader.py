@@ -69,8 +69,7 @@ def main(loopInterval):
             if cht8305c_valid:
                 print(cht8305c.read())
             time.sleep(1)     
-
-
+            
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             
         except Exception as e:
