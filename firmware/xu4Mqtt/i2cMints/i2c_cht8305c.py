@@ -6,8 +6,6 @@ import struct
 import time
 
 CHT8305C_I2C_ADDR           = 0x40
-CHT8305C_REG_MANUFACTURER   = 0xFE
-CHT8305C_REG_VERSION        = 0xFF
 
 class CHT8305C:
     def __init__(self, i2c_dev,debugIn):
@@ -45,13 +43,13 @@ class CHT8305C:
         try:
             # Send command to the I2C device
             self.i2c.write_byte(
-                CHT8305C_I2C_ADDR, command)
+                0x40, 0x00)
             # Delay for the I2C response
             time.sleep(1)  
     
             # Delay for the I2C response
             received_bytes = self.i2c.read_i2c_block_data(
-                CHT8305C_I2C_ADDR, command, reply_size)
+                0x40, 0x00, 4)
             
             print(received_bytes)
 
