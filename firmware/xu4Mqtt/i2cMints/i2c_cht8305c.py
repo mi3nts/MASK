@@ -35,6 +35,7 @@ class CHT8305C:
         except IOError:
             return False
 
+
     def read_i2c(self, command, reply_size):
         # Command is  the register requested
         received_bytes = []
