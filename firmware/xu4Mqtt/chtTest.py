@@ -1,63 +1,26 @@
-import smbus2
+import smbus
 import time
 
-# I²C address of the device
-address = 0x40
+# Open the I2C bus (bus 5 in this case)
+bus = smbus.SMBus(5)
 
-# Initialize I²C bus
-bus = smbus2.SMBus(5)  # Use '1' for Raspberry Pi's I²C bus
+# Device address (0x40)
+device_address = 0x40
 
-def read_reg(reg, length):
-    """
-    Read a specified number of bytes from a given register over I²C.
-    """
-    try:
-        # Write the register address we want to read from
-        # bus.write_byte(address, reg)
-        # Delay to allow sensor time for processing
-        # time.sleep(0.05)
-        # Read the specified number of bytes
-        return bus.read_i2c_block_data(address, reg, length)
-    except Exception as e:
-        print("Error reading register:", e)
-        return None
+# Number of bytes to read (we can read up to 256 bytes at a time)
+num_bytes = 256
 
-def calculate_temperature_and_humidity(buf):
-    """
-    Calculate temperature (C) and humidity (%RH) from raw data.
-    """
-
-    # Combine bytes into integers
-    data = (buf[0] << 8) | buf[1]
-    data1 = (buf[2] << 8) | buf[3]
-
-    # Calculate temperature and humidity
-    temp = (data * 165.0 / 65535.0) - 40.0
-    hum = (data1 / 65535.0) * 100.0
-
-    return temp, hum
-
-def main():
-    while True:
-        # Read 4 bytes from register 0x00
-        time.sleep(1.5)
-        buf = read_reg(0x00, 10)
-        print(buf)
-
-
-        time.sleep(1.5)
-        # if buf:
-        #     # Calculate temperature and humidity
-        #     temp, hum = calculate_temperature_and_humidity(buf)
-            
-        #     # Print results
-        #     print(f"temp(C): {temp:.2f}\thum(%RH): {hum:.2f}")
-        # else:
-        #     print("Failed to read data")
-        
-        # Wait for 500 ms before the next reading
-        time.sleep(0.5)
-
-# Run the main function
-if __name__ == "__main__":
-    main()
+# Read bytes from the device (starting from register 0x00)
+try:
+    # Read block of data from the device (starting from register 0x00)
+    data = bus.read_i2c_block_data(device_address, 0x00, num_bytes)
+    
+    # Print data in a format similar to i2cdump
+    print("     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef")
+    for i in range(0, num_bytes, 16):
+        # Display the hex values in rows, 16 bytes per row
+        hex_values = " ".join(f"{x:02x}" for x in data[i:i+16])
+        ascii_values = "".join([chr(x) if 32 <= x <= 126 else '.' for x in data[i:i+16]])
+        print(f"{i:02x}: {hex_values:<47} {ascii_values}")
+except IOError as e:
+    print(f"Error reading from I²C device: {e}")
