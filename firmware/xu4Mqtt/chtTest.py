@@ -40,16 +40,16 @@ def calculate_temperature_and_humidity(buf):
 def main():
     while True:
         # Read 4 bytes from register 0x00
-        buf = read_reg(0x00, 4)
-        
-        if buf:
-            # Calculate temperature and humidity
-            temp, hum = calculate_temperature_and_humidity(buf)
+        buf = read_reg(0x02, 4)
+        print(buf)
+        # if buf:
+        #     # Calculate temperature and humidity
+        #     temp, hum = calculate_temperature_and_humidity(buf)
             
-            # Print results
-            print(f"temp(C): {temp:.2f}\thum(%RH): {hum:.2f}")
-        else:
-            print("Failed to read data")
+        #     # Print results
+        #     print(f"temp(C): {temp:.2f}\thum(%RH): {hum:.2f}")
+        # else:
+        #     print("Failed to read data")
         
         # Wait for 500 ms before the next reading
         time.sleep(0.5)
