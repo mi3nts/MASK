@@ -47,7 +47,7 @@ class CHT8305C:
             self.i2c.write_byte(
                 CHT8305C_I2C_ADDR, command)
             # Delay for the I2C response
-            time.sleep(0.01)  
+            time.sleep(0.02)  
     
             # Delay for the I2C response
             received_bytes = self.i2c.read_i2c_block_data(
