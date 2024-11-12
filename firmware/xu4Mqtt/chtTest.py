@@ -5,7 +5,7 @@ import time
 address = 0x40
 
 # Initialize I²C bus
-bus = smbus2.SMBus(1)  # Use '1' for Raspberry Pi's I²C bus
+bus = smbus2.SMBus(5)  # Use '1' for Raspberry Pi's I²C bus
 
 def read_reg(reg, length):
     """
