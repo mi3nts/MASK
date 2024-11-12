@@ -7,26 +7,18 @@ bus = smbus2.SMBus(5)
 # Device address (0x40)
 device_address = 0x40
 
-# Number of bytes to read (we will read 256 bytes, but will do so in 32-byte chunks)
-num_bytes = 256
-chunk_size = 32
+# Maximum number of registers (0x00 to 0xFF)
+num_registers = 256
 
-# Read data in chunks
-data = []
-
+# Read all registers one by one
 try:
-    # Loop over chunks of data
-    for i in range(0, num_bytes, chunk_size):
-        # Read a block of 32 bytes
-        chunk = bus.read_i2c_block_data(device_address, 0x00 + i, chunk_size)
-        data.extend(chunk)  # Add the chunk to the data list
-    
-    # Print data in a format similar to i2cdump
-    print("     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef")
-    for i in range(0, num_bytes, 16):
-        # Display the hex values in rows, 16 bytes per row
-        hex_values = " ".join(f"{x:02x}" for x in data[i:i+16])
-        ascii_values = "".join([chr(x) if 32 <= x <= 126 else '.' for x in data[i:i+16]])
-        print(f"{i:02x}: {hex_values:<47} {ascii_values}")
+    print("Register  Data")
+    for reg in range(num_registers):
+        # Read 1 byte from each register
+        data = bus.read_byte_data(device_address, reg)
+        
+        # Print register and corresponding data
+        print(f"0x{reg:02X}    0x{data:02X}")
+
 except IOError as e:
     print(f"Error reading from I²C device: {e}")
