@@ -50,7 +50,7 @@ loopInterval = 5
 def main(loopInterval):
     bme280v3_valid   = bme280v3.initiate(30)
     tmp117_valid     = tmp117.initiate(30)
-    cht8305c_valid   = cht8305c.initiate(30)
+    cht8305c_valid   = cht8305c.initiate()
     startTime    = time.time()
 
     while True:
