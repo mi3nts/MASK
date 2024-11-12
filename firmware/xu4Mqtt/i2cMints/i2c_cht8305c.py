@@ -5,7 +5,7 @@ import smbus2
 import struct
 import time
 
-CHT8305C_I2C_ADDR          = 0x40
+CHT8305C_I2C_ADDR           = 0x40
 CHT8305C_REG_MANUFACTURER   = 0xFE
 CHT8305C_REG_VERSION        = 0xFF
 
