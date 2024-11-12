@@ -17,17 +17,16 @@ class CHT8305C:
 
     def initiate(self):
         print("============== CHT8305C I2C ==============")
-        return True
-        # if self.is_connected():
-        #     print("CHT8305C sensor connected")
-        #     time.sleep(1)
-        #     print(f"Manufacturer: {self.get_manufacturer()}")
-        #     time.sleep(1)
-        #     print(f"Version ID: {self.get_version_id()}")
-        #     return True
-        # else:
-        #     print("CHT8305C sensor connection failed")
-        #     return False
+        if self.is_connected():
+            print("CHT8305C sensor connected")
+            time.sleep(1)
+            print(f"Manufacturer: {self.get_manufacturer()}")
+            time.sleep(1)
+            print(f"Version ID: {self.get_version_id()}")
+            return True
+        else:
+            print("CHT8305C sensor connection failed")
+            return False
 
     def is_connected(self):
         try:
