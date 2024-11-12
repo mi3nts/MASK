@@ -17,23 +17,26 @@ class CHT8305C:
 
     def initiate(self):
         print("============== CHT8305C I2C ==============")
-        if self.is_connected():
-            print("CHT8305C sensor connected")
-            time.sleep(1)
-            print(f"Manufacturer: {self.get_manufacturer()}")
-            time.sleep(1)
-            print(f"Version ID: {self.get_version_id()}")
-            return True
-        else:
-            print("CHT8305C sensor connection failed")
-            return False
+        
+        time.sleep(1)
+        return True
+        # if self.is_connected():
+        #     print("CHT8305C sensor connected")
+        #     time.sleep(1)
+        #     print(f"Manufacturer: {self.get_manufacturer()}")
+        #     time.sleep(1)
+        #     print(f"Version ID: {self.get_version_id()}")
+        #     return True
+        # else:
+        #     print("CHT8305C sensor connection failed")
+        #     return False
 
-    def is_connected(self):
-        try:
-            self.i2c.write_quick(self.i2c_addr)
-            return True
-        except IOError:
-            return False
+    # def is_connected(self):
+    #     try:
+    #         self.i2c.write_quick(self.i2c_addr)
+    #         return True
+    #     except IOError:
+    #         return False
 
 
     def read_i2c(self, command, reply_size):
