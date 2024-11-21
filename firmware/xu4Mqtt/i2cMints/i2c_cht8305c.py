@@ -29,7 +29,7 @@ class CHT8305C:
             time.sleep(1)
             print(f"Manufacturer: {self.getManufacturer()}")
             time.sleep(1)
-            print(f"Version ID: {self.get_version_id()}")
+            print(f"Version ID: {self.getVersionID()}")
             return True;
         except Exception as e:
             time.sleep(0.01)
