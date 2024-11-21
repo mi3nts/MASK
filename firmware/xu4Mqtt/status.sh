@@ -9,8 +9,8 @@ echo "IPS7100"
 echo $(pgrep -f 'ips7100Reader.py')
 sleep 2
 
-echo "BME280 With TMP117"
-echo $(pgrep -f 'bme280WithTmp117Reader.py')
+echo "BME280 With CHT8305C"
+echo $(pgrep -f 'bme280WithCht8305cReader.py')
 sleep 2
 
 echo "COZIR"
