@@ -52,9 +52,12 @@ class CHT8305C:
             time.sleep(.2)
     
             # Delay for the I2C response
-            receivedBytes = self.i2c_msg.read(\
+            receivedBytes = i2c_msg.read(\
                                         CHT8305C_I2C_ADDR,\
                                         replySize)
+            
+            self.i2c.i2c_rdwr(receivedBytes)
+
             
             outPut = list(receivedBytes)
 
