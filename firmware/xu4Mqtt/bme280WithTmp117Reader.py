@@ -67,12 +67,12 @@ def main(loopInterval):
 
             print("======= CHT8305C ========")
             if cht8305c_valid:
-                print(cht8305c.read())
+                 mSR.CHT8305CWriteI2c(cht8305c.read())
             time.sleep(1)     
             
             startTime = mSR.delayMints(time.time() - startTime,loopInterval)
             
-            
+
         except Exception as e:
             print(e)
             time.sleep(10)

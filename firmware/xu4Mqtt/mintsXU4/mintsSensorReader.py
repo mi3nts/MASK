@@ -527,6 +527,18 @@ def TMP117WriteI2c(sensorData):
         sensorFinisher(sensorData[0],sensorName,sensorDictionary)   
 
 
+def CHT8305CWriteI2c(sensorData):
+    sensorName = "CHT8305C"
+    dataLength = 4
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("temperature"  ,sensorData[1]),
+                ("humidity"     ,sensorData[2]),
+                ("dewPoint"     ,sensorData[3])
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)  
+
 
 def BME280V3WriteI2c(sensorData):
     sensorName = "BME280V3"

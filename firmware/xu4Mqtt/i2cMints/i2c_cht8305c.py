@@ -4,7 +4,7 @@ import logging
 from smbus2 import SMBus, i2c_msg
 import struct
 import time
-
+import math
 # Datasheet: https://dfimg.dfrobot.com/nobody/wiki/4c8e1057e1c118e5c72f8ff6147575db.pdf
 
 CHT8305C_I2C_ADDR         = 0x40
@@ -107,7 +107,10 @@ class CHT8305C:
         # Calculate humidity using the formula
         humidity    = (float(humidityPre) / 65535.0) * 100
     
+        dewPoint = 243.04 * (math.log(humidity / 100.0) + ((17.625 * temperature) / (243.04 + temperature))) / (17.625 - math.log(humidity / 100.0) - ((17.625 * temperature) / (243.04 + temperature)))
+
         return [dateTime, \
                   temperature,\
-                  humidity]
+                  humidity,
+                  dewPoint]
 
