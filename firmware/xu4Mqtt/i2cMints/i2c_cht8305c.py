@@ -30,6 +30,7 @@ class CHT8305C:
             print(f"Manufacturer: {self.getManufacturer()}")
             time.sleep(1)
             print(f"Version ID: {self.getVersionID()}")
+            time.sleep(1)
             return True;
         except Exception as e:
             time.sleep(0.01)
@@ -113,8 +114,6 @@ class CHT8305C:
 
         # Calculate humidity using the formula
         humidity    = (float(humidityPre) / 65535.0) * 100
-    
-        # dewPoint = 243.04 * (math.log(humidity / 100.0) + ((17.625 * temperature) / (243.04 + temperature))) / (17.625 - math.log(humidity / 100.0) - ((17.625 * temperature) / (243.04 + temperature)))
 
         dewPoint = self.calculateDewPoint(temperature,humidity)
 

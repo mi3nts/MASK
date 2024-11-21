@@ -35,7 +35,7 @@ debug        = False
 bus          = smbus2.SMBus(5)
 
 # # BME280V3
-# bme280v3     = BME280V3(bus,debug)
+bme280v3     = BME280V3(bus,debug)
 
 # # TMP117
 # tmp117      = TMP117(bus,debug) 
@@ -48,17 +48,17 @@ checkTrials  = 0
 loopInterval = 5 
 
 def main(loopInterval):
-    # bme280v3_valid   = bme280v3.initiate(30)
+    bme280v3_valid   = bme280v3.initiate(30)
     # tmp117_valid     = tmp117.initiate(30)
     cht8305c_valid   = cht8305c.initiate()
     startTime    = time.time()
 
     while True:
         try:
-            # print("======= BME280V3 ========")
-            # if bme280v3_valid:
-            #     mSR.BME280V3WriteI2c(bme280v3.read())
-            # time.sleep(1)     
+            print("======= BME280V3 ========")
+            if bme280v3_valid:
+                mSR.BME280V3WriteI2c(bme280v3.read())
+            time.sleep(1)     
             
             # print("======= TMP117 ========")
             # if tmp117_valid:
