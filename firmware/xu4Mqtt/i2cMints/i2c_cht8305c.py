@@ -91,6 +91,13 @@ class CHT8305C:
 
 
 
+    def calculateDewPoint(self,temperature, humidity):
+        # Applying the Magnus-Tetens approximation formula for dew point
+        dew_point = 243.04 * (math.log(humidity / 100.0) + ((17.625 * temperature) / (243.04 + temperature))) / \
+                    (17.625 - math.log(humidity / 100.0) - ((17.625 * temperature) / (243.04 + temperature)))
+        return dew_point
+
+
     def read(self):
         # Read PC data
         dateTime  = datetime.datetime.now() 
@@ -107,7 +114,10 @@ class CHT8305C:
         # Calculate humidity using the formula
         humidity    = (float(humidityPre) / 65535.0) * 100
     
-        dewPoint = 243.04 * (math.log(humidity / 100.0) + ((17.625 * temperature) / (243.04 + temperature))) / (17.625 - math.log(humidity / 100.0) - ((17.625 * temperature) / (243.04 + temperature)))
+        # dewPoint = 243.04 * (math.log(humidity / 100.0) + ((17.625 * temperature) / (243.04 + temperature))) / (17.625 - math.log(humidity / 100.0) - ((17.625 * temperature) / (243.04 + temperature)))
+
+        dewPoint = self.calculateDewPoint(temperature,humidity)
+
 
         return [dateTime, \
                   temperature,\
