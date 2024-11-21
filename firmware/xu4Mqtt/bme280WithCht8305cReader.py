@@ -43,7 +43,6 @@ bme280v3     = BME280V3(bus,debug)
 # CHT8305C
 cht8305c    = CHT8305C(bus,debug) 
 
-
 checkTrials  = 0
 loopInterval = 5 
 
