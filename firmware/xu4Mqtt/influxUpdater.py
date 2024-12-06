@@ -240,6 +240,10 @@ def sendCSV2InfluxToday(csvFile,nodeID,sensorID,nodeName,fileDate):
                             if header not in tag_columns and header != time_column:
                                 if sensorID == "MWBR001" and header == "rtcTime":
                                     point.field(header, float(dateTimeRow.year))
+                                elif sensorID == "MWBR001" and header == "batteryPowerPlugged":
+                                    point.field(header, float(rowData[header]))                                       
+                                elif sensorID == "GPSGPGGA2" and header == "stationID":
+                                    point.field(header, str(rowData[header]))                                      
                                 else:
                                     point.field(header, isFloat(rowData[header]))
                         sequence.append(point)
@@ -329,6 +333,10 @@ def sendCSV2Influx(csvFile,nodeID,sensorID,nodeName,fileDate):
                         if header not in tag_columns and header != time_column:
                             if sensorID == "MWBR001" and header == "rtcTime":
                                 point.field(header, float(dateTimeRow.year))
+                            elif sensorID == "MWBR001" and header == "batteryPowerPlugged":
+                                point.field(header, float(rowData[header]))                      
+                            elif sensorID == "GPSGPGGA2" and header == "stationID":
+                                point.field(header, str(rowData[header]))                                    
                             else:
                                 point.field(header, isFloat(rowData[header]))
                     sequence.append(point)

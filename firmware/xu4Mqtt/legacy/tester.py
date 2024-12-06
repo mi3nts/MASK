@@ -13,7 +13,7 @@ bus_num  = 5     # I2C bus number
 with SMBus(bus_num) as bus:
   
     # Write the register to read the first byte
-    bus.write_byte(address, 0x00);
+    bus.write_byte(address, 0xFF);
     time.sleep(.2)
     
     # Now read 2 bytes from register 0x00
