@@ -139,7 +139,7 @@
         <mxCell id="NXsdGgOJUFReOd44QVA4-101" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.hellasdigital.gr/images/detailed/26/4821-04-removebg-preview.png;clipPath=inset(22.89% 22% 23.33% 22%);" parent="NXsdGgOJUFReOd44QVA4-97" vertex="1">
           <mxGeometry x="143.91620111731842" y="146.87074829931973" width="133.08379888268155" height="95.94413407821229" as="geometry" />
         </mxCell>
-        <mxCell id="lABpP-1NjewJWDQONTOA-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.004;entryY=0.721;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;strokeColor=#00CC00;flowAnimation=1;jumpStyle=arc;" edge="1" parent="1" source="lABpP-1NjewJWDQONTOA-22" target="lABpP-1NjewJWDQONTOA-7">
+        <mxCell id="lABpP-1NjewJWDQONTOA-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.002;entryY=0.721;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;strokeColor=#00CC00;flowAnimation=1;jumpStyle=arc;" edge="1" parent="1" source="lABpP-1NjewJWDQONTOA-22" target="lABpP-1NjewJWDQONTOA-7">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="135" y="554" as="targetPoint" />
           </mxGeometry>
