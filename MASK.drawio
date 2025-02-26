@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0" version="26.0.16">
   <diagram name="Page-1" id="3OzVXapQxGBqhg9Vh2Or">
-    <mxGraphModel dx="2709" dy="1596" grid="1" gridSize="1" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2035" dy="1174" grid="1" gridSize="1" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -176,9 +176,6 @@
             <mxPoint x="418" y="1302" as="sourcePoint" />
             <mxPoint x="418" y="1254" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="NXsdGgOJUFReOd44QVA4-99" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.ardusimple.com/wp-content/uploads/2022/11/BNO085_adafruit_4754_top.jpg;clipPath=inset(16.67% 14.67% 19% 14.33% round 5%);" parent="1" vertex="1">
-          <mxGeometry x="-99.00497206703909" y="1352" width="141.5949720670391" height="128.4413407821229" as="geometry" />
         </mxCell>
         <mxCell id="NXsdGgOJUFReOd44QVA4-100" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://grobotronics.com/images/detailed/128/bme280-dregmes-temperaturos-ir-slegio-jutiklis-110kpa-i2c-spi-3-5v-stemma-qt-qwiic-adafruit-2652-202792-1-500x500_grobo.jpg;clipPath=inset(20% 7.67% 19.67% 6.67% round 5%);points=[[0,0.25,0,0,0],[0,0.5,0,0,0],[0,0.75,0,0,0],[0,1,0,0,0]];" parent="1" vertex="1">
           <mxGeometry x="13" y="972.9986394557823" width="133.85754189944134" height="94.39664804469274" as="geometry" />
