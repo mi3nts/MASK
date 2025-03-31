@@ -291,3 +291,11 @@ sudo /usr/local/bin/update-rtc.sh
 ```
 If the internet is available, the RTC time will be updated from the system time. The cron job will ensure that this happens automatically at regular intervals.
 
+## New Installations from Wearable 
+```
+pip3 install adafruit-circuitpython-icm20x
+
+```
+
+
+
