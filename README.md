@@ -168,7 +168,7 @@ sudo i2cdetect -y 1
 ```
 Add the RTC module to the system:
 
-Add the following to /boot/firmware/config.txt
+Add the following to /boot/config.txt
 ```bash
 dtparam=i2c_arm=on
 dtoverlay=i2c-rtc,ds3231
