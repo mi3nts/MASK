@@ -2,7 +2,6 @@
 
 sleep 60
 
-
 kill $(pgrep -f 'icm20948WithPa1010dReader.py')
 sleep 5
 python3 icm20948WithPa1010dReader.py &
@@ -12,7 +11,6 @@ kill $(pgrep -f 'gpsReader.py')
 sleep 5
 python3 gpsReader.py &
 sleep 5
-
 
 kill $(pgrep -f 'ips7100Reader.py')
 sleep 5
