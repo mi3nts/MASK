@@ -5,6 +5,8 @@
 # Using timedatectl + systemd-timesyncd + RTC
 # ================================
 
+sleep 10
+
 LOG_FILE="/var/log/time_sync.log"
 
 # Function to log messages to console + log file

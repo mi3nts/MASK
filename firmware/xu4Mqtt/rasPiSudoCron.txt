@@ -1,0 +1,1 @@
+0 * * * *  cd /home/teamlary/gitHubRepos/MASK/firmware/xu4Mqtt && ./sudoRub.sh 

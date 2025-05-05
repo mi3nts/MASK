@@ -1,40 +1,86 @@
-# Devices Attached
-- Rasberry Pi 2WH
-- Pi Sugar 3 Power Manage
-- Toggle Switch
-- Sensors
-  - COZIR AH          : Uart Only           : UART (default)
-  - PiSugar and Clock : I2c                 : I2c Bus 1 (default)
-  - IPS7100           : I2c or Uart         : I2c Bus 3
-    - `dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22` Connecting the secondary I2C devices to gpio pins 27(13) and 22(15).
-  - BNO085            : I2c, SPI and Uart   : I2c Bus 4
-    - `dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24` Connecting the tertiary I2C devices to gpio pins 23(16) and 24(18).
-  - BME280            : I2c                 : I2c Bus 5
-  - TMP117            : I2c                 : I2c Bus 5
-    - `dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=05,i2c_gpio_scl=06` Connecting the tertiary I2C devices to gpio pins 05(29) and 06(31).
-  - PA1010D           : I2c, SPI and Uart   : I2c Bus 6
-    - `dtoverlay=i2c-gpio,bus=6,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26` Connecting  the secondary I2C devices to gpio pins 25(22) and 26(37).
 
-- Add an extra I2c Pipeline On the to /boot/config.txt add the following lines via ```sudo nano /boot/config.txt```.
+# Devices Attached
+
+- **Raspberry Pi 2WH**
+- **PiSugar 3 Power Manager**
+- **Toggle Switch**
+- **Sensors**
+  - **COZIR AH**: UART only — connected via **UART** (default)
+  - **PiSugar and Clock**: I²C — connected to **I²C Bus 1** (default)
+  - **IPS7100**: I²C or UART — connected to **I²C Bus 3**
+    - Enable via:
+      ```
+      dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22
+      ```
+      (GPIO 27 (pin 13) and GPIO 22 (pin 15))
+  - **BNO085**: I²C, SPI, or UART — connected to **I²C Bus 4**
+    - Enable via:
+      ```
+      dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24
+      ```
+      (GPIO 23 (pin 16) and GPIO 24 (pin 18))
+  - **BME280**: I²C — connected to **I²C Bus 5**
+  - **TMP117**: I²C — connected to **I²C Bus 5**
+    - Enable via:
+      ```
+      dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=5,i2c_gpio_scl=6
+      ```
+      (GPIO 5 (pin 29) and GPIO 6 (pin 31))
+  - **PA1010D**: I²C, SPI, or UART — connected to **I²C Bus 6**
+    - Enable via:
+      ```
+      dtoverlay=i2c-gpio,bus=6,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26
+      ```
+      (GPIO 25 (pin 22) and GPIO 26 (pin 37))
+
+---
+
+## Adding Extra I²C Pipelines
+
+To configure additional I²C buses, edit `/boot/config.txt` using:
+
+```bash
+sudo nano /boot/config.txt
+```
+
+Add the following lines:
 
 ```
 dtoverlay=i2c-rtc,ds3231
-# Extra i2c port 
+# Extra I2C ports
 dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22
 dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24
-dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=05,i2c_gpio_scl=06
+dtoverlay=i2c-gpio,bus=5,i2c_gpio_delay_us=1,i2c_gpio_sda=5,i2c_gpio_scl=6
 dtoverlay=i2c-gpio,bus=6,i2c_gpio_delay_us=1,i2c_gpio_sda=25,i2c_gpio_scl=26
 ```
 
-- Check Devices<br>
-  ```sudo i2cdetect -y 1```<br>
-  ```sudo i2cdetect -y 2```<br>
-  ```sudo i2cdetect -y 3```<br>
-  ```sudo i2cdetect -y 4```<br>
-  ```sudo i2cdetect -y 5```<br>
+Be sure to also check the [config.txt](config) file for additional setup details.
 
-Inspired by this [link](https://www.instructables.com/Raspberry-PI-Multiple-I2c-Devices/) 
+---
 
+## Checking Attached Devices
 
-<!-- ## For the IPS7100 to work on the GPIO Serial Port
-To manually change the settings, edit the kernel command line with `sudo nano /boot/cmdline.txt`. Find the console entry that refers to the serial0 device, and remove it, including the baud rate setting. It will look something like `console=serial0,115200`. Make sure the rest of the line remains the same, as errors in this configuration can stop the Raspberry Pi from booting. -->
+Use the following commands to detect devices on each I²C bus:
+
+```bash
+sudo i2cdetect -y 1
+sudo i2cdetect -y 2
+sudo i2cdetect -y 3
+sudo i2cdetect -y 4
+sudo i2cdetect -y 5
+```
+
+---
+
+> *Configuration inspired by this [Instructables guide](https://www.instructables.com/Raspberry-PI-Multiple-I2c-Devices/).*
+
+<!-- 
+## Notes for IPS7100 UART Setup
+To manually reconfigure the GPIO serial port:
+- Edit `/boot/cmdline.txt` using:
+  ```bash
+  sudo nano /boot/cmdline.txt
+  ```
+- Remove any `console=serial0,115200` entry carefully.
+- Do not alter the rest of the line to avoid boot issues.
+-->
