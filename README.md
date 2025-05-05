@@ -168,7 +168,7 @@ sudo i2cdetect -y 1
 ```
 Add the RTC module to the system:
 
-Add the following to /boot/firmware/config.txt
+Add the following to /boot/config.txt
 ```bash
 dtparam=i2c_arm=on
 dtoverlay=i2c-rtc,ds3231
@@ -189,7 +189,8 @@ sudo hwclock -w
 ```
 You can check the time with:
 ```bash
-sudo hwclock -r
+date # For system time 
+sudo hwclock -r # for the RTC time
 ```
 3. Configure Fallback to RTC
 Ubuntu should already try to use NTP by default and fall back to the RTC if no internet is available. However, you can automate this by ensuring that the RTC syncs with the system time when the system boots and when no internet is available.
@@ -290,4 +291,12 @@ After creating the script and cron job, you can test the script manually:
 sudo /usr/local/bin/update-rtc.sh
 ```
 If the internet is available, the RTC time will be updated from the system time. The cron job will ensure that this happens automatically at regular intervals.
+
+## New Installations from Wearable 
+```
+pip3 install adafruit-circuitpython-icm20x
+
+```
+
+
 
