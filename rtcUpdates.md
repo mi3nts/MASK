@@ -91,7 +91,6 @@ NTP service: active
 6. Final set up for the clock 
 ``` bash 
 git clone git@github.com:mi3nts/MASK.git
-cp firmware/xu4Mqtt/sudoRun.sh /usr/local/bin/update-rtc.sh
 sudo cp firmware/xu4Mqtt/sudoRun.sh /usr/local/bin/update-rtc.sh
 ```
 Add the line `/usr/local/bin/update-rtc.sh` to `/etc/rc.local`  before exit 0
