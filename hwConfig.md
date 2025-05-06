@@ -13,7 +13,7 @@
       dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=27,i2c_gpio_scl=22
       ```
       (GPIO 27 (pin 13) and GPIO 22 (pin 15))
-  - **BNO085**: I²C, SPI, or UART — connected to **I²C Bus 4**
+  - **ICM20948**: I²C, SPI, or UART — connected to **I²C Bus 4**
     - Enable via:
       ```
       dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=23,i2c_gpio_scl=24
