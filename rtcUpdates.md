@@ -3,6 +3,13 @@
 
 This guide covers how to set up NTP (Network Time Protocol) for synchronizing time from internet servers and configure an RTC (Real-Time Clock) on your Raspberry Pi for fallback timekeeping when the internet is unavailable.
 
+
+## Start by updating the piSugar SW Stack 
+
+```bash 
+curl https://cdn.pisugar.com/release/PiSugarUpdate.sh | sudo bash
+```
+
 ## Install NTP (Network Time Protocol)
 
 First, install NTP to synchronize time from a time server:
